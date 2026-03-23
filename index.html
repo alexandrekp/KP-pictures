@@ -575,15 +575,28 @@
     @media (max-width: 1024px) { .masonry { columns: 2; } }
 
     @media (max-width: 640px) {
-      nav { padding: 0 20px; }
-      .hero { padding: 0 20px 28px; }
-      .filter-bar { padding: 0 20px; }
-      .gallery-wrap { padding: 2px 20px 60px; }
-      .masonry { columns: 1; }
-      footer { padding: 0 20px; }
+      nav { padding: 0 16px; height: 54px; }
+      .nav-index { display: none; }
+      .nav-logo { font-size: 12px; letter-spacing: 4px; }
+      nav a { font-size: 7px; letter-spacing: 2px; }
+      nav ul { gap: 16px; }
+      .hero { padding: 0 20px 24px; height: auto; min-height: 260px; }
+      .hero h1 { font-size: clamp(48px, 15vw, 68px); letter-spacing: -1px; }
+      .hero-line-left { left: 20px; }
+      .hero-year { left: 36px; }
+      .filter-bar { padding: 10px 16px; height: auto; flex-direction: column; align-items: flex-start; gap: 8px; }
+      .filter-left { width: 100%; flex-wrap: wrap; }
+      .filter-sort-label { display: none; }
+      .filter-buttons { flex-wrap: wrap; gap: 2px; }
+      .filter-btn { padding: 4px 10px; font-size: 7px; }
+      .filter-count { font-size: 7px; align-self: flex-end; }
+      .gallery-wrap { padding: 2px 0 60px; }
+      .masonry { columns: 1; column-gap: 0; }
       .lightbox-nav.prev { left: 8px; }
       .lightbox-nav.next { right: 8px; }
-      .nav-index { display: none; }
+      .lightbox-close { right: 12px; top: 16px; font-size: 7px; padding: 5px 10px; }
+      .lightbox-counter { left: 12px; top: 18px; }
+      footer { padding: 14px 16px; flex-direction: column; height: auto; gap: 4px; text-align: center; }
     }
   </style>
 </head>
