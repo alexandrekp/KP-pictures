@@ -152,23 +152,21 @@
 
     /* Image zone */
     .card-img {
-      width: 100%;
-      aspect-ratio: 1/1;
-      background: var(--surface);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border-bottom: 1px solid var(--border);
+       width: 100%;
+       aspect-ratio: 1/1;
+       background: var(--surface);
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       overflow: hidden;
+       border-bottom: 1px solid var(--border);
     }
-
+    
     .card-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: grayscale(20%) brightness(0.9);
-      transition: filter 0.3s;
+       width: 100%;
+       height: 100%;
+       object-fit: cover;
+       display: block;
     }
 
     .gear-card:hover .card-img img { filter: grayscale(0%) brightness(1); }
