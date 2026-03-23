@@ -371,64 +371,83 @@
   <main class="content">
 
     <!-- ── BLOC 1 : BOÎTIERS ── -->
-    <div class="gear-block">
-      <div class="gear-block-header">
-        <span class="gear-block-title">Boîtiers</span>
-        <div class="gear-block-line"></div>
+<div class="gear-block">
+  <div class="gear-block-header">
+    <span class="gear-block-title">Boîtiers</span>
+    <div class="gear-block-line"></div>
+  </div>
+  <div class="gear-layout">
+
+    <div class="carousel" id="carousel-0">
+      <div class="carousel-track" id="track-0">
+        <div class="carousel-slide">
+          <div class="slide-ph ph-boitiers">
+            <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/><circle cx="18.5" cy="9.5" r="1"/></svg>
+            <span class="slide-ph-label">Panasonic Lumix DMC-FX33</span>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-ph ph-boitiers">
+            <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/><circle cx="18.5" cy="9.5" r="1"/></svg>
+            <span class="slide-ph-label">Canon Epoca</span>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <div class="slide-ph ph-boitiers">
+            <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/><circle cx="18.5" cy="9.5" r="1"/></svg>
+            <span class="slide-ph-label">Kodak Fun Flash</span>
+          </div>
+        </div>
       </div>
-      <div class="gear-layout">
-
-        <div class="carousel" id="carousel-0">
-          <div class="carousel-track" id="track-0">
-            <div class="carousel-slide">
-              <div class="slide-ph ph-boitiers">
-                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/><circle cx="18.5" cy="9.5" r="1"/></svg>
-                <span class="slide-ph-label">Sony A7 III</span>
-              </div>
-            </div>
-            <div class="carousel-slide">
-              <div class="slide-ph ph-boitiers">
-                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/><circle cx="18.5" cy="9.5" r="1"/></svg>
-                <span class="slide-ph-label">Fujifilm X-T5</span>
-              </div>
-            </div>
-          </div>
-          <button class="carousel-btn c-prev" onclick="slide(0,-1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button class="carousel-btn c-next" onclick="slide(0,1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg></button>
-          <div class="carousel-counter" id="dots-0">
-            <div class="carousel-dot active" onclick="slideTo(0,0)"></div>
-            <div class="carousel-dot" onclick="slideTo(0,1)"></div>
-          </div>
-        </div>
-
-        <div class="gear-desc-panel">
-          <div class="desc-item active" id="desc-0-0">
-            <div class="desc-item-index">01 / 02</div>
-            <div class="desc-item-name">Sony A7 III</div>
-            <div class="desc-item-type">Hybride plein format</div>
-            <div class="desc-item-text">Mon boîtier principal depuis 2 ans. Excellent rendu en basse lumière, AF rapide et fiable. La dynamique du capteur plein format est remarquable pour les portraits et la photo urbaine de nuit.</div>
-            <div class="desc-item-specs">
-              <div class="spec-row"><span class="spec-key">Capteur</span><span class="spec-val">BSI CMOS 24 Mpx</span></div>
-              <div class="spec-row"><span class="spec-key">Monture</span><span class="spec-val">Sony FE</span></div>
-              <div class="spec-row"><span class="spec-key">ISO natif</span><span class="spec-val">100 – 51 200</span></div>
-            </div>
-            <span class="desc-tag">Boîtier principal</span>
-          </div>
-          <div class="desc-item" id="desc-0-1">
-            <div class="desc-item-index">02 / 02</div>
-            <div class="desc-item-name">Fujifilm X-T5</div>
-            <div class="desc-item-type">Hybride APS-C</div>
-            <div class="desc-item-text">Compact, léger et doté d'un capteur 40 Mpx. La simulation de films Fuji donne une couleur unique en JPEG. Idéal pour la street photo et les voyages sans alourdir le sac.</div>
-            <div class="desc-item-specs">
-              <div class="spec-row"><span class="spec-key">Capteur</span><span class="spec-val">X-Trans 5 HR 40 Mpx</span></div>
-              <div class="spec-row"><span class="spec-key">Monture</span><span class="spec-val">Fuji X</span></div>
-              <div class="spec-row"><span class="spec-key">Simulation</span><span class="spec-val">Classic Neg, Eterna</span></div>
-            </div>
-            <span class="desc-tag">Voyage & street</span>
-          </div>
-        </div>
+      <button class="carousel-btn c-prev" onclick="slide(0,-1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button class="carousel-btn c-next" onclick="slide(0,1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg></button>
+      <div class="carousel-counter" id="dots-0">
+        <div class="carousel-dot active" onclick="slideTo(0,0)"></div>
+        <div class="carousel-dot" onclick="slideTo(0,1)"></div>
+        <div class="carousel-dot" onclick="slideTo(0,2)"></div>
       </div>
     </div>
+
+    <div class="gear-desc-panel">
+      <div class="desc-item active" id="desc-0-0">
+        <div class="desc-item-index">01 / 03</div>
+        <div class="desc-item-name">Panasonic Lumix DMC-FX33</div>
+        <div class="desc-item-type">Compact numérique</div>
+        <div class="desc-item-text">Mon premier vrai appareil photo. Petit, discret, toujours dans la poche. Il m'a suivi partout et c'est avec lui que j'ai commencé à vraiment shooter au quotidien.</div>
+        <div class="desc-item-specs">
+          <div class="spec-row"><span class="spec-key">Capteur</span><span class="spec-val">8 MP CCD</span></div>
+          <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">28mm f/2.8</span></div>
+          <div class="spec-row"><span class="spec-key">Zoom</span><span class="spec-val">3.6x optique</span></div>
+        </div>
+        <span class="desc-tag">Premier appareil</span>
+      </div>
+      <div class="desc-item" id="desc-0-1">
+        <div class="desc-item-index">02 / 03</div>
+        <div class="desc-item-name">Canon Epoca</div>
+        <div class="desc-item-type">Compact argentique</div>
+        <div class="desc-item-text">Un compact argentique des années 90, simple et efficace. Pas de réglages, pas de prise de tête — tu vises, tu shootes. Le grain argentique donne un rendu unique qu'on ne retrouve nulle part ailleurs.</div>
+        <div class="desc-item-specs">
+          <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm argentique</span></div>
+          <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">32mm f/4.5</span></div>
+          <div class="spec-row"><span class="spec-key">Mise au point</span><span class="spec-val">Autofocus</span></div>
+        </div>
+        <span class="desc-tag">Argentique</span>
+      </div>
+      <div class="desc-item" id="desc-0-2">
+        <div class="desc-item-index">03 / 03</div>
+        <div class="desc-item-name">Kodak Fun Flash</div>
+        <div class="desc-item-type">Appareil jetable</div>
+        <div class="desc-item-text">Le jetable par excellence. On ne réfléchit pas, on shoote. Le flash intégré, le grain épais, les couleurs saturées — c'est brut, imparfait et c'est exactement ce qui le rend authentique.</div>
+        <div class="desc-item-specs">
+          <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm argentique</span></div>
+          <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">30mm f/10</span></div>
+          <div class="spec-row"><span class="spec-key">Flash</span><span class="spec-val">Intégré</span></div>
+        </div>
+        <span class="desc-tag">Jetable</span>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- ── BLOC 2 : OBJECTIFS ── -->
     <div class="gear-block">
