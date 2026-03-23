@@ -152,12 +152,13 @@
       justify-content: center;
       overflow: hidden;
       border-bottom: 1px solid var(--border);
+      padding: 1rem;
     }
 
     .card-img img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
       filter: grayscale(20%) brightness(0.9);
       transition: filter 0.3s;
@@ -201,14 +202,7 @@
       font-weight: 300;
       color: var(--text);
       line-height: 1.2;
-      margin-bottom: 0.8rem;
-    }
-
-    .card-desc {
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.75;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
     }
 
     .card-specs {
@@ -303,7 +297,6 @@
           <div class="card-body">
             <div class="card-type">Compact numérique</div>
             <div class="card-name">Panasonic Lumix DMC-FX33</div>
-            <div class="card-desc">Mon premier vrai appareil. Petit, discret, toujours dans la poche. C'est avec lui que tout a commencé.</div>
             <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Capteur</span><span class="spec-val">8 MP CCD</span></div>
               <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">28mm f/2.8</span></div>
@@ -320,7 +313,6 @@
           <div class="card-body">
             <div class="card-type">Compact argentique</div>
             <div class="card-name">Canon Epoca</div>
-            <div class="card-desc">Années 90, pas de réglages, pas de prise de tête. Tu vises, tu shootes. Le grain argentique fait le reste.</div>
             <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm argentique</span></div>
               <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">32mm f/4.5</span></div>
@@ -337,7 +329,6 @@
           <div class="card-body">
             <div class="card-type">Appareil jetable</div>
             <div class="card-name">Kodak Fun Flash</div>
-            <div class="card-desc">On ne réfléchit pas, on shoote. Brut, imparfait, authentique. C'est exactement ce que j'aime.</div>
             <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm argentique</span></div>
               <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">30mm f/10</span></div>
@@ -365,7 +356,6 @@
           <div class="card-body">
             <div class="card-type">Pellicule couleur</div>
             <div class="card-name">Kodak Gold 200</div>
-            <div class="card-desc">Tons chauds, grain présent, couleurs légèrement saturées. Ma pellicule couleur de base pour le Canon Epoca et le Kodak Fun Flash.</div>
             <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 200</span></div>
               <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
@@ -382,7 +372,6 @@
           <div class="card-body">
             <div class="card-type">Pellicule noir & blanc</div>
             <div class="card-name">Ilford HP5 Plus 400</div>
-            <div class="card-desc">La référence en noir et blanc. Polyvalente, tolérante en sur-exposition, grain fin et contrastes marqués. Parfaite pour la street et les portraits.</div>
             <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 400</span></div>
               <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
@@ -399,7 +388,6 @@
           <div class="card-body">
             <div class="card-type">Pellicule couleur</div>
             <div class="card-name">Fujifilm 200</div>
-            <div class="card-desc">Des couleurs naturelles et fidèles, un grain discret. Idéale en plein jour pour les paysages et les scènes de voyage.</div>
             <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 200</span></div>
               <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
