@@ -32,7 +32,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -81,7 +80,6 @@
     nav a:hover::after, nav a.active::after { width: 100%; }
     nav a.active { color: var(--text); }
 
-    /* ── HERO ── */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -137,10 +135,7 @@
       animation: fadeUp 1s ease 0.4s both;
     }
 
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
 
     .hero-desc {
       font-size: 0.85rem;
@@ -176,7 +171,6 @@
       animation: fadeUp 0.8s ease 1.2s both;
     }
 
-    /* ── FILTER BAR ── */
     .filter-bar {
       padding: 2.5rem 3rem;
       display: flex;
@@ -215,10 +209,7 @@
       background: rgba(200,169,110,0.07);
     }
 
-    /* ── MASONRY GALLERY ── */
-    .gallery-wrap {
-      padding: 2rem 3rem 6rem;
-    }
+    .gallery-wrap { padding: 2rem 3rem 6rem; }
 
     .masonry {
       columns: 3;
@@ -233,7 +224,12 @@
       margin-bottom: 2px;
       background: var(--surface);
       display: block;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
+
+    .photo-card.visible { opacity: 1; transform: translateY(0); }
 
     .photo-card img {
       width: 100%;
@@ -243,12 +239,8 @@
       filter: brightness(0.88);
     }
 
-    .photo-card:hover img {
-      transform: scale(1.04);
-      filter: brightness(1);
-    }
+    .photo-card:hover img { transform: scale(1.04); filter: brightness(1); }
 
-    /* Overlay info */
     .photo-overlay {
       position: absolute;
       inset: 0;
@@ -265,9 +257,7 @@
 
     .photo-meta-top {
       position: absolute;
-      top: 1rem;
-      left: 1rem;
-      right: 1rem;
+      top: 1rem; left: 1rem; right: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -312,10 +302,8 @@
 
     .photo-expand {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 30px;
-      height: 30px;
+      top: 1rem; right: 1rem;
+      width: 30px; height: 30px;
       background: rgba(0,0,0,0.5);
       border: 1px solid rgba(255,255,255,0.15);
       border-radius: 50%;
@@ -326,26 +314,9 @@
       transition: opacity 0.3s, transform 0.3s;
     }
 
-    .photo-card:hover .photo-expand {
-      opacity: 1;
-      transform: scale(1.1);
-    }
-
+    .photo-card:hover .photo-expand { opacity: 1; transform: scale(1.1); }
     .photo-expand svg { width: 12px; height: 12px; stroke: #fff; fill: none; }
 
-    /* Scroll reveal */
-    .photo-card {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .photo-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── LIGHTBOX ── */
     .lightbox {
       position: fixed;
       inset: 0;
@@ -390,9 +361,7 @@
       display: block;
     }
 
-    .lightbox-info {
-      text-align: center;
-    }
+    .lightbox-info { text-align: center; }
 
     .lightbox-title {
       font-family: var(--font-display);
@@ -410,37 +379,14 @@
       flex-wrap: wrap;
     }
 
-    .lightbox-location {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .lightbox-year {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-    }
-
-    .lightbox-gear {
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .lightbox-sep {
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: var(--border);
-    }
+    .lightbox-location { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+    .lightbox-year { font-size: 0.7rem; letter-spacing: 0.15em; color: var(--accent); }
+    .lightbox-gear { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+    .lightbox-sep { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
 
     .lightbox-close {
       position: fixed;
-      top: 1.5rem;
-      right: 2rem;
+      top: 1.5rem; right: 2rem;
       background: none;
       border: 1px solid var(--border);
       color: var(--muted);
@@ -477,7 +423,6 @@
     .lightbox-nav.next { right: 1.5rem; }
     .lightbox-nav svg { width: 18px; height: 18px; stroke: currentColor; fill: none; }
 
-    /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
       padding: 2rem 3rem;
@@ -488,16 +433,12 @@
 
     footer p { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .masonry { columns: 2; }
-    }
+    @media (max-width: 1024px) { .masonry { columns: 2; } }
 
     @media (max-width: 640px) {
       nav { padding: 1.2rem 1.5rem; }
@@ -515,7 +456,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-logo">Focale<span>.</span></a>
     <ul>
@@ -524,7 +464,6 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <header class="hero">
     <div class="hero-lines"></div>
     <div class="hero-glow"></div>
@@ -536,7 +475,6 @@
     <div class="hero-scroll-line"></div>
   </header>
 
-  <!-- FILTER BAR -->
   <div class="filter-bar">
     <span class="filter-label">Lieu</span>
     <button class="filter-btn active" data-filter="all">Tout</button>
@@ -545,17 +483,14 @@
     <button class="filter-btn" data-filter="New York">New York</button>
   </div>
 
-  <!-- GALLERY -->
   <div class="gallery-wrap">
     <div class="masonry" id="gallery">
 
-      <!-- Pour chaque photo : data-location = lieu affiché, data-year = année, data-category = filtre -->
-
-      <div class="photo-card" data-category="France" data-title="Toyota Supra MKIII" data-gear="Panasonic DMC-FX33 · 8 MP, ISO 100, 28mm, f/2,8" data-location="Paris, France" data-year="2023">
+      <div class="photo-card" data-category="France" data-title="Toyota Supra MKIII" data-gear="Panasonic DMC-FX33 · 8 MP, ISO 100, 28mm, f/2,8" data-location="Villebon2 - Palaiseau" data-year="2026">
         <img src="photos/Toyota Supra.jpg" alt="Toyota Supra MKIII" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
-            <span class="photo-location">Villebon2 - Palaiseau </span>
+            <span class="photo-location">Villebon2 - Palaiseau</span>
             <span class="photo-year">2026</span>
           </div>
           <div class="photo-title">Toyota Supra MKIII</div>
@@ -564,7 +499,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="France" data-title="Paris sous la neige" data-gear="iPhone 17 Pro · 24 MP, ISO 64, 24mm, f/1,78" data-location="Paris, France" data-year="2025">
+      <div class="photo-card" data-category="France" data-title="Paris sous la neige" data-gear="iPhone 17 Pro · 24 MP, ISO 64, 24mm, f/1,78" data-location="Vincennes" data-year="2026">
         <img src="photos/IMG_8072 2.jpg" alt="Paris sous la neige" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -577,7 +512,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="France" data-title="Vespa" data-gear="Canon Epoca · Kodak Gold, 35mm, ISO 200" data-location="Paris, France" data-year="2025">
+      <div class="photo-card" data-category="France" data-title="Vespa" data-gear="Canon Epoca · Kodak Gold, 35mm, ISO 200" data-location="Paris" data-year="2026">
         <img src="photos/Vespa.jpg" alt="Vespa" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -590,7 +525,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="France" data-title="Salon Sauvage" data-gear="iPhone 17 Pro · 24 MP, ISO 64, 140mm, f/2,8" data-location="France" data-year="2025">
+      <div class="photo-card" data-category="France" data-title="Salon Sauvage" data-gear="iPhone 17 Pro · 24 MP, ISO 64, 140mm, f/2,8" data-location="L'aigle" data-year="2025">
         <img src="photos/IMG_7884.jpg" alt="Salon Sauvage" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -603,7 +538,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="France" data-title="Bretagne suspendue" data-gear="iPhone 17 Pro · 24 MP, ISO 64, 140mm, f/2,8" data-location="Bretagne, France" data-year="2025">
+      <div class="photo-card" data-category="France" data-title="Bretagne suspendue" data-gear="iPhone 17 Pro · 24 MP, ISO 64, 140mm, f/2,8" data-location="Pointe de la Varde Bunker - Bretagne" data-year="2025">
         <img src="photos/IMG_7567.jpg" alt="Bretagne suspendue" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -616,7 +551,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="France" data-title="Horizon caché" data-gear="iPhone 17 Pro · 48 MP, ISO 100, 100mm, f/2,8" data-location="Bretagne, France" data-year="2025">
+      <div class="photo-card" data-category="France" data-title="Horizon caché" data-gear="iPhone 17 Pro · 48 MP, ISO 100, 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
         <img src="photos/IMG_7499.jpg" alt="Horizon caché" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -629,8 +564,8 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="France" data-title="Horizon caché" data-gear="iPhone 17 Pro · 27 MP, ISO 125, 100mm, f/2,8" data-location="Bretagne, France" data-year="2025">
-        <img src="photos/IMG_7497.jpg" alt="Horizon caché" />
+      <div class="photo-card" data-category="France" data-title="Horizon caché II" data-gear="iPhone 17 Pro · 27 MP, ISO 125, 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
+        <img src="photos/IMG_7497.jpg" alt="Horizon caché II" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
             <span class="photo-location">Cancale - Bretagne</span>
@@ -642,7 +577,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="France" data-title="Au milieu de l'eau" data-gear="iPhone 17 Pro · 12 MP, ISO 64, 100mm, f/2,8" data-location="Bretagne, France" data-year="2025">
+      <div class="photo-card" data-category="France" data-title="Au milieu de l'eau" data-gear="iPhone 17 Pro · 12 MP, ISO 64, 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
         <img src="photos/IMG_7498.jpg" alt="Au milieu de l'eau" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -655,7 +590,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="France" data-title="Falaise" data-gear="iPhone 17 Pro · 24 MP, ISO 100, 28mm, f/1,78" data-location="Bretagne, France" data-year="2025">
+      <div class="photo-card" data-category="France" data-title="Falaise" data-gear="iPhone 17 Pro · 24 MP, ISO 100, 28mm, f/1,78" data-location="Cap Fréhel - Bretagne" data-year="2025">
         <img src="photos/IMG_7687.jpg" alt="Falaise" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -668,7 +603,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="France" data-title="La pointe" data-gear="iPhone 17 Pro · 24 MP, ISO 80, 24mm, f/1,78" data-location="Bretagne, France" data-year="2025">
+      <div class="photo-card" data-category="France" data-title="La pointe" data-gear="iPhone 17 Pro · 24 MP, ISO 80, 24mm, f/1,78" data-location="Cap Fréhel - Bretagne" data-year="2025">
         <img src="photos/IMG_7680.jpg" alt="La pointe" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -681,7 +616,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Toyota FJ 40" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Bali, Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Toyota FJ 40" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Mont Bromo - Java" data-year="2025">
         <img src="photos/IMG_7926.jpg" alt="Toyota FJ 40" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -694,7 +629,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Ravitaillement" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Indonésie" data-year="2024">
+      <div class="photo-card" data-category="Indonésie" data-title="Ravitaillement" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Mont Bromo - Java" data-year="2025">
         <img src="photos/IMG_7901.jpg" alt="Ravitaillement" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -707,7 +642,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Scooter Honda" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Indonésie" data-year="2024">
+      <div class="photo-card" data-category="Indonésie" data-title="Scooter Honda" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Bali, Indonésie" data-year="2025">
         <img src="photos/IMG_7933.jpg" alt="Scooter Honda" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -720,7 +655,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Un moment de repos" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Indonésie" data-year="2024">
+      <div class="photo-card" data-category="Indonésie" data-title="Un moment de repos" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Mont Bromo - Java" data-year="2025">
         <img src="photos/IMG_7924.jpg" alt="Un moment de repos" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -733,7 +668,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="ROCKSTEADY" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Indonésie" data-year="2024">
+      <div class="photo-card" data-category="Indonésie" data-title="ROCKSTEADY" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Glili Meno" data-year="2025">
         <img src="photos/IMG_7908.jpg" alt="ROCKSTEADY" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -746,7 +681,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Mont Bromo" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Mont Bromo, Indonésie" data-year="2024">
+      <div class="photo-card" data-category="Indonésie" data-title="Mont Bromo" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Java" data-year="2025">
         <img src="photos/IMG_7911.jpg" alt="Mont Bromo" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -759,7 +694,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Vendeurs de fleurs" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Vendeurs de fleurs" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Mont Bromo - Java" data-year="2025">
         <img src="photos/IMG_7913.jpg" alt="Vendeurs de fleurs" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -772,7 +707,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Star ★" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Indonésie" data-year="2024">
+      <div class="photo-card" data-category="Indonésie" data-title="Star ★" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Mont Bromo - Java" data-year="2025">
         <img src="photos/IMG_7899.jpg" alt="Star" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -785,7 +720,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Juliette" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Indonésie" data-year="2024">
+      <div class="photo-card" data-category="Indonésie" data-title="Juliette" data-gear="Kodak Fun Flash · 35mm, ISO 800, f/10" data-location="Babahan - Bali" data-year="2025">
         <img src="photos/Juliette.jpg" alt="Juliette" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -798,7 +733,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Réapprovisionnement" data-gear="Panasonic DMC-FX33 · 8 MP, 32mm, f/3" data-location="Indonésie" data-year="2024">
+      <div class="photo-card" data-category="Indonésie" data-title="Réapprovisionnement" data-gear="Panasonic DMC-FX33 · 8 MP, 32mm, f/3" data-location="Bali" data-year="2025">
         <img src="photos/P1110162.jpg" alt="Réapprovisionnement" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -811,7 +746,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Journée de l'indépendance" data-gear="Panasonic DMC-FX33 · 8 MP, 100mm, f/5,6" data-location="Indonésie" data-year="2024">
+      <div class="photo-card" data-category="Indonésie" data-title="Journée de l'indépendance" data-gear="Panasonic DMC-FX33 · 8 MP, 100mm, f/5,6" data-location="Sindu Wati - Bali" data-year="2025">
         <img src="photos/P1110583.jpg" alt="Journée de l'indépendance" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -824,7 +759,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Maisons sur les rizières" data-gear="Panasonic DMC-FX33 · 8 MP, 86mm, f/5,2" data-location="Indonésie" data-year="2024">
+      <div class="photo-card" data-category="Indonésie" data-title="Maisons sur les rizières" data-gear="Panasonic DMC-FX33 · 8 MP, 86mm, f/5,2" data-location="Sangkan - Bali" data-year="2025">
         <img src="photos/P1110566.jpg" alt="Maisons sur les rizières" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -837,7 +772,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Fardeau" data-gear="Panasonic DMC-FX33 · 8 MP, 67mm, f/4,5" data-location="Indonésie" data-year="2024">
+      <div class="photo-card" data-category="Indonésie" data-title="Fardeau" data-gear="Panasonic DMC-FX33 · 8 MP, 67mm, f/4,5" data-location="Jatiluwih - Bali" data-year="2025">
         <img src="photos/P1110465.jpg" alt="Fardeau" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -850,7 +785,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="La réserve" data-gear="Panasonic DMC-FX33 · 8 MP, 100mm, f/2,8" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="La réserve" data-gear="Panasonic DMC-FX33 · 8 MP, 100mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
         <img src="photos/P1110405_01.jpg" alt="La réserve" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -863,7 +798,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Mobylette" data-gear="Panasonic DMC-FX33 · 8 MP, 40mm, f/5,6" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Mobylette" data-gear="Panasonic DMC-FX33 · 8 MP, 40mm, f/5,6" data-location="Bali" data-year="2025">
         <img src="photos/P1110557.jpg" alt="Mobylette" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -876,8 +811,8 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Mobylette" data-gear="Panasonic DMC-FX33 · 8 MP, 40mm, f/5,6" data-location="Indonésie" data-year="2025">
-        <img src="photos/P1110558.jpg" alt="Mobylette" />
+      <div class="photo-card" data-category="Indonésie" data-title="Mobylette II" data-gear="Panasonic DMC-FX33 · 8 MP, 40mm, f/5,6" data-location="Bali" data-year="2025">
+        <img src="photos/P1110558.jpg" alt="Mobylette II" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
             <span class="photo-location">Bali</span>
@@ -889,7 +824,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières" data-gear="Panasonic DMC-FX33 · 8 MP, 51mm, f/3,8" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières" data-gear="Panasonic DMC-FX33 · 8 MP, 51mm, f/3,8" data-location="Bali" data-year="2025">
         <img src="photos/P1110559.jpg" alt="Chantier au milieu des rizières" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -902,8 +837,8 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières" data-gear="Panasonic DMC-FX33 · 8 MP, 92mm, f/5,4" data-location="Indonésie" data-year="2025">
-        <img src="photos/P1110560.jpg" alt="Chantier au milieu des rizières" />
+      <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières II" data-gear="Panasonic DMC-FX33 · 8 MP, 92mm, f/5,4" data-location="Bali" data-year="2025">
+        <img src="photos/P1110560.jpg" alt="Chantier au milieu des rizières II" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
             <span class="photo-location">Bali</span>
@@ -915,7 +850,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Parking nature" data-gear="Panasonic DMC-FX33 · 8 MP, 32mm, f/9" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Parking nature" data-gear="Panasonic DMC-FX33 · 8 MP, 32mm, f/9" data-location="Sangkan Gunung - Bali" data-year="2025">
         <img src="photos/P1110540.jpg" alt="Parking nature" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -928,7 +863,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Au fil de l'eau" data-gear="Panasonic DMC-FX33 · 8 MP, 100mm, f/5,6" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Au fil de l'eau" data-gear="Panasonic DMC-FX33 · 8 MP, 100mm, f/5,6" data-location="Sangkan Gunung - Bali" data-year="2025">
         <img src="photos/P1110538.jpg" alt="Au fil de l'eau" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -941,7 +876,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Plongeon entre amis" data-gear="Panasonic DMC-FX33 · 8 MP, 100mm, f/5,6" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Plongeon entre amis" data-gear="Panasonic DMC-FX33 · 8 MP, 100mm, f/5,6" data-location="Sangkan Gunung - Bali" data-year="2025">
         <img src="photos/P1110537.jpg" alt="Plongeon entre amis" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -954,7 +889,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Rizière en mouvement" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/2,8" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Rizière en mouvement" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
         <img src="photos/P1110458.jpg" alt="Rizière en mouvement" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -967,7 +902,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Trajet quotidien" data-gear="Panasonic DMC-FX33 · 8 MP, 30mm, f/2,9" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Trajet quotidien" data-gear="Panasonic DMC-FX33 · 8 MP, 30mm, f/2,9" data-location="Jatiluwih - Bali" data-year="2025">
         <img src="photos/P1110453.jpg" alt="Trajet quotidien" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -980,7 +915,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Livraison rurale" data-gear="Panasonic DMC-FX33 · 8 MP, 40mm, f/3,3" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Livraison rurale" data-gear="Panasonic DMC-FX33 · 8 MP, 40mm, f/3,3" data-location="Jatiluwih - Bali" data-year="2025">
         <img src="photos/P1110388.jpg" alt="Livraison rurale" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -993,7 +928,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Refuge agricole" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/2,8" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Refuge agricole" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/2,8" data-location="Bali" data-year="2025">
         <img src="photos/P1110415.jpg" alt="Refuge agricole" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -1006,7 +941,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Pause tranquille" data-gear="Panasonic DMC-FX33 · 8 MP, 38mm, f/5,6" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Pause tranquille" data-gear="Panasonic DMC-FX33 · 8 MP, 38mm, f/5,6" data-location="Bali" data-year="2025">
         <img src="photos/P1110402.jpg" alt="Pause tranquille" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -1019,7 +954,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Honda M-F1" data-gear="Panasonic DMC-FX33 · 8 MP, 38mm, f/3,2" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Honda M-F1" data-gear="Panasonic DMC-FX33 · 8 MP, 38mm, f/3,2" data-location="Bali" data-year="2025">
         <img src="photos/P1110408_01.jpg" alt="Honda M-F1" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -1032,7 +967,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Suzuki Vitara" data-gear="Panasonic DMC-FX33 · 8 MP, 48mm, f/3,7" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Suzuki Vitara" data-gear="Panasonic DMC-FX33 · 8 MP, 48mm, f/3,7" data-location="Babahan - Bali" data-year="2025">
         <img src="photos/P1110315.jpg" alt="Suzuki Vitara" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -1045,7 +980,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Fruits" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/2,8" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Fruits" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/2,8" data-location="Bali" data-year="2025">
         <img src="photos/P1110262.jpg" alt="Fruits" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -1058,7 +993,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Temple" data-gear="Panasonic DMC-FX33 · 8 MP, 54mm, f/4" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Temple" data-gear="Panasonic DMC-FX33 · 8 MP, 54mm, f/4" data-location="Candikuning - Bali" data-year="2025">
         <img src="photos/P1110275.jpg" alt="Temple" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -1071,7 +1006,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Taxi vélo" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/2,8" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Taxi vélo" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/2,8" data-location="Yogyakarta - Bali" data-year="2025">
         <img src="photos/P1110197.jpg" alt="Taxi vélo" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -1084,7 +1019,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Custom racing" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/2,8" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Custom racing" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/2,8" data-location="Yogyakarta - Bali" data-year="2025">
         <img src="photos/P1110176.jpg" alt="Custom racing" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -1097,7 +1032,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Balade du vendeur" data-gear="Panasonic DMC-FX33 · 8 MP, 58mm, f/4,1" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Balade du vendeur" data-gear="Panasonic DMC-FX33 · 8 MP, 58mm, f/4,1" data-location="Yogyakarta - Bali" data-year="2025">
         <img src="photos/P1110156.jpg" alt="Balade du vendeur" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -1110,7 +1045,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="ATM" data-gear="Panasonic DMC-FX33 · 8 MP, 30mm, f/2,9" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="ATM" data-gear="Panasonic DMC-FX33 · 8 MP, 30mm, f/2,9" data-location="Prambanan - Bali" data-year="2025">
         <img src="photos/P1110127.jpg" alt="ATM" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -1123,7 +1058,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="" data-title="Laverie de fortune" data-gear="Panasonic DMC-FX33 · 8 MP, 32mm, f/3" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="" data-title="Laverie de fortune" data-gear="Panasonic DMC-FX33 · 8 MP, 32mm, f/3" data-location="Beyoglu, Turquie" data-year="2024">
         <img src="photos/P1100740.jpg" alt="Laverie de fortune" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -1136,7 +1071,7 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="" data-title="Au rayon légumes" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/3,8" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="" data-title="Au rayon légumes" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/3,8" data-location="Istanbul, Turquie" data-year="2024">
         <img src="photos/P1100672.jpg" alt="Au rayon légumes" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
@@ -1149,12 +1084,12 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="" data-title="Balade en famille" data-gear="Panasonic DMC-FX33 · 8 MP, 48mm, f/3,7" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="" data-title="Balade en famille" data-gear="Panasonic DMC-FX33 · 8 MP, 48mm, f/3,7" data-location="Munich, Allemagne" data-year="2024">
         <img src="photos/P1100977.jpg" alt="Balade en famille" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
             <span class="photo-location">Munich, Allemagne</span>
-            <span class="photo-year">2025</span>
+            <span class="photo-year">2024</span>
           </div>
           <div class="photo-title">Balade en famille</div>
           <div class="photo-gear">Panasonic DMC-FX33 · 48mm, f/3,7</div>
@@ -1162,12 +1097,12 @@
         <div class="photo-expand"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
 
-      <div class="photo-card" data-category="" data-title="Vinyles" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/2,8" data-location="Indonésie" data-year="2025">
+      <div class="photo-card" data-category="" data-title="Vinyles" data-gear="Panasonic DMC-FX33 · 8 MP, 28mm, f/2,8" data-location="Barcelone, Espagne" data-year="2024">
         <img src="photos/P1100527.jpg" alt="Vinyles" />
         <div class="photo-overlay">
           <div class="photo-meta-top">
             <span class="photo-location">Barcelone, Espagne</span>
-            <span class="photo-year">2025</span>
+            <span class="photo-year">2024</span>
           </div>
           <div class="photo-title">Vinyles</div>
           <div class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</div>
@@ -1503,7 +1438,6 @@
     </div>
   </div>
 
-  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lbClose">Fermer</button>
     <button class="lightbox-nav prev" id="lbPrev">
@@ -1527,34 +1461,38 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <p>© 2026 — Focale · Alexandre</p>
     <p>Tous droits réservés</p>
   </footer>
 
   <script>
-    // ── COMPTEUR PHOTOS ──
+    // ── COMPTEUR PHOTOS ANIMÉ ──
     const allCards = document.querySelectorAll('.photo-card');
-    document.getElementById('photoCount').textContent = allCards.length;
+    function animateCount(target) {
+      let count = 0;
+      const step = Math.ceil(target / 40);
+      const interval = setInterval(() => {
+        count = Math.min(count + step, target);
+        document.getElementById('photoCount').textContent = count;
+        if (count >= target) clearInterval(interval);
+      }, 30);
+    }
+    animateCount(allCards.length);
 
     // ── SCROLL REVEAL ──
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, 60);
+          setTimeout(() => { entry.target.classList.add('visible'); }, 60);
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.08 });
-
     allCards.forEach(card => observer.observe(card));
 
-    // ── FILTER ──
+    // ── FILTER AVEC TRANSITION ──
     const filterBtns = document.querySelectorAll('.filter-btn');
-
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
@@ -1562,11 +1500,18 @@
         const filter = btn.dataset.filter;
         allCards.forEach(card => {
           const show = filter === 'all' || card.dataset.category === filter;
-          card.style.display = show ? '' : 'none';
+          if (show) {
+            card.style.display = '';
+            setTimeout(() => card.classList.add('visible'), 10);
+          } else {
+            card.classList.remove('visible');
+            setTimeout(() => { card.style.display = 'none'; }, 400);
+          }
         });
-        // Update counter
-        const visible = [...allCards].filter(c => c.style.display !== 'none').length;
-        document.getElementById('photoCount').textContent = visible;
+        setTimeout(() => {
+          const visible = [...allCards].filter(c => c.style.display !== 'none').length;
+          animateCount(visible);
+        }, 420);
       });
     });
 
@@ -1607,6 +1552,7 @@
       lbLocation.textContent = card.dataset.location || '';
       lbYear.textContent = card.dataset.year || '';
       lbGear.textContent = card.dataset.gear || '';
+      document.title = card.dataset.title + ' — Focale';
     }
 
     allCards.forEach(card => {
@@ -1616,12 +1562,14 @@
     document.getElementById('lbClose').addEventListener('click', () => {
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
+      document.title = 'Focale — Portfolio';
     });
 
     lightbox.addEventListener('click', e => {
       if (e.target === lightbox) {
         lightbox.classList.remove('open');
         document.body.style.overflow = '';
+        document.title = 'Focale — Portfolio';
       }
     });
 
@@ -1639,7 +1587,7 @@
 
     document.addEventListener('keydown', e => {
       if (!lightbox.classList.contains('open')) return;
-      if (e.key === 'Escape') { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+      if (e.key === 'Escape') { lightbox.classList.remove('open'); document.body.style.overflow = ''; document.title = 'Focale — Portfolio'; }
       if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + visibleCards.length) % visibleCards.length; showSlide(currentIndex); }
       if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % visibleCards.length; showSlide(currentIndex); }
     });
