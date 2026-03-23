@@ -19,7 +19,6 @@
       --accent: #c8a96e;
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-body: 'DM Sans', sans-serif;
-      --card: 38vw;
     }
 
     body {
@@ -105,23 +104,24 @@
     /* CONTENT */
     .content { padding: 0 3rem 6rem; }
 
-    .gear-block {
-      margin-bottom: 5rem;
+    /* SECTION */
+    .gear-section {
+      margin-bottom: 4.5rem;
       animation: fadeUp 0.6s ease both;
     }
 
-    .gear-block:nth-child(1) { animation-delay: 0.1s; }
-    .gear-block:nth-child(2) { animation-delay: 0.2s; }
-    .gear-block:nth-child(3) { animation-delay: 0.3s; }
+    .gear-section:nth-child(1) { animation-delay: 0.1s; }
+    .gear-section:nth-child(2) { animation-delay: 0.2s; }
+    .gear-section:nth-child(3) { animation-delay: 0.3s; }
 
-    .gear-block-header {
+    .section-header {
       display: flex;
       align-items: center;
       gap: 1.2rem;
       margin-bottom: 2rem;
     }
 
-    .gear-block-title {
+    .section-title {
       font-size: 0.7rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
@@ -129,173 +129,104 @@
       white-space: nowrap;
     }
 
-    .gear-block-line { flex: 1; height: 1px; background: var(--border); }
+    .section-line { flex: 1; height: 1px; background: var(--border); }
 
-    /* LAYOUT : carousel carré + description */
-    .gear-layout {
+    /* CARDS GRID */
+    .cards-grid {
       display: grid;
-      grid-template-columns: var(--card) var(--card);
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--border);
       border: 1px solid var(--border);
-      width: calc(var(--card) * 2);
     }
 
-    /* CAROUSEL */
-    .carousel {
-      position: relative;
-      overflow: hidden;
-      background: var(--surface);
-      width: var(--card);
-      height: var(--card);
-    }
-
-    .carousel-track {
+    /* CARD */
+    .gear-card {
+      background: var(--bg);
       display: flex;
-      height: 100%;
-      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      flex-direction: column;
+      transition: background 0.2s;
     }
 
-    .carousel-slide {
-      flex: 0 0 100%;
-      width: var(--card);
-      height: var(--card);
+    .gear-card:hover { background: var(--surface); }
+
+    /* Image zone */
+    .card-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      background: var(--surface);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      border-bottom: 1px solid var(--border);
     }
 
-    .carousel-slide img {
+    .card-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      filter: grayscale(20%) brightness(0.9);
+      transition: filter 0.3s;
     }
 
-    .slide-ph {
+    .gear-card:hover .card-img img { filter: grayscale(0%) brightness(1); }
+
+    /* Placeholder si pas d'image */
+    .card-ph {
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.9rem;
+      gap: 0.8rem;
     }
 
-    .slide-ph svg { width: 48px; height: 48px; opacity: 0.18; stroke: var(--accent); fill: none; }
+    .card-ph svg { width: 40px; height: 40px; opacity: 0.15; stroke: var(--accent); fill: none; }
 
-    .slide-ph-label {
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
+    .card-ph-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
+      opacity: 0.5;
     }
 
-    .ph-boitiers    { background: #131210; }
-    .ph-objectifs   { background: #101214; }
-    .ph-accessoires { background: #121010; }
+    /* Card body */
+    .card-body { padding: 1.5rem; flex: 1; }
 
-    /* Dots */
-    .carousel-counter {
-      position: absolute;
-      bottom: 1rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 6px;
-      z-index: 2;
-    }
-
-    .carousel-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.2);
-      transition: background 0.25s, transform 0.25s;
-      cursor: pointer;
-    }
-
-    .carousel-dot.active { background: var(--accent); transform: scale(1.3); }
-
-    /* Nav buttons */
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 3;
-      background: rgba(13,13,13,0.7);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      width: 36px; height: 36px;
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .carousel-btn:hover { background: rgba(13,13,13,0.95); color: var(--text); border-color: var(--muted); }
-    .carousel-btn.c-prev { left: 0.8rem; }
-    .carousel-btn.c-next { right: 0.8rem; }
-    .carousel-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; }
-
-    /* DESCRIPTION PANEL */
-    .gear-desc-panel {
-      background: var(--bg);
-      border-left: 1px solid var(--border);
-      width: var(--card);
-      height: var(--card);
-      overflow: hidden;
-    }
-
-    .desc-item {
-      display: none;
-      flex-direction: column;
-      height: var(--card);
-      padding: 2.2rem 2rem;
-      overflow-y: auto;
-    }
-
-    .desc-item.active { display: flex; animation: fadeUp 0.3s ease both; }
-
-    .desc-item-index {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1rem;
-    }
-
-    .desc-item-name {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 300;
-      color: var(--text);
-      line-height: 1.2;
-      margin-bottom: 0.35rem;
-    }
-
-    .desc-item-type {
-      font-size: 0.65rem;
+    .card-type {
+      font-size: 0.62rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .card-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+
+    .card-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.75;
       margin-bottom: 1.2rem;
     }
 
-    .desc-item-text {
-      font-size: 0.83rem;
-      color: var(--muted);
-      line-height: 1.8;
-      flex: 1;
-    }
-
-    .desc-item-specs {
-      margin-top: 1.3rem;
-      padding-top: 1.3rem;
-      border-top: 1px solid var(--border);
+    .card-specs {
       display: flex;
       flex-direction: column;
-      gap: 0.45rem;
+      gap: 0.4rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
     }
 
     .spec-row {
@@ -305,25 +236,24 @@
     }
 
     .spec-key {
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       color: var(--muted);
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
-    .spec-val { font-size: 0.78rem; color: var(--text); }
+    .spec-val { font-size: 0.75rem; color: var(--text); }
 
-    .desc-tag {
+    .card-tag {
       display: inline-block;
-      margin-top: 1.1rem;
-      font-size: 0.62rem;
+      margin-top: 1rem;
+      font-size: 0.6rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       border: 1px solid rgba(200,169,110,0.3);
       color: var(--accent);
-      padding: 0.22rem 0.65rem;
+      padding: 0.2rem 0.6rem;
       border-radius: 2px;
-      align-self: flex-start;
     }
 
     /* FOOTER */
@@ -342,18 +272,11 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 900px) {
-      :root { --card: 100vw; }
-      .gear-layout { grid-template-columns: 1fr; width: 100%; }
-      .gear-desc-panel { width: 100%; border-left: none; border-top: 1px solid var(--border); }
-      .carousel { width: 100%; }
-      .desc-item { height: auto; min-height: 280px; }
-    }
-
     @media (max-width: 640px) {
       nav { padding: 1.2rem 1.5rem; }
       .hero { padding: 10rem 1.5rem 3rem; }
       .content { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .cards-grid { grid-template-columns: 1fr 1fr; }
       footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
     }
   </style>
@@ -376,205 +299,181 @@
 
   <main class="content">
 
-    <!-- ── BLOC 1 : BOÎTIERS ── -->
-    <div class="gear-block">
-      <div class="gear-block-header">
-        <span class="gear-block-title">Boîtiers</span>
-        <div class="gear-block-line"></div>
+    <!-- BOÎTIERS -->
+    <section class="gear-section">
+      <div class="section-header">
+        <span class="section-title">Boîtiers</span>
+        <div class="section-line"></div>
       </div>
-      <div class="gear-layout">
+      <div class="cards-grid">
 
-        <div class="carousel" id="carousel-0">
-          <div class="carousel-track" id="track-0">
-            <div class="carousel-slide">
-              <!-- Remplace par <img src="photos/Lumix.png" alt="Lumix"> quand tu veux -->
-              <div class="slide-ph ph-boitiers">
-                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/><circle cx="18.5" cy="9.5" r="1"/></svg>
-                <span class="slide-ph-label">Panasonic Lumix DMC-FX33</span>
-              </div>
-            </div>
-            <div class="carousel-slide">
-              <div class="slide-ph ph-boitiers">
-                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/><circle cx="18.5" cy="9.5" r="1"/></svg>
-                <span class="slide-ph-label">Canon Epoca</span>
-              </div>
-            </div>
-            <div class="carousel-slide">
-              <div class="slide-ph ph-boitiers">
-                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/><circle cx="18.5" cy="9.5" r="1"/></svg>
-                <span class="slide-ph-label">Kodak Fun Flash</span>
-              </div>
+        <div class="gear-card">
+          <div class="card-img">
+            <!-- <img src="photos/Lumix.png" alt="Lumix" /> -->
+            <div class="card-ph">
+              <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/></svg>
+              <span class="card-ph-label">Photo à venir</span>
             </div>
           </div>
-          <button class="carousel-btn c-prev" onclick="slide(0,-1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button class="carousel-btn c-next" onclick="slide(0,1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg></button>
-          <div class="carousel-counter" id="dots-0">
-            <div class="carousel-dot active" onclick="slideTo(0,0)"></div>
-            <div class="carousel-dot" onclick="slideTo(0,1)"></div>
-            <div class="carousel-dot" onclick="slideTo(0,2)"></div>
-          </div>
-        </div>
-
-        <div class="gear-desc-panel">
-          <div class="desc-item active" id="desc-0-0">
-            <div class="desc-item-index">01 / 03</div>
-            <div class="desc-item-name">Panasonic Lumix DMC-FX33</div>
-            <div class="desc-item-type">Compact numérique</div>
-            <div class="desc-item-text">Mon premier vrai appareil photo. Petit, discret, toujours dans la poche. Il m'a suivi partout et c'est avec lui que j'ai commencé à vraiment shooter au quotidien.</div>
-            <div class="desc-item-specs">
+          <div class="card-body">
+            <div class="card-type">Compact numérique</div>
+            <div class="card-name">Panasonic Lumix DMC-FX33</div>
+            <div class="card-desc">Mon premier vrai appareil. Petit, discret, toujours dans la poche. C'est avec lui que tout a commencé.</div>
+            <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Capteur</span><span class="spec-val">8 MP CCD</span></div>
               <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">28mm f/2.8</span></div>
               <div class="spec-row"><span class="spec-key">Zoom</span><span class="spec-val">3.6x optique</span></div>
             </div>
-            <span class="desc-tag">Premier appareil</span>
+            <span class="card-tag">Premier appareil</span>
           </div>
-          <div class="desc-item" id="desc-0-1">
-            <div class="desc-item-index">02 / 03</div>
-            <div class="desc-item-name">Canon Epoca</div>
-            <div class="desc-item-type">Compact argentique</div>
-            <div class="desc-item-text">Un compact argentique des années 90, simple et efficace. Pas de réglages, pas de prise de tête — tu vises, tu shootes. Le grain argentique donne un rendu unique qu'on ne retrouve nulle part ailleurs.</div>
-            <div class="desc-item-specs">
+        </div>
+
+        <div class="gear-card">
+          <div class="card-img">
+            <!-- <img src="photos/Epoca.png" alt="Canon Epoca" /> -->
+            <div class="card-ph">
+              <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/></svg>
+              <span class="card-ph-label">Photo à venir</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-type">Compact argentique</div>
+            <div class="card-name">Canon Epoca</div>
+            <div class="card-desc">Années 90, pas de réglages, pas de prise de tête. Tu vises, tu shootes. Le grain argentique fait le reste.</div>
+            <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm argentique</span></div>
               <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">32mm f/4.5</span></div>
               <div class="spec-row"><span class="spec-key">Mise au point</span><span class="spec-val">Autofocus</span></div>
             </div>
-            <span class="desc-tag">Argentique</span>
+            <span class="card-tag">Argentique</span>
           </div>
-          <div class="desc-item" id="desc-0-2">
-            <div class="desc-item-index">03 / 03</div>
-            <div class="desc-item-name">Kodak Fun Flash</div>
-            <div class="desc-item-type">Appareil jetable</div>
-            <div class="desc-item-text">Le jetable par excellence. On ne réfléchit pas, on shoote. Le flash intégré, le grain épais, les couleurs saturées — c'est brut, imparfait et c'est exactement ce qui le rend authentique.</div>
-            <div class="desc-item-specs">
+        </div>
+
+        <div class="gear-card">
+          <div class="card-img">
+            <!-- <img src="photos/Kodak.png" alt="Kodak Fun Flash" /> -->
+            <div class="card-ph">
+              <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/></svg>
+              <span class="card-ph-label">Photo à venir</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-type">Appareil jetable</div>
+            <div class="card-name">Kodak Fun Flash</div>
+            <div class="card-desc">On ne réfléchit pas, on shoote. Brut, imparfait, authentique. C'est exactement ce que j'aime.</div>
+            <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm argentique</span></div>
               <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">30mm f/10</span></div>
               <div class="spec-row"><span class="spec-key">Flash</span><span class="spec-val">Intégré</span></div>
             </div>
-            <span class="desc-tag">Jetable</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── BLOC 2 : LOGICIELS ── -->
-    <div class="gear-block">
-      <div class="gear-block-header">
-        <span class="gear-block-title">Logiciels</span>
-        <div class="gear-block-line"></div>
-      </div>
-      <div class="gear-layout">
-
-        <div class="carousel" id="carousel-1">
-          <div class="carousel-track" id="track-1">
-            <div class="carousel-slide">
-              <div class="slide-ph ph-objectifs">
-                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M7 21h10M12 17v4"/></svg>
-                <span class="slide-ph-label">Darktable</span>
-              </div>
-            </div>
-            <div class="carousel-slide">
-              <div class="slide-ph ph-objectifs">
-                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M7 21h10M12 17v4"/></svg>
-                <span class="slide-ph-label">Lightroom Mobile</span>
-              </div>
-            </div>
-          </div>
-          <button class="carousel-btn c-prev" onclick="slide(1,-1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button class="carousel-btn c-next" onclick="slide(1,1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg></button>
-          <div class="carousel-counter" id="dots-1">
-            <div class="carousel-dot active" onclick="slideTo(1,0)"></div>
-            <div class="carousel-dot" onclick="slideTo(1,1)"></div>
+            <span class="card-tag">Jetable</span>
           </div>
         </div>
 
-        <div class="gear-desc-panel">
-          <div class="desc-item active" id="desc-1-0">
-            <div class="desc-item-index">01 / 02</div>
-            <div class="desc-item-name">Darktable</div>
-            <div class="desc-item-type">Logiciel · Post-traitement</div>
-            <div class="desc-item-text">Mon logiciel principal pour développer les RAW. Gratuit, puissant, et avec suffisamment de contrôle pour garder un rendu cohérent sur toutes mes photos.</div>
-            <div class="desc-item-specs">
+      </div>
+    </section>
+
+    <!-- LOGICIELS -->
+    <section class="gear-section">
+      <div class="section-header">
+        <span class="section-title">Logiciels</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="cards-grid">
+
+        <div class="gear-card">
+          <div class="card-img">
+            <div class="card-ph">
+              <svg viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M7 21h10M12 17v4"/></svg>
+              <span class="card-ph-label">Darktable</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-type">Post-traitement</div>
+            <div class="card-name">Darktable</div>
+            <div class="card-desc">Mon logiciel principal pour développer les RAW. Gratuit, puissant, suffisant pour garder un rendu cohérent sur toutes mes photos.</div>
+            <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Usage</span><span class="spec-val">Développement RAW</span></div>
               <div class="spec-row"><span class="spec-key">Prix</span><span class="spec-val">Gratuit</span></div>
               <div class="spec-row"><span class="spec-key">Plateforme</span><span class="spec-val">Mac / Linux / Windows</span></div>
             </div>
-            <span class="desc-tag">Principal</span>
+            <span class="card-tag">Principal</span>
           </div>
-          <div class="desc-item" id="desc-1-1">
-            <div class="desc-item-index">02 / 02</div>
-            <div class="desc-item-name">Lightroom Mobile</div>
-            <div class="desc-item-type">Logiciel · Retouche mobile</div>
-            <div class="desc-item-text">Pour les retouches rapides sur iPhone, notamment les photos prises avec l'iPhone 17 Pro. Simple, efficace, et synchronisé avec le cloud.</div>
-            <div class="desc-item-specs">
+        </div>
+
+        <div class="gear-card">
+          <div class="card-img">
+            <div class="card-ph">
+              <svg viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M7 21h10M12 17v4"/></svg>
+              <span class="card-ph-label">Lightroom Mobile</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-type">Retouche mobile</div>
+            <div class="card-name">Lightroom Mobile</div>
+            <div class="card-desc">Pour les retouches rapides sur iPhone. Simple et efficace quand je veux poster directement depuis le téléphone.</div>
+            <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Usage</span><span class="spec-val">Retouche mobile</span></div>
-              <div class="spec-row"><span class="spec-key">Prix</span><span class="spec-val">Gratuit (version de base)</span></div>
+              <div class="spec-row"><span class="spec-key">Prix</span><span class="spec-val">Gratuit</span></div>
               <div class="spec-row"><span class="spec-key">Plateforme</span><span class="spec-val">iOS / Android</span></div>
             </div>
-            <span class="desc-tag">Mobile</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── BLOC 3 : ACCESSOIRES ── -->
-    <div class="gear-block">
-      <div class="gear-block-header">
-        <span class="gear-block-title">Accessoires</span>
-        <div class="gear-block-line"></div>
-      </div>
-      <div class="gear-layout">
-
-        <div class="carousel" id="carousel-2">
-          <div class="carousel-track" id="track-2">
-            <div class="carousel-slide">
-              <div class="slide-ph ph-accessoires">
-                <svg viewBox="0 0 24 24" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-                <span class="slide-ph-label">Pellicule Kodak Gold 200</span>
-              </div>
-            </div>
-            <div class="carousel-slide">
-              <div class="slide-ph ph-accessoires">
-                <svg viewBox="0 0 24 24" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-                <span class="slide-ph-label">Carte SD SanDisk 128 Go</span>
-              </div>
-            </div>
-          </div>
-          <button class="carousel-btn c-prev" onclick="slide(2,-1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button class="carousel-btn c-next" onclick="slide(2,1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg></button>
-          <div class="carousel-counter" id="dots-2">
-            <div class="carousel-dot active" onclick="slideTo(2,0)"></div>
-            <div class="carousel-dot" onclick="slideTo(2,1)"></div>
+            <span class="card-tag">Mobile</span>
           </div>
         </div>
 
-        <div class="gear-desc-panel">
-          <div class="desc-item active" id="desc-2-0">
-            <div class="desc-item-index">01 / 02</div>
-            <div class="desc-item-name">Kodak Gold 200</div>
-            <div class="desc-item-type">Pellicule · Argentique</div>
-            <div class="desc-item-text">La pellicule que j'utilise dans le Canon Epoca et le Kodak Fun Flash. Des tons chauds, un grain présent et des couleurs légèrement saturées — tout ce que j'aime dans l'argentique.</div>
-            <div class="desc-item-specs">
+      </div>
+    </section>
+
+    <!-- ACCESSOIRES -->
+    <section class="gear-section">
+      <div class="section-header">
+        <span class="section-title">Accessoires</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="cards-grid">
+
+        <div class="gear-card">
+          <div class="card-img">
+            <div class="card-ph">
+              <svg viewBox="0 0 24 24" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              <span class="card-ph-label">Kodak Gold 200</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-type">Pellicule</div>
+            <div class="card-name">Kodak Gold 200</div>
+            <div class="card-desc">La pellicule que j'utilise dans le Canon Epoca et le Kodak. Tons chauds, grain présent, couleurs légèrement saturées.</div>
+            <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 200</span></div>
               <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
               <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Couleur négatif</span></div>
             </div>
-            <span class="desc-tag">Pellicule</span>
-          </div>
-          <div class="desc-item" id="desc-2-1">
-            <div class="desc-item-index">02 / 02</div>
-            <div class="desc-item-name">SanDisk 128 Go</div>
-            <div class="desc-item-type">Stockage · Numérique</div>
-            <div class="desc-item-text">Carte SD pour le Lumix. Fiable, rapide, et suffisamment grande pour ne jamais être à court d'espace en sortie.</div>
-            <div class="desc-item-specs">
-              <div class="spec-row"><span class="spec-key">Capacité</span><span class="spec-val">128 Go</span></div>
-              <div class="spec-row"><span class="spec-key">Vitesse lecture</span><span class="spec-val">100 Mo/s</span></div>
-              <div class="spec-row"><span class="spec-key">Classe</span><span class="spec-val">UHS-I U3</span></div>
-            </div>
-            <span class="desc-tag">Stockage</span>
+            <span class="card-tag">Argentique</span>
           </div>
         </div>
+
+        <div class="gear-card">
+          <div class="card-img">
+            <div class="card-ph">
+              <svg viewBox="0 0 24 24" stroke-width="1"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+              <span class="card-ph-label">iPhone 17 Pro</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-type">Téléphone</div>
+            <div class="card-name">iPhone 17 Pro</div>
+            <div class="card-desc">Le meilleur appareil photo c'est celui qu'on a sur soi. Utilisé quotidiennement pour capturer des scènes de rue à Paris.</div>
+            <div class="card-specs">
+              <div class="spec-row"><span class="spec-key">Capteur principal</span><span class="spec-val">48 MP</span></div>
+              <div class="spec-row"><span class="spec-key">Téléobjectif</span><span class="spec-val">5x optique</span></div>
+              <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">RAW / HEIC</span></div>
+            </div>
+            <span class="card-tag">Toujours sur moi</span>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </section>
 
   </main>
 
@@ -584,44 +483,7 @@
   </footer>
 
   <script>
-    const states = [
-      { index: 0, total: 3 },
-      { index: 0, total: 2 },
-      { index: 0, total: 2 }
-    ];
-
-    function slideTo(carouselId, target) {
-      const s = states[carouselId];
-      s.index = target;
-      updateCarousel(carouselId);
-    }
-
-    function slide(carouselId, direction) {
-      const s = states[carouselId];
-      s.index = (s.index + direction + s.total) % s.total;
-      updateCarousel(carouselId);
-    }
-
-    function updateCarousel(id) {
-      const s = states[id];
-      document.getElementById('track-' + id).style.transform =
-        'translateX(-' + (s.index * 100) + '%)';
-      document.querySelectorAll('#dots-' + id + ' .carousel-dot')
-        .forEach((d, i) => d.classList.toggle('active', i === s.index));
-      for (let i = 0; i < s.total; i++) {
-        const el = document.getElementById('desc-' + id + '-' + i);
-        if (el) el.classList.toggle('active', i === s.index);
-      }
-    }
-
-    document.querySelectorAll('.carousel').forEach((carousel, id) => {
-      let startX = 0;
-      carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-      carousel.addEventListener('touchend', e => {
-        const diff = startX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 40) slide(id, diff > 0 ? 1 : -1);
-      });
-    });
+    // Pour activer une image : retire les <!-- --> autour de <img> et mets en commentaire le <div class="card-ph">
   </script>
 </body>
 </html>
