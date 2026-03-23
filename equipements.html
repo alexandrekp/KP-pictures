@@ -6,20 +6,22 @@
   <title>Équipements — Focale</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0d0d0d;
-      --surface: #161616;
-      --border: #2a2a2a;
-      --text: #e8e4df;
-      --muted: #6b6560;
-      --accent: #c8a96e;
+      --bg: #f0ede6;
+      --surface: #e8e5de;
+      --border: #c8c4ba;
+      --text: #111111;
+      --muted: #888880;
+      --hint: #bbbbbb;
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-body: 'DM Sans', sans-serif;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
@@ -27,8 +29,10 @@
       font-family: var(--font-body);
       font-weight: 300;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
+    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -36,112 +40,186 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.4rem 3rem;
-      background: rgba(13,13,13,0.85);
+      padding: 0 40px;
+      height: 62px;
+      background: rgba(240,237,230,0.92);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 0.6px solid var(--border);
     }
+
+    .nav-left { display: flex; align-items: center; gap: 32px; }
 
     .nav-logo {
       font-family: var(--font-display);
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 5px;
       color: var(--text);
       text-decoration: none;
+      text-transform: uppercase;
     }
 
-    .nav-logo span { color: var(--accent); }
-    nav ul { list-style: none; display: flex; gap: 2.5rem; }
+    .nav-logo span { color: var(--muted); }
+    .nav-index { font-size: 8px; letter-spacing: 1.5px; color: var(--hint); padding-top: 2px; }
+
+    nav ul { list-style: none; display: flex; align-items: center; gap: 36px; }
 
     nav a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.15em;
+      font-size: 8px;
+      letter-spacing: 3px;
       text-transform: uppercase;
       transition: color 0.2s;
+      position: relative;
+      font-weight: 400;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 0.8px;
+      background: var(--text);
+      transition: width 0.3s;
     }
 
     nav a:hover { color: var(--text); }
-    nav a.active { color: var(--text); }
-    nav a.active::after { content: ''; display: block; height: 1px; background: var(--accent); margin-top: 3px; }
+    nav a:hover::after, nav a.active::after { width: 100%; }
+    nav a.active { color: var(--text); font-weight: 500; }
 
+    /* ── HERO ── */
     .hero {
-      padding: 13rem 3rem 4rem;
-      max-width: 680px;
-      animation: fadeUp 0.5s ease both;
+      margin-top: 62px;
+      height: 42vh;
+      min-height: 260px;
+      background: #111;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 40px 36px;
     }
 
-    .hero-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.2rem;
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(#1e1e1e 0.4px, transparent 0.4px),
+        linear-gradient(90deg, #1e1e1e 0.4px, transparent 0.4px);
+      background-size: 38px 38px;
+      pointer-events: none;
+      opacity: 0.6;
     }
+
+    .hero-line-left {
+      position: absolute;
+      left: 40px; top: 0; bottom: 0;
+      width: 0.8px;
+      background: #2a2a2a;
+    }
+
+    .hero-year {
+      position: absolute;
+      top: 24px; left: 56px;
+      font-size: 7.5px;
+      letter-spacing: 3px;
+      color: #444;
+      text-transform: uppercase;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
 
     .hero h1 {
       font-family: var(--font-display);
-      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 800;
+      line-height: 0.88;
+      color: #fff;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.2s both;
+    }
+
+    .hero-divider {
+      width: 0;
+      height: 0.6px;
+      background: #2e2e2e;
+      margin: 14px 0 12px;
+      animation: expandLine 0.8s ease 0.7s both;
+    }
+
+    .hero-sub {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.9s both;
+    }
+
+    .hero-sub span {
+      font-size: 8px;
+      letter-spacing: 4px;
+      color: #555;
+      text-transform: uppercase;
       font-weight: 300;
-      line-height: 1.1;
-      color: var(--text);
-      margin-bottom: 1.2rem;
     }
 
-    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-sub-sep { width: 16px; height: 0.6px; background: #333; }
 
-    .hero p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 440px;
-    }
+    /* ── CONTENT ── */
+    .content { padding: 0 40px 80px; }
 
-    .content { padding: 0 3rem 6rem; }
-
-    .gear-section {
-      margin-bottom: 4.5rem;
-      animation: fadeUp 0.6s ease both;
-    }
-
-    .gear-section:nth-child(1) { animation-delay: 0.1s; }
-    .gear-section:nth-child(2) { animation-delay: 0.2s; }
+    .gear-section { margin-top: 48px; }
 
     .section-header {
       display: flex;
       align-items: center;
-      gap: 1.2rem;
-      margin-bottom: 2rem;
+      gap: 20px;
+      padding-bottom: 16px;
+      border-bottom: 0.6px solid var(--border);
+      margin-bottom: 0;
+    }
+
+    .section-num {
+      font-size: 7.5px;
+      letter-spacing: 2px;
+      color: var(--hint);
     }
 
     .section-title {
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
+      font-size: 8px;
+      letter-spacing: 4px;
       text-transform: uppercase;
-      color: var(--accent);
-      white-space: nowrap;
+      color: var(--text);
+      font-weight: 500;
     }
 
-    .section-line { flex: 1; height: 1px; background: var(--border); }
+    .section-count {
+      font-size: 7.5px;
+      letter-spacing: 2px;
+      color: var(--hint);
+      margin-left: auto;
+    }
 
+    /* ── CARDS ── */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
+      gap: 0.6px;
       background: var(--border);
-      border: 1px solid var(--border);
     }
 
     .gear-card {
       background: var(--bg);
       display: flex;
       flex-direction: column;
-      transition: background 0.2s;
+      transition: background 0.25s;
     }
 
-    .gear-card:hover { background: var(--surface); }
+    .gear-card:hover { background: #ebe8e1; }
 
     .card-img {
       width: 100%;
@@ -151,8 +229,17 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      border-bottom: 1px solid var(--border);
-      padding: 1rem;
+      padding: 1.2rem;
+      border-bottom: 0.6px solid var(--border);
+      position: relative;
+    }
+
+    .card-num {
+      position: absolute;
+      top: 12px; left: 14px;
+      font-size: 7px;
+      letter-spacing: 1.5px;
+      color: var(--hint);
     }
 
     .card-img img {
@@ -160,58 +247,48 @@
       height: 100%;
       object-fit: contain;
       display: block;
-      filter: grayscale(20%) brightness(0.9);
-      transition: filter 0.3s;
+      filter: grayscale(15%) brightness(0.95);
+      transition: filter 0.3s, transform 0.4s;
     }
 
-    .gear-card:hover .card-img img { filter: grayscale(0%) brightness(1); }
+    .gear-card:hover .card-img img {
+      filter: grayscale(0%) brightness(1);
+      transform: scale(1.03);
+    }
 
-    .card-ph {
-      width: 100%;
-      height: 100%;
+    .card-body {
+      padding: 20px 20px 22px;
+      flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.8rem;
     }
-
-    .card-ph svg { width: 40px; height: 40px; opacity: 0.15; stroke: var(--accent); fill: none; }
-
-    .card-ph-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      opacity: 0.5;
-    }
-
-    .card-body { padding: 1.5rem; flex: 1; }
 
     .card-type {
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
+      font-size: 7px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.4rem;
+      color: var(--muted);
+      margin-bottom: 8px;
     }
 
     .card-name {
       font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 300;
+      font-size: 20px;
+      font-weight: 700;
       color: var(--text);
-      line-height: 1.2;
-      margin-bottom: 1rem;
+      line-height: 1.1;
+      letter-spacing: 0.3px;
+      margin-bottom: 14px;
     }
 
-    .card-specs {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border);
+    .card-divider {
+      width: 20px;
+      height: 0.6px;
+      background: var(--border);
+      margin-bottom: 14px;
     }
+
+    .card-specs { display: flex; flex-direction: column; gap: 7px; flex: 1; }
 
     .spec-row {
       display: flex;
@@ -220,120 +297,198 @@
     }
 
     .spec-key {
-      font-size: 0.62rem;
+      font-size: 7px;
+      color: var(--hint);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .spec-val {
+      font-size: 8px;
       color: var(--muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .spec-val { font-size: 0.75rem; color: var(--text); }
-
-    .card-tag {
-      display: inline-block;
-      margin-top: 1rem;
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: 1px solid rgba(200,169,110,0.3);
-      color: var(--accent);
-      padding: 0.2rem 0.6rem;
-      border-radius: 2px;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 3rem;
+    .card-footer {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 0.6px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    footer p { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; }
+    .card-tag {
+      font-size: 7px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 0.6px solid var(--border);
+      padding: 3px 8px;
+    }
 
+    .card-arrow {
+      width: 20px; height: 20px;
+      border: 0.6px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .gear-card:hover .card-arrow { opacity: 1; }
+    .card-arrow svg { width: 10px; height: 10px; stroke: var(--muted); fill: none; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 0.6px solid var(--border);
+      padding: 0 40px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg);
+    }
+
+    footer p {
+      font-size: 7.5px;
+      color: var(--hint);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes expandLine {
+      from { width: 0; }
+      to   { width: 420px; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+
     @media (max-width: 640px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .hero { padding: 10rem 1.5rem 3rem; }
-      .content { padding-left: 1.5rem; padding-right: 1.5rem; }
+      nav { padding: 0 20px; }
+      .hero { padding: 0 20px 28px; }
+      .content { padding: 0 20px 60px; }
       .cards-grid { grid-template-columns: 1fr; }
-      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+      footer { padding: 0 20px; }
+      .nav-index { display: none; }
     }
   </style>
 </head>
 <body>
 
+  <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-logo">Focale<span>.</span></a>
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">Focale<span>.</span></a>
+      <span class="nav-index">02 / 02</span>
+    </div>
     <ul>
-      <li><a href="index.html">Accueil</a></li>
+      <li><a href="index.html">Galerie</a></li>
       <li><a href="equipements.html" class="active">Équipements</a></li>
     </ul>
   </nav>
 
+  <!-- HERO -->
   <header class="hero">
-    <p class="hero-label">Alexandre · 25 ans · Paris</p>
-    <h1>Equipements </h1>
+    <div class="hero-grid"></div>
+    <div class="hero-line-left"></div>
+    <div class="hero-year">© 2026</div>
+    <div class="hero-content">
+      <h1>Équipements</h1>
+      <div class="hero-divider"></div>
+      <div class="hero-sub">
+        <span>Boîtiers</span>
+        <div class="hero-sub-sep"></div>
+        <span>Pellicules</span>
+        <div class="hero-sub-sep"></div>
+        <span>6 références</span>
+      </div>
+    </div>
   </header>
 
+  <!-- CONTENT -->
   <main class="content">
 
     <!-- BOÎTIERS -->
     <section class="gear-section">
       <div class="section-header">
+        <span class="section-num">01</span>
         <span class="section-title">Boîtiers</span>
-        <div class="section-line"></div>
+        <span class="section-count">3 appareils</span>
       </div>
       <div class="cards-grid">
 
         <div class="gear-card">
           <div class="card-img">
-            <img src="photos/Lumix.png" alt="Lumix" />
+            <span class="card-num">001</span>
+            <img src="photos/Lumix.png" alt="Panasonic Lumix DMC-FX33" />
           </div>
           <div class="card-body">
             <div class="card-type">Compact numérique</div>
             <div class="card-name">Panasonic Lumix DMC-FX33</div>
+            <div class="card-divider"></div>
             <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Capteur</span><span class="spec-val">8 MP CCD</span></div>
-              <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">28mm f/2.8</span></div>
-              <div class="spec-row"><span class="spec-key">Zoom</span><span class="spec-val">3.6x optique</span></div>
+              <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">28mm f/2,8</span></div>
+              <div class="spec-row"><span class="spec-key">Zoom</span><span class="spec-val">3,6× optique</span></div>
+              <div class="spec-row"><span class="spec-key">Année</span><span class="spec-val">2007</span></div>
             </div>
-            <span class="card-tag">Premier appareil</span>
+            <div class="card-footer">
+              <span class="card-tag">Premier appareil</span>
+              <div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+            </div>
           </div>
         </div>
 
         <div class="gear-card">
           <div class="card-img">
+            <span class="card-num">002</span>
             <img src="photos/Epoca.png" alt="Canon Epoca" />
           </div>
           <div class="card-body">
             <div class="card-type">Compact argentique</div>
             <div class="card-name">Canon Epoca</div>
+            <div class="card-divider"></div>
             <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm argentique</span></div>
-              <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">32mm f/4.5</span></div>
+              <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">32mm f/4,5</span></div>
               <div class="spec-row"><span class="spec-key">Mise au point</span><span class="spec-val">Autofocus</span></div>
+              <div class="spec-row"><span class="spec-key">Époque</span><span class="spec-val">Années 90</span></div>
             </div>
-            <span class="card-tag">Argentique</span>
+            <div class="card-footer">
+              <span class="card-tag">Argentique</span>
+              <div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+            </div>
           </div>
         </div>
 
         <div class="gear-card">
           <div class="card-img">
+            <span class="card-num">003</span>
             <img src="photos/Kodak.png" alt="Kodak Fun Flash" />
           </div>
           <div class="card-body">
             <div class="card-type">Appareil jetable</div>
             <div class="card-name">Kodak Fun Flash</div>
+            <div class="card-divider"></div>
             <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm argentique</span></div>
               <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">30mm f/10</span></div>
               <div class="spec-row"><span class="spec-key">Flash</span><span class="spec-val">Intégré</span></div>
+              <div class="spec-row"><span class="spec-key">ISO</span><span class="spec-val">800</span></div>
             </div>
-            <span class="card-tag">Jetable</span>
+            <div class="card-footer">
+              <span class="card-tag">Jetable</span>
+              <div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+            </div>
           </div>
         </div>
 
@@ -343,56 +498,75 @@
     <!-- PELLICULES -->
     <section class="gear-section">
       <div class="section-header">
+        <span class="section-num">02</span>
         <span class="section-title">Pellicules</span>
-        <div class="section-line"></div>
+        <span class="section-count">3 références</span>
       </div>
       <div class="cards-grid">
 
         <div class="gear-card">
           <div class="card-img">
+            <span class="card-num">004</span>
             <img src="photos/KodakG.PNG" alt="Kodak Gold 200" />
           </div>
           <div class="card-body">
             <div class="card-type">Pellicule couleur</div>
             <div class="card-name">Kodak Gold 200</div>
+            <div class="card-divider"></div>
             <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 200</span></div>
               <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
               <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Couleur négatif</span></div>
+              <div class="spec-row"><span class="spec-key">Rendu</span><span class="spec-val">Chaud, doré</span></div>
             </div>
-            <span class="card-tag">Couleur</span>
+            <div class="card-footer">
+              <span class="card-tag">Couleur</span>
+              <div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+            </div>
           </div>
         </div>
 
         <div class="gear-card">
           <div class="card-img">
+            <span class="card-num">005</span>
             <img src="photos/Ilford.png" alt="Ilford HP5 Plus 400" />
           </div>
           <div class="card-body">
             <div class="card-type">Pellicule noir & blanc</div>
             <div class="card-name">Ilford HP5 Plus 400</div>
+            <div class="card-divider"></div>
             <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 400</span></div>
               <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
               <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Noir & blanc négatif</span></div>
+              <div class="spec-row"><span class="spec-key">Rendu</span><span class="spec-val">Granuleux, contrasté</span></div>
             </div>
-            <span class="card-tag">Noir & blanc</span>
+            <div class="card-footer">
+              <span class="card-tag">Noir & blanc</span>
+              <div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+            </div>
           </div>
         </div>
 
         <div class="gear-card">
           <div class="card-img">
+            <span class="card-num">006</span>
             <img src="photos/Fujifilm.png" alt="Fujifilm 200" />
           </div>
           <div class="card-body">
             <div class="card-type">Pellicule couleur</div>
             <div class="card-name">Fujifilm 200</div>
+            <div class="card-divider"></div>
             <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 200</span></div>
               <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
               <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Couleur négatif</span></div>
+              <div class="spec-row"><span class="spec-key">Rendu</span><span class="spec-val">Saturé, vif</span></div>
             </div>
-            <span class="card-tag">Couleur</span>
+            <div class="card-footer">
+              <span class="card-tag">Couleur</span>
+              <div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+            </div>
           </div>
         </div>
 
