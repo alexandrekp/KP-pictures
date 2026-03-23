@@ -133,9 +133,10 @@
     /* CAROUSEL + DESCRIPTION LAYOUT */
     .gear-layout {
       display: grid;
-      grid-template-columns: 1fr 300px;
+      grid-template-columns: 400px 400px;
       border: 1px solid var(--border);
-      min-height: 380px;
+      min-height: 400px;
+      margin: 0 auto;
     }
 
     /* CAROUSEL */
@@ -245,7 +246,7 @@
     .desc-item {
       display: none;
       flex-direction: column;
-      height: 380px;
+      height: 400px;
       padding: 2.2rem 2rem;
       overflow-y: auto;
     }
@@ -341,7 +342,7 @@
       .gear-layout { grid-template-columns: 1fr; }
       .gear-desc-panel { border-left: none; border-top: 1px solid var(--border); }
       .desc-item { height: auto; min-height: 220px; }
-      .carousel-slide { height: 260px; }
+      .carousel-slide { height: 400px; }
     }
 
     @media (max-width: 640px) {
