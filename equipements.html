@@ -29,7 +29,6 @@
       min-height: 100vh;
     }
 
-    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -68,7 +67,6 @@
     nav a.active { color: var(--text); }
     nav a.active::after { content: ''; display: block; height: 1px; background: var(--accent); margin-top: 3px; }
 
-    /* HERO */
     .hero {
       padding: 13rem 3rem 4rem;
       max-width: 680px;
@@ -101,10 +99,8 @@
       max-width: 440px;
     }
 
-    /* CONTENT */
     .content { padding: 0 3rem 6rem; }
 
-    /* SECTION */
     .gear-section {
       margin-bottom: 4.5rem;
       animation: fadeUp 0.6s ease both;
@@ -131,7 +127,6 @@
 
     .section-line { flex: 1; height: 1px; background: var(--border); }
 
-    /* CARDS GRID */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -140,7 +135,6 @@
       border: 1px solid var(--border);
     }
 
-    /* CARD */
     .gear-card {
       background: var(--bg);
       display: flex;
@@ -150,28 +144,28 @@
 
     .gear-card:hover { background: var(--surface); }
 
-    /* Image zone */
     .card-img {
-       width: 100%;
-       aspect-ratio: 1/1;
-       background: var(--surface);
-       display: flex;
-       align-items: center;
-       justify-content: center;
-       overflow: hidden;
-       border-bottom: 1px solid var(--border);
+      width: 100%;
+      aspect-ratio: 1/1;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
     }
-    
+
     .card-img img {
-       width: 100%;
-       height: 100%;
-       object-fit: cover;
-       display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%) brightness(0.9);
+      transition: filter 0.3s;
     }
 
     .gear-card:hover .card-img img { filter: grayscale(0%) brightness(1); }
 
-    /* Placeholder si pas d'image */
     .card-ph {
       width: 100%;
       height: 100%;
@@ -192,7 +186,6 @@
       opacity: 0.5;
     }
 
-    /* Card body */
     .card-body { padding: 1.5rem; flex: 1; }
 
     .card-type {
@@ -254,7 +247,6 @@
       border-radius: 2px;
     }
 
-    /* FOOTER */
     footer {
       border-top: 1px solid var(--border);
       padding: 2rem 3rem;
@@ -307,11 +299,7 @@
 
         <div class="gear-card">
           <div class="card-img">
-          <img src="photos/Lumix.png" alt="Lumix" />
-            <div class="card-ph">
-              <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/></svg>
-              <span class="card-ph-label">Photo à venir</span>
-            </div>
+            <img src="photos/Lumix.png" alt="Lumix" />
           </div>
           <div class="card-body">
             <div class="card-type">Compact numérique</div>
@@ -329,10 +317,6 @@
         <div class="gear-card">
           <div class="card-img">
             <img src="photos/Epoca.png" alt="Canon Epoca" />
-            <div class="card-ph">
-              <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/></svg>
-              <span class="card-ph-label">Photo à venir</span>
-            </div>
           </div>
           <div class="card-body">
             <div class="card-type">Compact argentique</div>
@@ -350,10 +334,6 @@
         <div class="gear-card">
           <div class="card-img">
             <img src="photos/Kodak.png" alt="Kodak Fun Flash" />
-            <div class="card-ph">
-              <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/></svg>
-              <span class="card-ph-label">Photo à venir</span>
-            </div>
           </div>
           <div class="card-body">
             <div class="card-type">Appareil jetable</div>
@@ -402,14 +382,14 @@
         <div class="gear-card">
           <div class="card-img">
             <div class="card-ph">
-              <svg viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M7 21h10M12 17v4"/></svg>
-              <span class="card-ph-label">Lightroom Mobile</span>
+              <svg viewBox="0 0 24 24" stroke-width="1"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              <span class="card-ph-label">Snapseed</span>
             </div>
           </div>
           <div class="card-body">
             <div class="card-type">Retouche mobile</div>
-            <div class="card-name">Lightroom Mobile</div>
-            <div class="card-desc">Pour les retouches rapides sur iPhone. Simple et efficace quand je veux poster directement depuis le téléphone.</div>
+            <div class="card-name">Snapseed</div>
+            <div class="card-desc">Pour les retouches rapides sur iPhone. Gratuit, intuitif et suffisamment puissant pour ajuster l'exposition, les couleurs et le contraste en déplacement.</div>
             <div class="card-specs">
               <div class="spec-row"><span class="spec-key">Usage</span><span class="spec-val">Retouche mobile</span></div>
               <div class="spec-row"><span class="spec-key">Prix</span><span class="spec-val">Gratuit</span></div>
@@ -419,69 +399,96 @@
           </div>
         </div>
 
+        <div class="gear-card">
+          <div class="card-img">
+            <div class="card-ph">
+              <svg viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M7 21h10M12 17v4"/></svg>
+              <span class="card-ph-label">Google Photos</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-type">Stockage & organisation</div>
+            <div class="card-name">Google Photos</div>
+            <div class="card-desc">Pour archiver, retrouver et partager mes photos facilement depuis n'importe quel appareil. Pratique en voyage pour sauvegarder directement depuis le téléphone.</div>
+            <div class="card-specs">
+              <div class="spec-row"><span class="spec-key">Usage</span><span class="spec-val">Stockage cloud</span></div>
+              <div class="spec-row"><span class="spec-key">Prix</span><span class="spec-val">Gratuit (15 Go)</span></div>
+              <div class="spec-row"><span class="spec-key">Plateforme</span><span class="spec-val">iOS / Android / Web</span></div>
+            </div>
+            <span class="card-tag">Archivage</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- ACCESSOIRES -->
-    <div class="gear-card">
-  <div class="card-img">
-    <div class="card-ph">
-      <svg viewBox="0 0 24 24" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-      <span class="card-ph-label">Kodak Gold 200</span>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="card-type">Pellicule couleur</div>
-    <div class="card-name">Kodak Gold 200</div>
-    <div class="card-desc">Tons chauds, grain présent, couleurs légèrement saturées. Ma pellicule couleur de base pour le Canon Epoca et le Kodak Fun Flash.</div>
-    <div class="card-specs">
-      <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 200</span></div>
-      <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
-      <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Couleur négatif</span></div>
-    </div>
-    <span class="card-tag">Couleur</span>
-  </div>
-</div>
+    <!-- PELLICULES -->
+    <section class="gear-section">
+      <div class="section-header">
+        <span class="section-title">Pellicules</span>
+        <div class="section-line"></div>
+      </div>
+      <div class="cards-grid">
 
-<div class="gear-card">
-  <div class="card-img">
-    <div class="card-ph">
-      <svg viewBox="0 0 24 24" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-      <span class="card-ph-label">Ilford HP5 Plus 400</span>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="card-type">Pellicule noir & blanc</div>
-    <div class="card-name">Ilford HP5 Plus 400</div>
-    <div class="card-desc">La référence en noir et blanc. Polyvalente, tolérante en sur-exposition, grain fin et contrastes marqués. Parfaite pour la street et les portraits.</div>
-    <div class="card-specs">
-      <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 400</span></div>
-      <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
-      <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Noir & blanc négatif</span></div>
-    </div>
-    <span class="card-tag">Noir & blanc</span>
-  </div>
-</div>
+        <div class="gear-card">
+          <div class="card-img">
+            <div class="card-ph">
+              <svg viewBox="0 0 24 24" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              <span class="card-ph-label">Kodak Gold 200</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-type">Pellicule couleur</div>
+            <div class="card-name">Kodak Gold 200</div>
+            <div class="card-desc">Tons chauds, grain présent, couleurs légèrement saturées. Ma pellicule couleur de base pour le Canon Epoca et le Kodak Fun Flash.</div>
+            <div class="card-specs">
+              <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 200</span></div>
+              <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
+              <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Couleur négatif</span></div>
+            </div>
+            <span class="card-tag">Couleur</span>
+          </div>
+        </div>
 
-<div class="gear-card">
-  <div class="card-img">
-    <div class="card-ph">
-      <svg viewBox="0 0 24 24" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-      <span class="card-ph-label">Fujifilm 200</span>
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="card-type">Pellicule couleur</div>
-    <div class="card-name">Fujifilm 200</div>
-    <div class="card-desc">Des couleurs naturelles et fidèles, un grain discret. Idéale en plein jour pour les paysages et les scènes de voyage avec beaucoup de lumière.</div>
-    <div class="card-specs">
-      <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 200</span></div>
-      <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
-      <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Couleur négatif</span></div>
-    </div>
-    <span class="card-tag">Couleur</span>
-  </div>
-</div>
+        <div class="gear-card">
+          <div class="card-img">
+            <div class="card-ph">
+              <svg viewBox="0 0 24 24" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              <span class="card-ph-label">Ilford HP5 Plus 400</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-type">Pellicule noir & blanc</div>
+            <div class="card-name">Ilford HP5 Plus 400</div>
+            <div class="card-desc">La référence en noir et blanc. Polyvalente, tolérante en sur-exposition, grain fin et contrastes marqués. Parfaite pour la street et les portraits.</div>
+            <div class="card-specs">
+              <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 400</span></div>
+              <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
+              <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Noir & blanc négatif</span></div>
+            </div>
+            <span class="card-tag">Noir & blanc</span>
+          </div>
+        </div>
+
+        <div class="gear-card">
+          <div class="card-img">
+            <div class="card-ph">
+              <svg viewBox="0 0 24 24" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              <span class="card-ph-label">Fujifilm 200</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-type">Pellicule couleur</div>
+            <div class="card-name">Fujifilm 200</div>
+            <div class="card-desc">Des couleurs naturelles et fidèles, un grain discret. Idéale en plein jour pour les paysages et les scènes de voyage.</div>
+            <div class="card-specs">
+              <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 200</span></div>
+              <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
+              <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Couleur négatif</span></div>
+            </div>
+            <span class="card-tag">Couleur</span>
+          </div>
+        </div>
 
       </div>
     </section>
@@ -493,8 +500,5 @@
     <p>Tous droits réservés</p>
   </footer>
 
-  <script>
-    // Pour activer une image : retire les <!-- --> autour de <img> et mets en commentaire le <div class="card-ph">
-  </script>
 </body>
 </html>
