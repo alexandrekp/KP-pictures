@@ -1,1 +1,646 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Équipements — Focale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --text: #e8e4df;
+      --muted: #6b6560;
+      --accent: #c8a96e;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 3rem;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2.5rem; }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--text); }
+    nav a.active { color: var(--text); }
+    nav a.active::after { content: ''; display: block; height: 1px; background: var(--accent); margin-top: 3px; }
+
+    /* HERO */
+    .hero {
+      padding: 13rem 3rem 4rem;
+      max-width: 680px;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .hero-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 em { font-style: italic; color: var(--accent); }
+
+    .hero p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 440px;
+    }
+
+    /* CONTENT */
+    .content { padding: 0 3rem 6rem; }
+
+    .gear-block {
+      margin-bottom: 5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .gear-block:nth-child(1) { animation-delay: 0.1s; }
+    .gear-block:nth-child(2) { animation-delay: 0.2s; }
+    .gear-block:nth-child(3) { animation-delay: 0.3s; }
+
+    .gear-block-header {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .gear-block-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .gear-block-line { flex: 1; height: 1px; background: var(--border); }
+
+    /* CAROUSEL + DESCRIPTION LAYOUT */
+    .gear-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      border: 1px solid var(--border);
+      min-height: 360px;
+    }
+
+    /* CAROUSEL */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide-ph {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.9rem;
+    }
+
+    .slide-ph svg { width: 48px; height: 48px; opacity: 0.18; stroke: var(--accent); fill: none; }
+
+    .slide-ph-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .ph-boitiers    { background: #131210; }
+    .ph-objectifs   { background: #101214; }
+    .ph-accessoires { background: #121010; }
+
+    /* Dots */
+    .carousel-counter {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .carousel-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transition: background 0.25s, transform 0.25s;
+      cursor: pointer;
+    }
+
+    .carousel-dot.active { background: var(--accent); transform: scale(1.3); }
+
+    /* Nav buttons */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      background: rgba(13,13,13,0.7);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      width: 36px; height: 36px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .carousel-btn:hover { background: rgba(13,13,13,0.95); color: var(--text); border-color: var(--muted); }
+    .carousel-btn.c-prev { left: 0.8rem; }
+    .carousel-btn.c-next { right: 0.8rem; }
+    .carousel-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; }
+
+    /* DESCRIPTION PANEL */
+    .gear-desc-panel {
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .desc-item {
+      display: none;
+      flex-direction: column;
+      height: 360px;
+      padding: 2.2rem 2rem;
+      overflow-y: auto;
+    }
+
+    .desc-item.active { display: flex; animation: fadeUp 0.3s ease both; }
+
+    .desc-item-index {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .desc-item-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+    }
+
+    .desc-item-type {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .desc-item-text {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.8;
+      flex: 1;
+    }
+
+    .desc-item-specs {
+      margin-top: 1.3rem;
+      padding-top: 1.3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .spec-key {
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .spec-val { font-size: 0.78rem; color: var(--text); }
+
+    .desc-tag {
+      display: inline-block;
+      margin-top: 1.1rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid rgba(200,169,110,0.3);
+      color: var(--accent);
+      padding: 0.22rem 0.65rem;
+      border-radius: 2px;
+      align-self: flex-start;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer p { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .gear-layout { grid-template-columns: 1fr; }
+      .gear-desc-panel { border-left: none; border-top: 1px solid var(--border); }
+      .desc-item { height: auto; min-height: 220px; }
+      .carousel-slide { height: 260px; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .hero { padding: 10rem 1.5rem 3rem; }
+      .content { padding-left: 1.5rem; padding-right: 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Focale<span>.</span></a>
+    <ul>
+      <li><a href="index.html">Galerie</a></li>
+      <li><a href="equipements.html" class="active">Équipements</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <p class="hero-label">Alexandre · 25 ans · Paris</p>
+    <h1>Les outils <em>derrière</em><br>chaque image.</h1>
+    <p>Le matériel que j'utilise au quotidien. Chaque pièce est choisie pour sa fiabilité, son rendu optique et ce qu'elle m'apporte créativement.</p>
+  </header>
+
+  <main class="content">
+
+    <!-- ── BLOC 1 : BOÎTIERS ── -->
+    <div class="gear-block">
+      <div class="gear-block-header">
+        <span class="gear-block-title">Boîtiers</span>
+        <div class="gear-block-line"></div>
+      </div>
+      <div class="gear-layout">
+
+        <div class="carousel" id="carousel-0">
+          <div class="carousel-track" id="track-0">
+            <div class="carousel-slide">
+              <div class="slide-ph ph-boitiers">
+                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/><circle cx="18.5" cy="9.5" r="1"/></svg>
+                <span class="slide-ph-label">Sony A7 III</span>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="slide-ph ph-boitiers">
+                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/><circle cx="18.5" cy="9.5" r="1"/></svg>
+                <span class="slide-ph-label">Fujifilm X-T5</span>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-btn c-prev" onclick="slide(0,-1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="carousel-btn c-next" onclick="slide(0,1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="carousel-counter" id="dots-0">
+            <div class="carousel-dot active" onclick="slideTo(0,0)"></div>
+            <div class="carousel-dot" onclick="slideTo(0,1)"></div>
+          </div>
+        </div>
+
+        <div class="gear-desc-panel">
+          <div class="desc-item active" id="desc-0-0">
+            <div class="desc-item-index">01 / 02</div>
+            <div class="desc-item-name">Sony A7 III</div>
+            <div class="desc-item-type">Hybride plein format</div>
+            <div class="desc-item-text">Mon boîtier principal depuis 2 ans. Excellent rendu en basse lumière, AF rapide et fiable. La dynamique du capteur plein format est remarquable pour les portraits et la photo urbaine de nuit.</div>
+            <div class="desc-item-specs">
+              <div class="spec-row"><span class="spec-key">Capteur</span><span class="spec-val">BSI CMOS 24 Mpx</span></div>
+              <div class="spec-row"><span class="spec-key">Monture</span><span class="spec-val">Sony FE</span></div>
+              <div class="spec-row"><span class="spec-key">ISO natif</span><span class="spec-val">100 – 51 200</span></div>
+            </div>
+            <span class="desc-tag">Boîtier principal</span>
+          </div>
+          <div class="desc-item" id="desc-0-1">
+            <div class="desc-item-index">02 / 02</div>
+            <div class="desc-item-name">Fujifilm X-T5</div>
+            <div class="desc-item-type">Hybride APS-C</div>
+            <div class="desc-item-text">Compact, léger et doté d'un capteur 40 Mpx. La simulation de films Fuji donne une couleur unique en JPEG. Idéal pour la street photo et les voyages sans alourdir le sac.</div>
+            <div class="desc-item-specs">
+              <div class="spec-row"><span class="spec-key">Capteur</span><span class="spec-val">X-Trans 5 HR 40 Mpx</span></div>
+              <div class="spec-row"><span class="spec-key">Monture</span><span class="spec-val">Fuji X</span></div>
+              <div class="spec-row"><span class="spec-key">Simulation</span><span class="spec-val">Classic Neg, Eterna</span></div>
+            </div>
+            <span class="desc-tag">Voyage & street</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BLOC 2 : OBJECTIFS ── -->
+    <div class="gear-block">
+      <div class="gear-block-header">
+        <span class="gear-block-title">Objectifs</span>
+        <div class="gear-block-line"></div>
+      </div>
+      <div class="gear-layout">
+
+        <div class="carousel" id="carousel-1">
+          <div class="carousel-track" id="track-1">
+            <div class="carousel-slide">
+              <div class="slide-ph ph-objectifs">
+                <svg viewBox="0 0 24 24" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>
+                <span class="slide-ph-label">Sony 85mm f/1.4 GM</span>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="slide-ph ph-objectifs">
+                <svg viewBox="0 0 24 24" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>
+                <span class="slide-ph-label">Sony 24-70mm f/2.8 GM II</span>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="slide-ph ph-objectifs">
+                <svg viewBox="0 0 24 24" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>
+                <span class="slide-ph-label">Fuji XF 23mm f/2</span>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-btn c-prev" onclick="slide(1,-1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="carousel-btn c-next" onclick="slide(1,1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="carousel-counter" id="dots-1">
+            <div class="carousel-dot active" onclick="slideTo(1,0)"></div>
+            <div class="carousel-dot" onclick="slideTo(1,1)"></div>
+            <div class="carousel-dot" onclick="slideTo(1,2)"></div>
+          </div>
+        </div>
+
+        <div class="gear-desc-panel">
+          <div class="desc-item active" id="desc-1-0">
+            <div class="desc-item-index">01 / 03</div>
+            <div class="desc-item-name">Sony 85mm f/1.4 GM</div>
+            <div class="desc-item-type">Focale fixe · Portrait</div>
+            <div class="desc-item-text">Mon objectif fétiche pour les portraits. Bokeh d'une douceur exceptionnelle, piqué à pleine ouverture et mise au point quasi instantanée. Un investissement qui en vaut le prix.</div>
+            <div class="desc-item-specs">
+              <div class="spec-row"><span class="spec-key">Focale</span><span class="spec-val">85 mm</span></div>
+              <div class="spec-row"><span class="spec-key">Ouverture max</span><span class="spec-val">f/1.4</span></div>
+              <div class="spec-row"><span class="spec-key">Poids</span><span class="spec-val">820 g</span></div>
+            </div>
+            <span class="desc-tag">Préféré portrait</span>
+          </div>
+          <div class="desc-item" id="desc-1-1">
+            <div class="desc-item-index">02 / 03</div>
+            <div class="desc-item-name">Sony 24-70mm f/2.8 GM II</div>
+            <div class="desc-item-type">Zoom polyvalent</div>
+            <div class="desc-item-text">Le zoom de tous les jours. Lumineux, compact pour un f/2.8, avec une qualité optique qui rivalise avec les focales fixes. Idéal en reportage, paysage et voyage.</div>
+            <div class="desc-item-specs">
+              <div class="spec-row"><span class="spec-key">Focale</span><span class="spec-val">24 – 70 mm</span></div>
+              <div class="spec-row"><span class="spec-key">Ouverture max</span><span class="spec-val">f/2.8</span></div>
+              <div class="spec-row"><span class="spec-key">Poids</span><span class="spec-val">695 g</span></div>
+            </div>
+            <span class="desc-tag">Polyvalent</span>
+          </div>
+          <div class="desc-item" id="desc-1-2">
+            <div class="desc-item-index">03 / 03</div>
+            <div class="desc-item-name">Fuji XF 23mm f/2</div>
+            <div class="desc-item-type">Focale fixe · Street</div>
+            <div class="desc-item-text">Compact, discret, rapide à dégainer. Monté sur le X-T5, angle équivalent 35mm plein format — le format idéal pour la rue. Je l'emporte partout en balade dans Paris.</div>
+            <div class="desc-item-specs">
+              <div class="spec-row"><span class="spec-key">Focale</span><span class="spec-val">23 mm (≈ 35mm FF)</span></div>
+              <div class="spec-row"><span class="spec-key">Ouverture max</span><span class="spec-val">f/2</span></div>
+              <div class="spec-row"><span class="spec-key">Poids</span><span class="spec-val">180 g</span></div>
+            </div>
+            <span class="desc-tag">Street & voyage</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BLOC 3 : ACCESSOIRES & POST ── -->
+    <div class="gear-block">
+      <div class="gear-block-header">
+        <span class="gear-block-title">Accessoires & Post-traitement</span>
+        <div class="gear-block-line"></div>
+      </div>
+      <div class="gear-layout">
+
+        <div class="carousel" id="carousel-2">
+          <div class="carousel-track" id="track-2">
+            <div class="carousel-slide">
+              <div class="slide-ph ph-accessoires">
+                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M7 21h10M12 17v4"/></svg>
+                <span class="slide-ph-label">Adobe Lightroom Classic</span>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="slide-ph ph-accessoires">
+                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                <span class="slide-ph-label">Écran BenQ SW271C</span>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="slide-ph ph-accessoires">
+                <svg viewBox="0 0 24 24" stroke-width="1"><line x1="12" y1="2" x2="12" y2="22"/><line x1="12" y1="8" x2="12" y2="8"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span class="slide-ph-label">Filtres ND & Trépied</span>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-btn c-prev" onclick="slide(2,-1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="carousel-btn c-next" onclick="slide(2,1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="carousel-counter" id="dots-2">
+            <div class="carousel-dot active" onclick="slideTo(2,0)"></div>
+            <div class="carousel-dot" onclick="slideTo(2,1)"></div>
+            <div class="carousel-dot" onclick="slideTo(2,2)"></div>
+          </div>
+        </div>
+
+        <div class="gear-desc-panel">
+          <div class="desc-item active" id="desc-2-0">
+            <div class="desc-item-index">01 / 03</div>
+            <div class="desc-item-name">Adobe Lightroom Classic</div>
+            <div class="desc-item-type">Logiciel · Post-traitement</div>
+            <div class="desc-item-text">Mon workflow principal pour le tri et le développement RAW. J'utilise des presets maison pour garder une cohérence de style. Couplé à Photoshop pour les retouches avancées.</div>
+            <div class="desc-item-specs">
+              <div class="spec-row"><span class="spec-key">Usage</span><span class="spec-val">Tri & développement RAW</span></div>
+              <div class="spec-row"><span class="spec-key">Abonnement</span><span class="spec-val">Adobe Creative Cloud</span></div>
+            </div>
+            <span class="desc-tag">Principal</span>
+          </div>
+          <div class="desc-item" id="desc-2-1">
+            <div class="desc-item-index">02 / 03</div>
+            <div class="desc-item-name">BenQ SW271C</div>
+            <div class="desc-item-type">Écran · Étalonnage</div>
+            <div class="desc-item-text">Calibré, 99% AdobeRGB, 100% sRGB. Indispensable pour que les couleurs soient fidèles à l'impression ou à la diffusion web. Livré avec son capot anti-reflets.</div>
+            <div class="desc-item-specs">
+              <div class="spec-row"><span class="spec-key">Taille</span><span class="spec-val">27", 4K</span></div>
+              <div class="spec-row"><span class="spec-key">AdobeRGB</span><span class="spec-val">99%</span></div>
+              <div class="spec-row"><span class="spec-key">Calibration</span><span class="spec-val">ColorChecker Display</span></div>
+            </div>
+            <span class="desc-tag">Calibré</span>
+          </div>
+          <div class="desc-item" id="desc-2-2">
+            <div class="desc-item-index">03 / 03</div>
+            <div class="desc-item-name">Filtres ND & Trépied</div>
+            <div class="desc-item-type">Accessoires terrain</div>
+            <div class="desc-item-text">Filtres ND Kase 6, 10 et 16 stops pour les longues poses en plein jour. Trépied Peak Design Travel : ultra compact, solide, se glisse dans n'importe quel sac de voyage.</div>
+            <div class="desc-item-specs">
+              <div class="spec-row"><span class="spec-key">Filtres</span><span class="spec-val">ND 6 / 10 / 16 stops</span></div>
+              <div class="spec-row"><span class="spec-key">Trépied</span><span class="spec-val">Peak Design Travel</span></div>
+              <div class="spec-row"><span class="spec-key">Poids trépied</span><span class="spec-val">1,27 kg</span></div>
+            </div>
+            <span class="desc-tag">Terrain</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2026 — Focale · Alexandre</p>
+    <p>Tous droits réservés</p>
+  </footer>
+
+  <script>
+    const states = [
+      { index: 0, total: 2 },
+      { index: 0, total: 3 },
+      { index: 0, total: 3 }
+    ];
+
+    function slideTo(carouselId, target) {
+      const s = states[carouselId];
+      s.index = target;
+      updateCarousel(carouselId);
+    }
+
+    function slide(carouselId, direction) {
+      const s = states[carouselId];
+      s.index = (s.index + direction + s.total) % s.total;
+      updateCarousel(carouselId);
+    }
+
+    function updateCarousel(id) {
+      const s = states[id];
+
+      // Move track
+      document.getElementById('track-' + id).style.transform =
+        'translateX(-' + (s.index * 100) + '%)';
+
+      // Update dots
+      document.querySelectorAll('#dots-' + id + ' .carousel-dot')
+        .forEach((d, i) => d.classList.toggle('active', i === s.index));
+
+      // Update descriptions (find all desc-items in this carousel's panel)
+      // Desc items are: desc-{id}-0, desc-{id}-1, etc.
+      for (let i = 0; i < s.total; i++) {
+        const el = document.getElementById('desc-' + id + '-' + i);
+        if (el) el.classList.toggle('active', i === s.index);
+      }
+    }
+
+    // Touch/swipe support
+    document.querySelectorAll('.carousel').forEach((carousel, id) => {
+      let startX = 0;
+      carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+      carousel.addEventListener('touchend', e => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) slide(id, diff > 0 ? 1 : -1);
+      });
+    });
+  </script>
+</body>
+</html>
