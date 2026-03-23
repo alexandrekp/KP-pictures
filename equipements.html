@@ -19,6 +19,7 @@
       --accent: #c8a96e;
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-body: 'DM Sans', sans-serif;
+      --card: 420px;
     }
 
     body {
@@ -130,13 +131,12 @@
 
     .gear-block-line { flex: 1; height: 1px; background: var(--border); }
 
-    /* CAROUSEL + DESCRIPTION LAYOUT */
+    /* LAYOUT : carousel carré + description */
     .gear-layout {
       display: grid;
-      grid-template-columns: 400px 400px;
+      grid-template-columns: var(--card) var(--card);
       border: 1px solid var(--border);
-      min-height: 400px;
-      margin: 0 auto;
+      width: calc(var(--card) * 2);
     }
 
     /* CAROUSEL */
@@ -144,6 +144,8 @@
       position: relative;
       overflow: hidden;
       background: var(--surface);
+      width: var(--card);
+      height: var(--card);
     }
 
     .carousel-track {
@@ -154,19 +156,20 @@
 
     .carousel-slide {
       flex: 0 0 100%;
-      height: 380px;
+      width: var(--card);
+      height: var(--card);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
     }
 
-   .carousel-slide img {
+    .carousel-slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-  }
+    }
 
     .slide-ph {
       width: 100%;
@@ -239,14 +242,15 @@
     .gear-desc-panel {
       background: var(--bg);
       border-left: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
+      width: var(--card);
+      height: var(--card);
+      overflow: hidden;
     }
 
     .desc-item {
       display: none;
       flex-direction: column;
-      height: 400px;
+      height: var(--card);
       padding: 2.2rem 2rem;
       overflow-y: auto;
     }
@@ -339,10 +343,11 @@
     }
 
     @media (max-width: 900px) {
-      .gear-layout { grid-template-columns: 1fr; }
-      .gear-desc-panel { border-left: none; border-top: 1px solid var(--border); }
-      .desc-item { height: auto; min-height: 220px; }
-      .carousel-slide { height: 400px; }
+      :root { --card: 100vw; }
+      .gear-layout { grid-template-columns: 1fr; width: 100%; }
+      .gear-desc-panel { width: 100%; border-left: none; border-top: 1px solid var(--border); }
+      .carousel { width: 100%; }
+      .desc-item { height: auto; min-height: 280px; }
     }
 
     @media (max-width: 640px) {
@@ -358,94 +363,103 @@
   <nav>
     <a href="index.html" class="nav-logo">Focale<span>.</span></a>
     <ul>
-      <li><a href="index.html">Galerie</a></li>
+      <li><a href="index.html">Accueil</a></li>
       <li><a href="equipements.html" class="active">Équipements</a></li>
     </ul>
   </nav>
 
   <header class="hero">
     <p class="hero-label">Alexandre · 25 ans · Paris</p>
-    <h1>L'équipement <em>que j'utilise.</em></h1>
-   <!-- <p>Le matériel que j'utilise au quotidien.</p>-->
+    <h1>Ce que j'ai <em>dans le sac.</em></h1>
+    <p>Le matériel que j'utilise au quotidien.</p>
   </header>
 
   <main class="content">
 
     <!-- ── BLOC 1 : BOÎTIERS ── -->
-<div class="gear-block">
-  <div class="gear-block-header">
-    <span class="gear-block-title">Boîtiers</span>
-    <div class="gear-block-line"></div>
-  </div>
-  <div class="gear-layout">
-
-    <div class="carousel" id="carousel-0">
-      <div class="carousel-track" id="track-0">
-        <div class="carousel-slide">
-          <img src="photos/Lumix.png" alt="Panasonic Lumix DMC-FX33" />
-        </div>
-        <div class="carousel-slide">
-          <img src="photos/Epoca.png" alt="Canon Epoca" />
-        </div>
-        <div class="carousel-slide">
-          <img src="photos/Kodak.png" alt="Kodak Fun Flash" />
-        </div>
-      </div>
-      <button class="carousel-btn c-prev" onclick="slide(0,-1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>
-      <button class="carousel-btn c-next" onclick="slide(0,1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg></button>
-      <div class="carousel-counter" id="dots-0">
-        <div class="carousel-dot active" onclick="slideTo(0,0)"></div>
-        <div class="carousel-dot" onclick="slideTo(0,1)"></div>
-        <div class="carousel-dot" onclick="slideTo(0,2)"></div>
-      </div>
-    </div>
-
-    <div class="gear-desc-panel">
-      <div class="desc-item active" id="desc-0-0">
-        <div class="desc-item-index">01 / 03</div>
-        <div class="desc-item-name">Panasonic Lumix DMC-FX33</div>
-        <div class="desc-item-type">Compact numérique</div>
-        <div class="desc-item-text">Mon premier vrai appareil photo. Petit, discret, toujours dans la poche. Il m'a suivi partout et c'est avec lui que j'ai commencé à vraiment shooter au quotidien.</div>
-        <div class="desc-item-specs">
-          <div class="spec-row"><span class="spec-key">Capteur</span><span class="spec-val">8 MP CCD</span></div>
-          <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">28mm f/2.8</span></div>
-          <div class="spec-row"><span class="spec-key">Zoom</span><span class="spec-val">3.6x optique</span></div>
-        </div>
-        <span class="desc-tag">Premier appareil</span>
-      </div>
-      <div class="desc-item" id="desc-0-1">
-        <div class="desc-item-index">02 / 03</div>
-        <div class="desc-item-name">Canon Epoca</div>
-        <div class="desc-item-type">Compact argentique</div>
-        <div class="desc-item-text">Un compact argentique des années 90, simple et efficace. Pas de réglages, pas de prise de tête — tu vises, tu shootes. Le grain argentique donne un rendu unique qu'on ne retrouve nulle part ailleurs.</div>
-        <div class="desc-item-specs">
-          <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm argentique</span></div>
-          <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">32mm f/4.5</span></div>
-          <div class="spec-row"><span class="spec-key">Mise au point</span><span class="spec-val">Autofocus</span></div>
-        </div>
-        <span class="desc-tag">Argentique</span>
-      </div>
-      <div class="desc-item" id="desc-0-2">
-        <div class="desc-item-index">03 / 03</div>
-        <div class="desc-item-name">Kodak Fun Flash</div>
-        <div class="desc-item-type">Appareil jetable</div>
-        <div class="desc-item-text">Le jetable par excellence. On ne réfléchit pas, on shoote. Le flash intégré, le grain épais, les couleurs saturées — c'est brut, imparfait et c'est exactement ce qui le rend authentique.</div>
-        <div class="desc-item-specs">
-          <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm argentique</span></div>
-          <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">30mm f/10</span></div>
-          <div class="spec-row"><span class="spec-key">Flash</span><span class="spec-val">Intégré</span></div>
-        </div>
-        <span class="desc-tag">Jetable</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-    <!-- ── BLOC 2 : OBJECTIFS ── -->
- <!--   <div class="gear-block">
+    <div class="gear-block">
       <div class="gear-block-header">
-        <span class="gear-block-title">Objectifs</span>
+        <span class="gear-block-title">Boîtiers</span>
+        <div class="gear-block-line"></div>
+      </div>
+      <div class="gear-layout">
+
+        <div class="carousel" id="carousel-0">
+          <div class="carousel-track" id="track-0">
+            <div class="carousel-slide">
+              <!-- Remplace par <img src="photos/Lumix.png" alt="Lumix"> quand tu veux -->
+              <div class="slide-ph ph-boitiers">
+                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/><circle cx="18.5" cy="9.5" r="1"/></svg>
+                <span class="slide-ph-label">Panasonic Lumix DMC-FX33</span>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="slide-ph ph-boitiers">
+                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/><circle cx="18.5" cy="9.5" r="1"/></svg>
+                <span class="slide-ph-label">Canon Epoca</span>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="slide-ph ph-boitiers">
+                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4h8v2"/><circle cx="12" cy="13" r="3.5"/><circle cx="18.5" cy="9.5" r="1"/></svg>
+                <span class="slide-ph-label">Kodak Fun Flash</span>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-btn c-prev" onclick="slide(0,-1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <button class="carousel-btn c-next" onclick="slide(0,1)"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg></button>
+          <div class="carousel-counter" id="dots-0">
+            <div class="carousel-dot active" onclick="slideTo(0,0)"></div>
+            <div class="carousel-dot" onclick="slideTo(0,1)"></div>
+            <div class="carousel-dot" onclick="slideTo(0,2)"></div>
+          </div>
+        </div>
+
+        <div class="gear-desc-panel">
+          <div class="desc-item active" id="desc-0-0">
+            <div class="desc-item-index">01 / 03</div>
+            <div class="desc-item-name">Panasonic Lumix DMC-FX33</div>
+            <div class="desc-item-type">Compact numérique</div>
+            <div class="desc-item-text">Mon premier vrai appareil photo. Petit, discret, toujours dans la poche. Il m'a suivi partout et c'est avec lui que j'ai commencé à vraiment shooter au quotidien.</div>
+            <div class="desc-item-specs">
+              <div class="spec-row"><span class="spec-key">Capteur</span><span class="spec-val">8 MP CCD</span></div>
+              <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">28mm f/2.8</span></div>
+              <div class="spec-row"><span class="spec-key">Zoom</span><span class="spec-val">3.6x optique</span></div>
+            </div>
+            <span class="desc-tag">Premier appareil</span>
+          </div>
+          <div class="desc-item" id="desc-0-1">
+            <div class="desc-item-index">02 / 03</div>
+            <div class="desc-item-name">Canon Epoca</div>
+            <div class="desc-item-type">Compact argentique</div>
+            <div class="desc-item-text">Un compact argentique des années 90, simple et efficace. Pas de réglages, pas de prise de tête — tu vises, tu shootes. Le grain argentique donne un rendu unique qu'on ne retrouve nulle part ailleurs.</div>
+            <div class="desc-item-specs">
+              <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm argentique</span></div>
+              <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">32mm f/4.5</span></div>
+              <div class="spec-row"><span class="spec-key">Mise au point</span><span class="spec-val">Autofocus</span></div>
+            </div>
+            <span class="desc-tag">Argentique</span>
+          </div>
+          <div class="desc-item" id="desc-0-2">
+            <div class="desc-item-index">03 / 03</div>
+            <div class="desc-item-name">Kodak Fun Flash</div>
+            <div class="desc-item-type">Appareil jetable</div>
+            <div class="desc-item-text">Le jetable par excellence. On ne réfléchit pas, on shoote. Le flash intégré, le grain épais, les couleurs saturées — c'est brut, imparfait et c'est exactement ce qui le rend authentique.</div>
+            <div class="desc-item-specs">
+              <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm argentique</span></div>
+              <div class="spec-row"><span class="spec-key">Objectif</span><span class="spec-val">30mm f/10</span></div>
+              <div class="spec-row"><span class="spec-key">Flash</span><span class="spec-val">Intégré</span></div>
+            </div>
+            <span class="desc-tag">Jetable</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BLOC 2 : LOGICIELS ── -->
+    <div class="gear-block">
+      <div class="gear-block-header">
+        <span class="gear-block-title">Logiciels</span>
         <div class="gear-block-line"></div>
       </div>
       <div class="gear-layout">
@@ -454,20 +468,14 @@
           <div class="carousel-track" id="track-1">
             <div class="carousel-slide">
               <div class="slide-ph ph-objectifs">
-                <svg viewBox="0 0 24 24" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>
-                <span class="slide-ph-label">Sony 85mm f/1.4 GM</span>
+                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M7 21h10M12 17v4"/></svg>
+                <span class="slide-ph-label">Darktable</span>
               </div>
             </div>
             <div class="carousel-slide">
               <div class="slide-ph ph-objectifs">
-                <svg viewBox="0 0 24 24" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>
-                <span class="slide-ph-label">Sony 24-70mm f/2.8 GM II</span>
-              </div>
-            </div>
-            <div class="carousel-slide">
-              <div class="slide-ph ph-objectifs">
-                <svg viewBox="0 0 24 24" stroke-width="1"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>
-                <span class="slide-ph-label">Fuji XF 23mm f/2</span>
+                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M7 21h10M12 17v4"/></svg>
+                <span class="slide-ph-label">Lightroom Mobile</span>
               </div>
             </div>
           </div>
@@ -476,55 +484,42 @@
           <div class="carousel-counter" id="dots-1">
             <div class="carousel-dot active" onclick="slideTo(1,0)"></div>
             <div class="carousel-dot" onclick="slideTo(1,1)"></div>
-            <div class="carousel-dot" onclick="slideTo(1,2)"></div>
           </div>
         </div>
 
         <div class="gear-desc-panel">
           <div class="desc-item active" id="desc-1-0">
-            <div class="desc-item-index">01 / 03</div>
-            <div class="desc-item-name">Sony 85mm f/1.4 GM</div>
-            <div class="desc-item-type">Focale fixe · Portrait</div>
-            <div class="desc-item-text">Mon objectif fétiche pour les portraits. Bokeh d'une douceur exceptionnelle, piqué à pleine ouverture et mise au point quasi instantanée. Un investissement qui en vaut le prix.</div>
+            <div class="desc-item-index">01 / 02</div>
+            <div class="desc-item-name">Darktable</div>
+            <div class="desc-item-type">Logiciel · Post-traitement</div>
+            <div class="desc-item-text">Mon logiciel principal pour développer les RAW. Gratuit, puissant, et avec suffisamment de contrôle pour garder un rendu cohérent sur toutes mes photos.</div>
             <div class="desc-item-specs">
-              <div class="spec-row"><span class="spec-key">Focale</span><span class="spec-val">85 mm</span></div>
-              <div class="spec-row"><span class="spec-key">Ouverture max</span><span class="spec-val">f/1.4</span></div>
-              <div class="spec-row"><span class="spec-key">Poids</span><span class="spec-val">820 g</span></div>
+              <div class="spec-row"><span class="spec-key">Usage</span><span class="spec-val">Développement RAW</span></div>
+              <div class="spec-row"><span class="spec-key">Prix</span><span class="spec-val">Gratuit</span></div>
+              <div class="spec-row"><span class="spec-key">Plateforme</span><span class="spec-val">Mac / Linux / Windows</span></div>
             </div>
-            <span class="desc-tag">Préféré portrait</span>
+            <span class="desc-tag">Principal</span>
           </div>
           <div class="desc-item" id="desc-1-1">
-            <div class="desc-item-index">02 / 03</div>
-            <div class="desc-item-name">Sony 24-70mm f/2.8 GM II</div>
-            <div class="desc-item-type">Zoom polyvalent</div>
-            <div class="desc-item-text">Le zoom de tous les jours. Lumineux, compact pour un f/2.8, avec une qualité optique qui rivalise avec les focales fixes. Idéal en reportage, paysage et voyage.</div>
+            <div class="desc-item-index">02 / 02</div>
+            <div class="desc-item-name">Lightroom Mobile</div>
+            <div class="desc-item-type">Logiciel · Retouche mobile</div>
+            <div class="desc-item-text">Pour les retouches rapides sur iPhone, notamment les photos prises avec l'iPhone 17 Pro. Simple, efficace, et synchronisé avec le cloud.</div>
             <div class="desc-item-specs">
-              <div class="spec-row"><span class="spec-key">Focale</span><span class="spec-val">24 – 70 mm</span></div>
-              <div class="spec-row"><span class="spec-key">Ouverture max</span><span class="spec-val">f/2.8</span></div>
-              <div class="spec-row"><span class="spec-key">Poids</span><span class="spec-val">695 g</span></div>
+              <div class="spec-row"><span class="spec-key">Usage</span><span class="spec-val">Retouche mobile</span></div>
+              <div class="spec-row"><span class="spec-key">Prix</span><span class="spec-val">Gratuit (version de base)</span></div>
+              <div class="spec-row"><span class="spec-key">Plateforme</span><span class="spec-val">iOS / Android</span></div>
             </div>
-            <span class="desc-tag">Polyvalent</span>
-          </div>
-          <div class="desc-item" id="desc-1-2">
-            <div class="desc-item-index">03 / 03</div>
-            <div class="desc-item-name">Fuji XF 23mm f/2</div>
-            <div class="desc-item-type">Focale fixe · Street</div>
-            <div class="desc-item-text">Compact, discret, rapide à dégainer. Monté sur le X-T5, angle équivalent 35mm plein format — le format idéal pour la rue. Je l'emporte partout en balade dans Paris.</div>
-            <div class="desc-item-specs">
-              <div class="spec-row"><span class="spec-key">Focale</span><span class="spec-val">23 mm (≈ 35mm FF)</span></div>
-              <div class="spec-row"><span class="spec-key">Ouverture max</span><span class="spec-val">f/2</span></div>
-              <div class="spec-row"><span class="spec-key">Poids</span><span class="spec-val">180 g</span></div>
-            </div>
-            <span class="desc-tag">Street & voyage</span>
+            <span class="desc-tag">Mobile</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ── BLOC 3 : ACCESSOIRES & POST ── -->
- <!--   <div class="gear-block">
+    <!-- ── BLOC 3 : ACCESSOIRES ── -->
+    <div class="gear-block">
       <div class="gear-block-header">
-        <span class="gear-block-title">Accessoires & Post-traitement</span>
+        <span class="gear-block-title">Accessoires</span>
         <div class="gear-block-line"></div>
       </div>
       <div class="gear-layout">
@@ -533,20 +528,14 @@
           <div class="carousel-track" id="track-2">
             <div class="carousel-slide">
               <div class="slide-ph ph-accessoires">
-                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M7 21h10M12 17v4"/></svg>
-                <span class="slide-ph-label">Adobe Lightroom Classic</span>
+                <svg viewBox="0 0 24 24" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                <span class="slide-ph-label">Pellicule Kodak Gold 200</span>
               </div>
             </div>
             <div class="carousel-slide">
               <div class="slide-ph ph-accessoires">
-                <svg viewBox="0 0 24 24" stroke-width="1"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                <span class="slide-ph-label">Écran BenQ SW271C</span>
-              </div>
-            </div>
-            <div class="carousel-slide">
-              <div class="slide-ph ph-accessoires">
-                <svg viewBox="0 0 24 24" stroke-width="1"><line x1="12" y1="2" x2="12" y2="22"/><line x1="12" y1="8" x2="12" y2="8"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                <span class="slide-ph-label">Filtres ND & Trépied</span>
+                <svg viewBox="0 0 24 24" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                <span class="slide-ph-label">Carte SD SanDisk 128 Go</span>
               </div>
             </div>
           </div>
@@ -555,45 +544,33 @@
           <div class="carousel-counter" id="dots-2">
             <div class="carousel-dot active" onclick="slideTo(2,0)"></div>
             <div class="carousel-dot" onclick="slideTo(2,1)"></div>
-            <div class="carousel-dot" onclick="slideTo(2,2)"></div>
           </div>
         </div>
 
         <div class="gear-desc-panel">
           <div class="desc-item active" id="desc-2-0">
-            <div class="desc-item-index">01 / 03</div>
-            <div class="desc-item-name">Adobe Lightroom Classic</div>
-            <div class="desc-item-type">Logiciel · Post-traitement</div>
-            <div class="desc-item-text">Mon workflow principal pour le tri et le développement RAW. J'utilise des presets maison pour garder une cohérence de style. Couplé à Photoshop pour les retouches avancées.</div>
+            <div class="desc-item-index">01 / 02</div>
+            <div class="desc-item-name">Kodak Gold 200</div>
+            <div class="desc-item-type">Pellicule · Argentique</div>
+            <div class="desc-item-text">La pellicule que j'utilise dans le Canon Epoca et le Kodak Fun Flash. Des tons chauds, un grain présent et des couleurs légèrement saturées — tout ce que j'aime dans l'argentique.</div>
             <div class="desc-item-specs">
-              <div class="spec-row"><span class="spec-key">Usage</span><span class="spec-val">Tri & développement RAW</span></div>
-              <div class="spec-row"><span class="spec-key">Abonnement</span><span class="spec-val">Adobe Creative Cloud</span></div>
+              <div class="spec-row"><span class="spec-key">Sensibilité</span><span class="spec-val">ISO 200</span></div>
+              <div class="spec-row"><span class="spec-key">Format</span><span class="spec-val">35mm — 36 poses</span></div>
+              <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Couleur négatif</span></div>
             </div>
-            <span class="desc-tag">Principal</span>
+            <span class="desc-tag">Pellicule</span>
           </div>
           <div class="desc-item" id="desc-2-1">
-            <div class="desc-item-index">02 / 03</div>
-            <div class="desc-item-name">BenQ SW271C</div>
-            <div class="desc-item-type">Écran · Étalonnage</div>
-            <div class="desc-item-text">Calibré, 99% AdobeRGB, 100% sRGB. Indispensable pour que les couleurs soient fidèles à l'impression ou à la diffusion web. Livré avec son capot anti-reflets.</div>
+            <div class="desc-item-index">02 / 02</div>
+            <div class="desc-item-name">SanDisk 128 Go</div>
+            <div class="desc-item-type">Stockage · Numérique</div>
+            <div class="desc-item-text">Carte SD pour le Lumix. Fiable, rapide, et suffisamment grande pour ne jamais être à court d'espace en sortie.</div>
             <div class="desc-item-specs">
-              <div class="spec-row"><span class="spec-key">Taille</span><span class="spec-val">27", 4K</span></div>
-              <div class="spec-row"><span class="spec-key">AdobeRGB</span><span class="spec-val">99%</span></div>
-              <div class="spec-row"><span class="spec-key">Calibration</span><span class="spec-val">ColorChecker Display</span></div>
+              <div class="spec-row"><span class="spec-key">Capacité</span><span class="spec-val">128 Go</span></div>
+              <div class="spec-row"><span class="spec-key">Vitesse lecture</span><span class="spec-val">100 Mo/s</span></div>
+              <div class="spec-row"><span class="spec-key">Classe</span><span class="spec-val">UHS-I U3</span></div>
             </div>
-            <span class="desc-tag">Calibré</span>
-          </div>
-          <div class="desc-item" id="desc-2-2">
-            <div class="desc-item-index">03 / 03</div>
-            <div class="desc-item-name">Filtres ND & Trépied</div>
-            <div class="desc-item-type">Accessoires terrain</div>
-            <div class="desc-item-text">Filtres ND Kase 6, 10 et 16 stops pour les longues poses en plein jour. Trépied Peak Design Travel : ultra compact, solide, se glisse dans n'importe quel sac de voyage.</div>
-            <div class="desc-item-specs">
-              <div class="spec-row"><span class="spec-key">Filtres</span><span class="spec-val">ND 6 / 10 / 16 stops</span></div>
-              <div class="spec-row"><span class="spec-key">Trépied</span><span class="spec-val">Peak Design Travel</span></div>
-              <div class="spec-row"><span class="spec-key">Poids trépied</span><span class="spec-val">1,27 kg</span></div>
-            </div>
-            <span class="desc-tag">Terrain</span>
+            <span class="desc-tag">Stockage</span>
           </div>
         </div>
       </div>
@@ -609,8 +586,8 @@
   <script>
     const states = [
       { index: 0, total: 3 },
-      { index: 0, total: 3 },
-      { index: 0, total: 3 }
+      { index: 0, total: 2 },
+      { index: 0, total: 2 }
     ];
 
     function slideTo(carouselId, target) {
@@ -627,24 +604,16 @@
 
     function updateCarousel(id) {
       const s = states[id];
-
-      // Move track
       document.getElementById('track-' + id).style.transform =
         'translateX(-' + (s.index * 100) + '%)';
-
-      // Update dots
       document.querySelectorAll('#dots-' + id + ' .carousel-dot')
         .forEach((d, i) => d.classList.toggle('active', i === s.index));
-
-      // Update descriptions (find all desc-items in this carousel's panel)
-      // Desc items are: desc-{id}-0, desc-{id}-1, etc.
       for (let i = 0; i < s.total; i++) {
         const el = document.getElementById('desc-' + id + '-' + i);
         if (el) el.classList.toggle('active', i === s.index);
       }
     }
 
-    // Touch/swipe support
     document.querySelectorAll('.carousel').forEach((carousel, id) => {
       let startX = 0;
       carousel.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
