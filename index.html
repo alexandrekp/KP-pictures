@@ -277,8 +277,16 @@
     .gallery-wrap { padding: 2px 40px 80px; background: var(--bg); }
 
     .masonry {
-      columns: 3;
-      column-gap: 2px;
+      display: flex;
+      gap: 2px;
+      align-items: flex-start;
+    }
+
+    .masonry-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .photo-card {
@@ -576,7 +584,7 @@
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) { .masonry { columns: 2; } }
+    @media (max-width: 1024px) { .masonry-col:last-child { display: none; } }
 
     @media (max-width: 640px) {
       nav { padding: 0 16px; height: 54px; }
@@ -595,7 +603,7 @@
       .filter-btn { padding: 4px 10px; font-size: 7px; }
       .filter-count { font-size: 7px; align-self: flex-end; }
       .gallery-wrap { padding: 2px 0 60px; }
-      .masonry { columns: 1; column-gap: 0; }
+      .masonry-col:nth-child(2), .masonry-col:nth-child(3) { display: none; }
       .lightbox-nav.prev { left: 8px; }
       .lightbox-nav.next { right: 8px; }
       .lightbox-close { right: 12px; top: 16px; font-size: 7px; padding: 5px 10px; }
@@ -659,7 +667,11 @@
   <!-- GALLERIE -->
   <div class="gallery-wrap">
     <div class="masonry" id="gallery">
-
+      <div class="masonry-col" id="col1"></div>
+      <div class="masonry-col" id="col2"></div>
+      <div class="masonry-col" id="col3"></div>
+    </div>
+    <div id="cards-pool" style="display:none">
       <div class="photo-card" data-category="France" data-title="Tulipes" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Paris - France" data-year="2026">
         <span class="photo-num">084</span>
         <img src="photos/Tulipes.jpg" alt="Tulipes" />
@@ -2258,6 +2270,7 @@
 
     </div>
   </div>
+  </div>
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
@@ -2291,25 +2304,16 @@
   </footer>
 
   <script>
-    const allCards = document.querySelectorAll('.photo-card');
+    const allCards = [...document.querySelectorAll('#cards-pool .photo-card')];
 
     // ── REDISTRIBUTION HORIZONTALE ──
-    function getNumCols() {
-      if (window.innerWidth <= 640) return 1;
-      if (window.innerWidth <= 1024) return 2;
-      return 3;
-    }
-
     function redistributeColumns(cards) {
-      const gallery = document.getElementById('gallery');
-      const numCols = getNumCols();
-      const cols = Array.from({ length: numCols }, () => []);
-      cards.forEach((card, i) => cols[i % numCols].push(card));
-      gallery.innerHTML = '';
-      const maxLen = Math.max(...cols.map(c => c.length));
-      for (let i = 0; i < maxLen; i++) {
-        cols.forEach(col => { if (col[i]) gallery.appendChild(col[i]); });
-      }
+      const col1 = document.getElementById('col1');
+      const col2 = document.getElementById('col2');
+      const col3 = document.getElementById('col3');
+      col1.innerHTML = ''; col2.innerHTML = ''; col3.innerHTML = '';
+      const cols = [col1, col2, col3];
+      cards.forEach((card, i) => cols[i % 3].appendChild(card));
     }
 
     // ── COMPTEUR ANIMÉ ──
@@ -2325,7 +2329,7 @@
     }
 
     // Init
-    redistributeColumns([...allCards]);
+    redistributeColumns(allCards);
     animateCount(allCards.length);
 
     // ── SCROLL REVEAL ──
@@ -2357,7 +2361,7 @@
           }
         });
         setTimeout(() => {
-          const visible = [...allCards].filter(c => c.style.display !== 'none');
+          const visible = allCards.filter(c => c.style.display !== 'none');
           redistributeColumns(visible);
           animateCount(visible.length);
           visible.forEach(card => {
@@ -2380,7 +2384,7 @@
     let currentIndex = 0;
 
     function getVisible() {
-      return [...allCards].filter(c => c.style.display !== 'none');
+      return allCards.filter(c => c.style.display !== 'none');
     }
 
     function openLightbox(card) {
