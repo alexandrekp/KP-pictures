@@ -277,16 +277,16 @@
     .gallery-wrap { padding: 2px 40px 80px; background: var(--bg); }
 
     .masonry {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      align-items: start;
+      columns: 3;
+      column-gap: 2px;
     }
 
     .photo-card {
+      break-inside: avoid;
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      margin-bottom: 2px;
       background: var(--surface);
       display: block;
       opacity: 0;
@@ -309,7 +309,6 @@
       filter: brightness(1) saturate(1);
     }
 
-    /* numéro photo */
     .photo-num {
       position: absolute;
       top: 12px;
@@ -324,7 +323,6 @@
 
     .photo-card:hover .photo-num { opacity: 0; }
 
-    /* overlay */
     .photo-overlay {
       position: absolute;
       inset: 0;
@@ -578,7 +576,7 @@
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) { .masonry { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 1024px) { .masonry { columns: 2; } }
 
     @media (max-width: 640px) {
       nav { padding: 0 16px; height: 54px; }
@@ -597,12 +595,12 @@
       .filter-btn { padding: 4px 10px; font-size: 7px; }
       .filter-count { font-size: 7px; align-self: flex-end; }
       .gallery-wrap { padding: 2px 0 60px; }
-      .masonry { grid-template-columns: 1fr; }
+      .masonry { columns: 1; column-gap: 0; }
       .lightbox-nav.prev { left: 8px; }
       .lightbox-nav.next { right: 8px; }
       .lightbox-close { right: 12px; top: 16px; font-size: 7px; padding: 5px 10px; }
       .lightbox-counter { left: 12px; top: 18px; }
-       footer { padding: 14px 16px; flex-direction: column; height: auto; gap: 4px; text-align: center; }
+      footer { padding: 14px 16px; flex-direction: column; height: auto; gap: 4px; text-align: center; }
       .lightbox { align-items: center; padding: 80px 0 40px; overflow-y: auto; }
       .lightbox-inner { justify-content: center; margin: auto; }
     }
@@ -737,7 +735,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="photo-card" data-category="France" data-title="Toyota Supra MKIII" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Villebon2 - Palaiseau" data-year="2026">
         <span class="photo-num">080</span>
         <img src="photos/Toyota Supra.jpg" alt="Toyota Supra MKIII" />
@@ -852,9 +850,9 @@
         </div>
       </div>
 
-      <div class="photo-card" data-category="France" data-title="Horizon caché" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
+      <div class="photo-card" data-category="France" data-title="Horizon caché II" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
         <span class="photo-num">074</span>
-        <img src="photos/IMG_7497.jpg" alt="Horizon caché" />
+        <img src="photos/IMG_7497.jpg" alt="Horizon caché II" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
             <span class="photo-location-tag">Cancale - Bretagne</span>
@@ -1213,9 +1211,9 @@
         </div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Mobylette" data-gear="Panasonic DMC-FX33 · 40mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Mobylette II" data-gear="Panasonic DMC-FX33 · 40mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">055</span>
-        <img src="photos/P1110558.jpg" alt="Mobylette" />
+        <img src="photos/P1110558.jpg" alt="Mobylette II" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
             <span class="photo-location-tag">Bali</span>
@@ -1223,7 +1221,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Mobylette</div>
+            <div class="photo-title">Mobylette II</div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 40mm, f/5,6</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1251,9 +1249,9 @@
         </div>
       </div>
 
-      <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="Bali - Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières II" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">053</span>
-        <img src="photos/P1110560.jpg" alt="Chantier au milieu des rizières" />
+        <img src="photos/P1110560.jpg" alt="Chantier au milieu des rizières II" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
             <span class="photo-location-tag">Bali</span>
@@ -1261,7 +1259,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Chantier au milieu des rizières</div>
+            <div class="photo-title">Chantier au milieu des rizières II</div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 92mm, f/5,4</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1384,7 +1382,7 @@
         </div>
       </div>
 
-       <div class="photo-card" data-category="Indonésie" data-title="Rizeières" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Babahan - Bali" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Rizières" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Babahan - Bali" data-year="2025">
         <span class="photo-num">046</span>
         <img src="photos/Rizieres.jpg" alt="Rizières" />
         <div class="photo-overlay">
@@ -1403,7 +1401,7 @@
         </div>
       </div>
 
-  <div class="photo-card" data-category="Indonésie" data-title="Yamaha Jupiter MX" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Yamaha Jupiter MX" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
         <span class="photo-num">045</span>
         <img src="photos/Yamaha Jupiter MX.jpg" alt="Yamaha Jupiter MX" />
         <div class="photo-overlay">
@@ -1413,7 +1411,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Yamaha Jupiter MXs</div>
+            <div class="photo-title">Yamaha Jupiter MX</div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1650,7 +1648,7 @@
         </div>
       </div>
 
-       <div class="photo-card" data-category="" data-title="Balade en famille" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="Munich, Allemagne" data-year="2024">
+      <div class="photo-card" data-category="" data-title="Balade en famille" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="Munich, Allemagne" data-year="2024">
         <span class="photo-num">032</span>
         <img src="photos/P1100977.jpg" alt="Balade en famille" />
         <div class="photo-overlay">
@@ -1745,7 +1743,7 @@
         </div>
       </div>
 
-        <div class="photo-card" data-title="Souvenirs" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Barcelone - Espagne" data-year="2024">
+      <div class="photo-card" data-title="Souvenirs" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Barcelone - Espagne" data-year="2024">
         <span class="photo-num">027</span>
         <img src="photos/Souvenirs.jpg" alt="Souvenirs" />
         <div class="photo-overlay">
@@ -2261,7 +2259,6 @@
     </div>
   </div>
 
-  
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
     <div class="lightbox-counter" id="lbCounter"></div>
@@ -2296,6 +2293,25 @@
   <script>
     const allCards = document.querySelectorAll('.photo-card');
 
+    // ── REDISTRIBUTION HORIZONTALE ──
+    function getNumCols() {
+      if (window.innerWidth <= 640) return 1;
+      if (window.innerWidth <= 1024) return 2;
+      return 3;
+    }
+
+    function redistributeColumns(cards) {
+      const gallery = document.getElementById('gallery');
+      const numCols = getNumCols();
+      const cols = Array.from({ length: numCols }, () => []);
+      cards.forEach((card, i) => cols[i % numCols].push(card));
+      gallery.innerHTML = '';
+      const maxLen = Math.max(...cols.map(c => c.length));
+      for (let i = 0; i < maxLen; i++) {
+        cols.forEach(col => { if (col[i]) gallery.appendChild(col[i]); });
+      }
+    }
+
     // ── COMPTEUR ANIMÉ ──
     function animateCount(target) {
       let count = 0;
@@ -2307,6 +2323,9 @@
         if (count >= target) clearInterval(interval);
       }, 28);
     }
+
+    // Init
+    redistributeColumns([...allCards]);
     animateCount(allCards.length);
 
     // ── SCROLL REVEAL ──
@@ -2338,8 +2357,12 @@
           }
         });
         setTimeout(() => {
-          const visible = [...allCards].filter(c => c.style.display !== 'none').length;
-          animateCount(visible);
+          const visible = [...allCards].filter(c => c.style.display !== 'none');
+          redistributeColumns(visible);
+          animateCount(visible.length);
+          visible.forEach(card => {
+            setTimeout(() => card.classList.add('visible'), 60);
+          });
         }, 420);
       });
     });
