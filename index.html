@@ -277,16 +277,15 @@
     .gallery-wrap { padding: 2px 40px 80px; background: var(--bg); }
 
     .masonry {
-      columns: 3;
-      column-gap: 2px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
     }
 
     .photo-card {
-      break-inside: avoid;
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      margin-bottom: 2px;
       background: var(--surface);
       display: block;
       opacity: 0;
@@ -578,7 +577,7 @@
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) { .masonry { columns: 2; } }
+    @media (max-width: 1024px) { .masonry { grid-template-columns: repeat(2, 1fr); } }
 
     @media (max-width: 640px) {
       nav { padding: 0 16px; height: 54px; }
@@ -597,7 +596,7 @@
       .filter-btn { padding: 4px 10px; font-size: 7px; }
       .filter-count { font-size: 7px; align-self: flex-end; }
       .gallery-wrap { padding: 2px 0 60px; }
-      .masonry { columns: 1; column-gap: 0; }
+      .masonry { grid-template-columns: 1fr; }
       .lightbox-nav.prev { left: 8px; }
       .lightbox-nav.next { right: 8px; }
       .lightbox-close { right: 12px; top: 16px; font-size: 7px; padding: 5px 10px; }
