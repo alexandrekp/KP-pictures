@@ -5,581 +5,107 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Focale — Portfolio</title>
-    <meta property="og:title" content="Focale" />
-    <meta property="og:description" content="Portfolio photo — KP" />
-    <meta property="og:image" content="https://kp-focale.com/photos/preview.png" />
-    <meta property="og:url" content="https://kp-focale.com" />
-    <meta property="og:type" content="website" />
+  <meta property="og:title" content="Focale" />
+  <meta property="og:description" content="Portfolio photo — KP" />
+  <meta property="og:image" content="https://kp-focale.com/photos/preview.png" />
+  <meta property="og:url" content="https://kp-focale.com" />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #f0ede6;
-      --surface: #e8e5de;
-      --border: #c8c4ba;
-      --border-dark: #2e2e2e;
-      --text: #111111;
-      --muted: #888880;
-      --hint: #bbbbbb;
+      --bg: #f0ede6; --surface: #e8e5de; --border: #c8c4ba; --border-dark: #2e2e2e;
+      --text: #111111; --muted: #888880; --hint: #bbbbbb;
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-body: 'DM Sans', sans-serif;
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-weight: 300;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      height: 62px;
-      background: rgba(240,237,230,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 0.6px solid var(--border);
-    }
-
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; min-height: 100vh; overflow-x: hidden; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 62px; background: rgba(240,237,230,0.92); backdrop-filter: blur(12px); border-bottom: 0.6px solid var(--border); }
     .nav-left { display: flex; align-items: center; gap: 32px; }
-
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 5px;
-      color: var(--text);
-      text-decoration: none;
-      text-transform: uppercase;
-    }
-
+    .nav-logo { font-family: var(--font-display); font-size: 14px; font-weight: 800; letter-spacing: 5px; color: var(--text); text-decoration: none; text-transform: uppercase; }
     .nav-logo span { color: var(--muted); }
-
-    .nav-index {
-      font-size: 8px;
-      letter-spacing: 1.5px;
-      color: var(--hint);
-      padding-top: 2px;
-    }
-
+    .nav-index { font-size: 8px; letter-spacing: 1.5px; color: var(--hint); padding-top: 2px; }
     nav ul { list-style: none; display: flex; align-items: center; gap: 36px; }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 8px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      position: relative;
-      font-weight: 400;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 0.8px;
-      background: var(--text);
-      transition: width 0.3s;
-    }
-
+    nav a { color: var(--muted); text-decoration: none; font-size: 8px; letter-spacing: 3px; text-transform: uppercase; transition: color 0.2s; position: relative; font-weight: 400; }
+    nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 0.8px; background: var(--text); transition: width 0.3s; }
     nav a:hover { color: var(--text); }
     nav a:hover::after, nav a.active::after { width: 100%; }
     nav a.active { color: var(--text); font-weight: 500; }
-
-    /* ── HERO ── */
-    .hero {
-      margin-top: 62px;
-      height: 38vh;
-      min-height: 340px;
-      background: #111;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 40px 36px;
-    }
-
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(#1e1e1e 0.4px, transparent 0.4px),
-        linear-gradient(90deg, #1e1e1e 0.4px, transparent 0.4px);
-      background-size: 38px 38px;
-      pointer-events: none;
-      opacity: 0.6;
-    }
-
-    .hero-line-left {
-      position: absolute;
-      left: 40px;
-      top: 0; bottom: 0;
-      width: 0.8px;
-      background: #2a2a2a;
-    }
-
-    .hero-year {
-      position: absolute;
-      top: 24px;
-      left: 56px;
-      font-size: 7.5px;
-      letter-spacing: 3px;
-      color: #444;
-      text-transform: uppercase;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(72px, 11vw, 118px);
-      font-weight: 800;
-      line-height: 0.88;
-      color: #fff;
-      letter-spacing: -3px;
-      text-transform: uppercase;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.2s both;
-    }
-
-    .hero-divider {
-      width: 0;
-      height: 0.6px;
-      background: #2e2e2e;
-      margin: 14px 0 12px;
-      animation: expandLine 0.8s ease 0.7s both;
-    }
-
-    .hero-sub {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease 0.9s both;
-    }
-
-    .hero-sub span {
-      font-size: 8px;
-      letter-spacing: 4px;
-      color: #555;
-      text-transform: uppercase;
-      font-weight: 300;
-    }
-
-    .hero-sub-sep {
-      width: 16px;
-      height: 0.6px;
-      background: #333;
-    }
-
-    .hero-scroll {
-      position: absolute;
-      bottom: 0;
-      left: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-      opacity: 0;
-      animation: fadeUp 0.7s ease 1.1s both;
-    }
-
-    .hero-scroll-line {
-      width: 0.8px;
-      height: 48px;
-      background: linear-gradient(to bottom, #333, transparent);
-    }
-
-    /* ── FILTER BAR ── */
-    .filter-bar {
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      border-bottom: 0.6px solid var(--border);
-      background: var(--bg);
-    }
-
-    .filter-left {
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
-
-    .filter-sort-label {
-      font-size: 7.5px;
-      letter-spacing: 2.5px;
-      color: var(--hint);
-      text-transform: uppercase;
-      margin-right: 20px;
-      padding-right: 20px;
-      border-right: 0.6px solid var(--border);
-    }
-
-    .filter-buttons {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .filter-btn {
-      background: transparent;
-      border: 0.6px solid transparent;
-      color: var(--muted);
-      padding: 5px 14px;
-      font-family: var(--font-body);
-      font-size: 7.5px;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-weight: 400;
-    }
-
+    .hero { margin-top: 62px; height: 38vh; min-height: 340px; background: #111; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 40px 36px; }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(#1e1e1e 0.4px, transparent 0.4px), linear-gradient(90deg, #1e1e1e 0.4px, transparent 0.4px); background-size: 38px 38px; pointer-events: none; opacity: 0.6; }
+    .hero-line-left { position: absolute; left: 40px; top: 0; bottom: 0; width: 0.8px; background: #2a2a2a; }
+    .hero-year { position: absolute; top: 24px; left: 56px; font-size: 7.5px; letter-spacing: 3px; color: #444; text-transform: uppercase; }
+    .hero-content { position: relative; z-index: 1; }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(72px, 11vw, 118px); font-weight: 800; line-height: 0.88; color: #fff; letter-spacing: -3px; text-transform: uppercase; opacity: 0; animation: fadeUp 0.9s ease 0.2s both; }
+    .hero-divider { width: 0; height: 0.6px; background: #2e2e2e; margin: 14px 0 12px; animation: expandLine 0.8s ease 0.7s both; }
+    .hero-sub { display: flex; align-items: center; gap: 14px; opacity: 0; animation: fadeUp 0.7s ease 0.9s both; }
+    .hero-sub span { font-size: 8px; letter-spacing: 4px; color: #555; text-transform: uppercase; font-weight: 300; }
+    .hero-sub-sep { width: 16px; height: 0.6px; background: #333; }
+    .hero-scroll { position: absolute; bottom: 0; left: 40px; display: flex; flex-direction: column; align-items: center; gap: 0; opacity: 0; animation: fadeUp 0.7s ease 1.1s both; }
+    .hero-scroll-line { width: 0.8px; height: 48px; background: linear-gradient(to bottom, #333, transparent); }
+    .filter-bar { height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 0.6px solid var(--border); background: var(--bg); }
+    .filter-left { display: flex; align-items: center; gap: 0; }
+    .filter-sort-label { font-size: 7.5px; letter-spacing: 2.5px; color: var(--hint); text-transform: uppercase; margin-right: 20px; padding-right: 20px; border-right: 0.6px solid var(--border); }
+    .filter-buttons { display: flex; align-items: center; gap: 4px; }
+    .filter-btn { background: transparent; border: 0.6px solid transparent; color: var(--muted); padding: 5px 14px; font-family: var(--font-body); font-size: 7.5px; letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; font-weight: 400; }
     .filter-btn:hover { color: var(--text); border-color: var(--border); }
-
-    .filter-btn.active {
-      background: var(--text);
-      color: #fff;
-      border-color: var(--text);
-    }
-
-    .filter-count {
-      font-size: 7.5px;
-      letter-spacing: 2.5px;
-      color: var(--hint);
-      text-transform: uppercase;
-    }
-
+    .filter-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
+    .filter-btn.fav-btn.active { background: #e05555; border-color: #e05555; }
+    .filter-count { font-size: 7.5px; letter-spacing: 2.5px; color: var(--hint); text-transform: uppercase; }
     .filter-count span { color: var(--text); font-weight: 500; }
-
-    /* ── GALLERY ── */
     .gallery-wrap { padding: 2px 40px 80px; background: var(--bg); }
-
-    .masonry {
-      columns: 3;
-      column-gap: 2px;
-    }
-
-    .photo-card {
-      break-inside: avoid;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      margin-bottom: 2px;
-      background: var(--surface);
-      display: block;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
+    .masonry { columns: 3; column-gap: 2px; }
+    .photo-card { break-inside: avoid; position: relative; overflow: hidden; cursor: pointer; margin-bottom: 2px; background: var(--surface); display: block; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .photo-card.visible { opacity: 1; transform: translateY(0); }
-
-    .photo-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s;
-      filter: brightness(0.9) saturate(0.95);
-    }
-
-    .photo-card:hover img {
-      transform: scale(1.03);
-      filter: brightness(1) saturate(1);
-    }
-
-    /* numéro photo */
-    .photo-num {
-      position: absolute;
-      top: 12px;
-      left: 14px;
-      font-size: 7px;
-      letter-spacing: 1.5px;
-      color: rgba(255,255,255,0.35);
-      font-weight: 400;
-      z-index: 2;
-      transition: opacity 0.3s;
-    }
-
+    .photo-card img { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s; filter: brightness(0.9) saturate(0.95); }
+    .photo-card:hover img { transform: scale(1.03); filter: brightness(1) saturate(1); }
+    .photo-num { position: absolute; top: 12px; left: 14px; font-size: 7px; letter-spacing: 1.5px; color: rgba(255,255,255,0.35); font-weight: 400; z-index: 2; transition: opacity 0.3s; }
     .photo-card:hover .photo-num { opacity: 0; }
-
-    /* overlay */
-    .photo-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 45%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 16px;
-    }
-
+    .photo-fav { position: absolute; top: 10px; right: 14px; font-size: 16px; color: rgba(255,255,255,0.4); cursor: pointer; z-index: 3; transition: color 0.2s, transform 0.2s; background: none; border: none; padding: 0; line-height: 1; }
+    .photo-fav:hover { transform: scale(1.2); color: rgba(255,255,255,0.8); }
+    .photo-fav.active { color: #e05555; }
+    .photo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 45%, transparent 70%); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
     .photo-card:hover .photo-overlay { opacity: 1; }
-
-    .photo-overlay-top {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      padding: 12px 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .photo-location-tag {
-      font-size: 7px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-      background: rgba(0,0,0,0.5);
-      padding: 3px 8px;
-      backdrop-filter: blur(4px);
-    }
-
-    .photo-year-tag {
-      font-size: 7px;
-      letter-spacing: 2px;
-      color: rgba(255,255,255,0.4);
-      background: rgba(0,0,0,0.5);
-      padding: 3px 8px;
-      backdrop-filter: blur(4px);
-    }
-
+    .photo-overlay-top { position: absolute; top: 0; left: 0; right: 0; padding: 12px 14px; display: flex; justify-content: space-between; align-items: flex-start; }
+    .photo-location-tag { font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); background: rgba(0,0,0,0.5); padding: 3px 8px; backdrop-filter: blur(4px); }
+    .photo-year-tag { font-size: 7px; letter-spacing: 2px; color: rgba(255,255,255,0.4); background: rgba(0,0,0,0.5); padding: 3px 8px; backdrop-filter: blur(4px); }
     .photo-overlay-bottom { position: relative; }
-
-    .photo-overlay-line {
-      width: 24px;
-      height: 0.6px;
-      background: rgba(255,255,255,0.25);
-      margin-bottom: 8px;
-    }
-
-    .photo-title {
-      font-family: var(--font-display);
-      font-size: 16px;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.1;
-      margin-bottom: 5px;
-      letter-spacing: 0.3px;
-    }
-
-    .photo-meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .photo-gear {
-      font-size: 7px;
-      color: rgba(255,255,255,0.4);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .photo-expand-icon {
-      width: 22px;
-      height: 22px;
-      border: 0.6px solid rgba(255,255,255,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.2s;
-    }
-
+    .photo-overlay-line { width: 24px; height: 0.6px; background: rgba(255,255,255,0.25); margin-bottom: 8px; }
+    .photo-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 5px; letter-spacing: 0.3px; }
+    .photo-meta-row { display: flex; align-items: center; justify-content: space-between; }
+    .photo-gear { font-size: 7px; color: rgba(255,255,255,0.4); letter-spacing: 1.5px; text-transform: uppercase; }
+    .photo-expand-icon { width: 22px; height: 22px; border: 0.6px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; transition: border-color 0.2s; }
     .photo-expand-icon:hover { border-color: rgba(255,255,255,0.6); }
     .photo-expand-icon svg { width: 10px; height: 10px; stroke: rgba(255,255,255,0.6); fill: none; }
-
-    /* ── LIGHTBOX ── */
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      background: rgba(15,15,15,0.98);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-
+    .lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(15,15,15,0.98); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
     .lightbox.open { opacity: 1; pointer-events: all; }
-
-    .lightbox-inner {
-      position: relative;
-      max-width: 1200px;
-      width: 92%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      transform: translateY(10px);
-      transition: transform 0.35s;
-    }
-
+    .lightbox-inner { position: relative; max-width: 1200px; width: 92%; display: flex; flex-direction: column; align-items: center; gap: 20px; transform: translateY(10px); transition: transform 0.35s; }
     .lightbox.open .lightbox-inner { transform: translateY(0); }
-
-    .lightbox-img-wrap {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .lightbox-img-wrap img {
-      max-width: 100%;
-      max-height: 78vh;
-      width: auto;
-      height: auto;
-      display: block;
-    }
-
-    .lightbox-info {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .lightbox-title {
-      font-family: var(--font-display);
-      font-size: 22px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: 0.5px;
-    }
-
-    .lightbox-meta {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .lightbox-location {
-      font-size: 7.5px;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: #666;
-    }
-
-    .lightbox-sep {
-      width: 14px;
-      height: 0.6px;
-      background: #333;
-    }
-
+    .lightbox-img-wrap { width: 100%; display: flex; align-items: center; justify-content: center; }
+    .lightbox-img-wrap img { max-width: 100%; max-height: 78vh; width: auto; height: auto; display: block; }
+    .lightbox-info { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .lightbox-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+    .lightbox-meta { display: flex; align-items: center; gap: 14px; }
+    .lightbox-location { font-size: 7.5px; letter-spacing: 2.5px; text-transform: uppercase; color: #666; }
+    .lightbox-sep { width: 14px; height: 0.6px; background: #333; }
     .lightbox-year { font-size: 7.5px; letter-spacing: 2.5px; color: #555; }
-
-    .lightbox-gear {
-      font-size: 7.5px;
-      color: #555;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .lightbox-close {
-      position: fixed;
-      top: 24px;
-      right: 32px;
-      background: none;
-      border: 0.6px solid #333;
-      color: #666;
-      cursor: pointer;
-      font-size: 7.5px;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      transition: all 0.2s;
-      font-family: var(--font-body);
-    }
-
+    .lightbox-gear { font-size: 7.5px; color: #555; letter-spacing: 1.5px; text-transform: uppercase; }
+    .lightbox-close { position: fixed; top: 24px; right: 32px; background: none; border: 0.6px solid #333; color: #666; cursor: pointer; font-size: 7.5px; letter-spacing: 2.5px; text-transform: uppercase; padding: 6px 14px; transition: all 0.2s; font-family: var(--font-body); }
     .lightbox-close:hover { color: #fff; border-color: #666; }
-
-    .lightbox-counter {
-      position: fixed;
-      top: 26px;
-      left: 32px;
-      font-size: 7.5px;
-      letter-spacing: 2px;
-      color: #444;
-    }
-
-    .lightbox-nav {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      background: transparent;
-      border: 0.6px solid #2a2a2a;
-      color: #555;
-      cursor: pointer;
-      width: 42px; height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
-    }
-
+    .lightbox-counter { position: fixed; top: 26px; left: 32px; font-size: 7.5px; letter-spacing: 2px; color: #444; }
+    .lightbox-nav { position: fixed; top: 50%; transform: translateY(-50%); background: transparent; border: 0.6px solid #2a2a2a; color: #555; cursor: pointer; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
     .lightbox-nav:hover { border-color: #555; color: #fff; }
     .lightbox-nav.prev { left: 24px; }
     .lightbox-nav.next { right: 24px; }
     .lightbox-nav svg { width: 16px; height: 16px; stroke: currentColor; fill: none; }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 0.6px solid var(--border);
-      padding: 0 40px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--bg);
-    }
-
-    footer p {
-      font-size: 7.5px;
-      color: var(--hint);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes expandLine {
-      from { width: 0; }
-      to   { width: 560px; }
-    }
-
-    /* ── RESPONSIVE ── */
+    footer { border-top: 0.6px solid var(--border); padding: 0 40px; height: 52px; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
+    footer p { font-size: 7.5px; color: var(--hint); letter-spacing: 2px; text-transform: uppercase; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes expandLine { from { width: 0; } to { width: 560px; } }
     @media (max-width: 1024px) { .masonry { columns: 2; } }
-
     @media (max-width: 640px) {
       nav { padding: 0 16px; height: 54px; }
       .nav-index { display: none; }
@@ -602,27 +128,24 @@
       .lightbox-nav.next { right: 8px; }
       .lightbox-close { right: 12px; top: 16px; font-size: 7px; padding: 5px 10px; }
       .lightbox-counter { left: 12px; top: 18px; }
-       footer { padding: 14px 16px; flex-direction: column; height: auto; gap: 4px; text-align: center; }
+      footer { padding: 14px 16px; flex-direction: column; height: auto; gap: 4px; text-align: center; }
       .lightbox { align-items: center; padding: 80px 0 40px; overflow-y: auto; }
       .lightbox-inner { justify-content: center; margin: auto; }
     }
   </style>
 </head>
 <body>
-
-  <!-- NAV -->
   <nav>
     <div class="nav-left">
       <a href="index.html" class="nav-logo">Focale<span>.</span></a>
-      <span class="nav-index">01 / 02</span>
+      <span class="nav-index">01 / 03</span>
     </div>
     <ul>
       <li><a href="index.html" class="active">Galerie</a></li>
       <li><a href="equipements.html">Équipements</a></li>
+      <li><a href="favoris.html">♥ Favoris</a></li>
     </ul>
   </nav>
-
-  <!-- HERO -->
   <header class="hero">
     <div class="hero-grid"></div>
     <div class="hero-line-left"></div>
@@ -631,19 +154,13 @@
       <h1>Focale</h1>
       <div class="hero-divider"></div>
       <div class="hero-sub">
-        <span>Alexandre</span>
-        <div class="hero-sub-sep"></div>
-        <span>25 ans</span>
-        <div class="hero-sub-sep"></div>
+        <span>Alexandre</span><div class="hero-sub-sep"></div>
+        <span>25 ans</span><div class="hero-sub-sep"></div>
         <span>Paris, France</span>
       </div>
     </div>
-    <div class="hero-scroll">
-      <div class="hero-scroll-line"></div>
-    </div>
+    <div class="hero-scroll"><div class="hero-scroll-line"></div></div>
   </header>
-
-  <!-- FILTER BAR -->
   <div class="filter-bar">
     <div class="filter-left">
       <span class="filter-sort-label">Trier par</span>
@@ -653,17 +170,17 @@
         <button class="filter-btn" data-filter="Indonésie">Indonésie</button>
         <button class="filter-btn" data-filter="New York">New York</button>
         <button class="filter-btn" data-filter="Portrait">Portrait</button>
+        <button class="filter-btn sort-btn" data-sort="desc">↓ Récent</button>
+        <button class="filter-btn sort-btn" data-sort="asc">↑ Ancien</button>
       </div>
     </div>
     <div class="filter-count"><span id="photoCount">—</span> Résultats</div>
   </div>
-
-  <!-- GALLERIE -->
   <div class="gallery-wrap">
     <div class="masonry" id="gallery">
-
       <div class="photo-card" data-category="France" data-title="Tulipes" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Paris - France" data-year="2026">
         <span class="photo-num">084</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Tulipes.jpg" alt="Tulipes" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -680,9 +197,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="France" data-title="Ténéré 600" data-gear="Panasonic DMC-FX33 · 32mm, f/3" data-location="Paris - France" data-year="2026">
         <span class="photo-num">083</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Tenere.jpg" alt="Ténéré 600" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -699,9 +216,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Portrait" data-title="Portrait de groupe" data-gear="Panasonic DMC-FX33 · 36mm, f/3,1" data-location="Paris - France" data-year="2026">
         <span class="photo-num">082</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Copains.jpg" alt="Portrait de groupe" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -712,15 +229,15 @@
             <div class="photo-overlay-line"></div>
             <div class="photo-title">Portrait de groupe</div>
             <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
+              <span class="photo-gear">Panasonic DMC-FX33 · 36mm, f/3,1</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
             </div>
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Portrait" data-title="Pause Chantier" data-gear="Canon Epoca · Kodak Gold 35mm" data-location="Paris - France" data-year="2026">
         <span class="photo-num">081</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Pause Chantier.jpg" alt="Pause Chantier" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -737,9 +254,9 @@
           </div>
         </div>
       </div>
-      
       <div class="photo-card" data-category="France" data-title="Toyota Supra MKIII" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Villebon2 - Palaiseau" data-year="2026">
         <span class="photo-num">080</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Toyota Supra.jpg" alt="Toyota Supra MKIII" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -756,9 +273,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="France" data-title="Paris sous la neige" data-gear="iPhone 17 Pro · 24mm, f/1,78" data-location="Vincennes - Paris" data-year="2026">
         <span class="photo-num">079</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_8072 2.jpg" alt="Paris sous la neige" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -775,9 +292,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="France" data-title="Vespa" data-gear="Canon Epoca · Kodak Gold 35mm" data-location="Paris - France" data-year="2026">
         <span class="photo-num">078</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Vespa.jpg" alt="Vespa" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -794,9 +311,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="France" data-title="Salon Sauvage" data-gear="iPhone 17 Pro · 140mm, f/2,8" data-location="L'aigle - Normandie" data-year="2025">
         <span class="photo-num">077</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7884.jpg" alt="Salon Sauvage" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -813,9 +330,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="France" data-title="Bretagne suspendue" data-gear="iPhone 17 Pro · 140mm, f/2,8" data-location="Pointe de la Varde Bunker - Bretagne" data-year="2025">
         <span class="photo-num">076</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7567.jpg" alt="Bretagne suspendue" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -832,9 +349,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="France" data-title="Horizon caché" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
         <span class="photo-num">075</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7499.jpg" alt="Horizon caché" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -851,10 +368,10 @@
           </div>
         </div>
       </div>
-
-      <div class="photo-card" data-category="France" data-title="Horizon caché" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
+      <div class="photo-card" data-category="France" data-title="Horizon caché II" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
         <span class="photo-num">074</span>
-        <img src="photos/IMG_7497.jpg" alt="Horizon caché" />
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
+        <img src="photos/IMG_7497.jpg" alt="Horizon caché II" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
             <span class="photo-location-tag">Cancale - Bretagne</span>
@@ -870,9 +387,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="France" data-title="Au milieu de l'eau" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
         <span class="photo-num">073</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7498.jpg" alt="Au milieu de l'eau" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -889,9 +406,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="France" data-title="Falaise" data-gear="iPhone 17 Pro · 28mm, f/1,78" data-location="Cap Fréhel - Bretagne" data-year="2025">
         <span class="photo-num">072</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7687.jpg" alt="Falaise" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -908,9 +425,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="France" data-title="La pointe" data-gear="iPhone 17 Pro · 24mm, f/1,78" data-location="Cap Fréhel - Bretagne" data-year="2025">
         <span class="photo-num">071</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7680.jpg" alt="La pointe" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -927,9 +444,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Toyota FJ 40" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
         <span class="photo-num">070</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Toyota FJ 40.jpg" alt="Toyota FJ 40" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -946,9 +463,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Ravitaillement" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
         <span class="photo-num">069</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7901.jpg" alt="Ravitaillement" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -965,9 +482,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Scooter Honda" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">068</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7933.jpg" alt="Scooter Honda" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -984,9 +501,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Un moment de repos" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
         <span class="photo-num">067</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7924.jpg" alt="Un moment de repos" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1003,9 +520,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="ROCKSTEADY" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Gili Meno" data-year="2025">
         <span class="photo-num">066</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7908.jpg" alt="ROCKSTEADY" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1022,9 +539,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Mont Bromo" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Java" data-year="2025">
         <span class="photo-num">065</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7911.jpg" alt="Mont Bromo" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1041,9 +558,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Vendeurs de fleurs" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
         <span class="photo-num">064</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7913.jpg" alt="Vendeurs de fleurs" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1060,9 +577,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Star ★" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
         <span class="photo-num">063</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7899.jpg" alt="Star" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1079,9 +596,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Portrait" data-title="Juliette" data-gear="Panasonic DMC-FX33 · 40mm, f/3,3" data-location="Babahan - Bali" data-year="2025">
         <span class="photo-num">062</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Juliette.jpg" alt="Juliette" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1098,9 +615,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Réapprovisionnement" data-gear="Panasonic DMC-FX33 · 32mm, f/3" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">061</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110162.jpg" alt="Réapprovisionnement" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1117,9 +634,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Journée de l'indépendance" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Sindu Wati - Bali" data-year="2025">
         <span class="photo-num">060</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110583.jpg" alt="Journée de l'indépendance" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1136,9 +653,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Maisons sur les rizières" data-gear="Panasonic DMC-FX33 · 86mm, f/5,2" data-location="Sangkan - Bali" data-year="2025">
         <span class="photo-num">059</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110566.jpg" alt="Maisons sur les rizières" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1155,9 +672,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Fardeau" data-gear="Panasonic DMC-FX33 · 67mm, f/4,5" data-location="Jatiluwih - Bali" data-year="2025">
         <span class="photo-num">058</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Fardeau.jpg" alt="Fardeau" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1174,9 +691,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="La réserve" data-gear="Panasonic DMC-FX33 · 100mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
         <span class="photo-num">057</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110405_01.jpg" alt="La réserve" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1193,9 +710,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Mobylette" data-gear="Panasonic DMC-FX33 · 40mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">056</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110557.jpg" alt="Mobylette" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1212,10 +729,10 @@
           </div>
         </div>
       </div>
-
-      <div class="photo-card" data-category="Indonésie" data-title="Mobylette" data-gear="Panasonic DMC-FX33 · 40mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Mobylette II" data-gear="Panasonic DMC-FX33 · 40mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">055</span>
-        <img src="photos/P1110558.jpg" alt="Mobylette" />
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
+        <img src="photos/P1110558.jpg" alt="Mobylette II" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
             <span class="photo-location-tag">Bali</span>
@@ -1223,7 +740,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Mobylette</div>
+            <div class="photo-title">Mobylette II</div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 40mm, f/5,6</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1231,9 +748,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières" data-gear="Panasonic DMC-FX33 · 51mm, f/3,8" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">054</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110559.jpg" alt="Chantier au milieu des rizières" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1250,10 +767,10 @@
           </div>
         </div>
       </div>
-
-      <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="Bali - Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières II" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">053</span>
-        <img src="photos/P1110560.jpg" alt="Chantier au milieu des rizières" />
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
+        <img src="photos/P1110560.jpg" alt="Chantier au milieu des rizières II" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
             <span class="photo-location-tag">Bali</span>
@@ -1261,7 +778,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Chantier au milieu des rizières</div>
+            <div class="photo-title">Chantier au milieu des rizières II</div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 92mm, f/5,4</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1269,9 +786,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Parking nature" data-gear="Panasonic DMC-FX33 · 32mm, f/9" data-location="Sangkan Gunung - Bali" data-year="2025">
         <span class="photo-num">052</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110540.jpg" alt="Parking nature" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1288,9 +805,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Au fil de l'eau" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Sangkan Gunung - Bali" data-year="2025">
         <span class="photo-num">051</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110538.jpg" alt="Au fil de l'eau" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1307,9 +824,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Plongeon entre amis" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Sangkan Gunung - Bali" data-year="2025">
         <span class="photo-num">050</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110537.jpg" alt="Plongeon entre amis" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1326,9 +843,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Rizière en mouvement" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
         <span class="photo-num">049</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110458.jpg" alt="Rizière en mouvement" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1345,9 +862,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Trajet quotidien" data-gear="Panasonic DMC-FX33 · 30mm, f/2,9" data-location="Jatiluwih - Bali" data-year="2025">
         <span class="photo-num">048</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110453.jpg" alt="Trajet quotidien" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1364,9 +881,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Livraison rurale" data-gear="Panasonic DMC-FX33 · 40mm, f/3,3" data-location="Jatiluwih - Bali" data-year="2025">
         <span class="photo-num">047</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110388.jpg" alt="Livraison rurale" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1383,9 +900,9 @@
           </div>
         </div>
       </div>
-
-       <div class="photo-card" data-category="Indonésie" data-title="Rizeières" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Babahan - Bali" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Rizières" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Babahan - Bali" data-year="2025">
         <span class="photo-num">046</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Rizieres.jpg" alt="Rizières" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1402,9 +919,9 @@
           </div>
         </div>
       </div>
-
-  <div class="photo-card" data-category="Indonésie" data-title="Yamaha Jupiter MX" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Yamaha Jupiter MX" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
         <span class="photo-num">045</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Yamaha Jupiter MX.jpg" alt="Yamaha Jupiter MX" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1413,7 +930,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Yamaha Jupiter MXs</div>
+            <div class="photo-title">Yamaha Jupiter MX</div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1421,9 +938,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Refuge agricole" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">044</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110415.jpg" alt="Refuge agricole" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1440,9 +957,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Pause tranquille" data-gear="Panasonic DMC-FX33 · 38mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">043</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110402.jpg" alt="Pause tranquille" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1459,9 +976,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Honda M-F1" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">042</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110408_01.jpg" alt="Honda M-F1" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1478,9 +995,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Suzuki Vitara" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="Babahan - Bali" data-year="2025">
         <span class="photo-num">041</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110315.jpg" alt="Suzuki Vitara" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1497,9 +1014,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Fruits" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">040</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110262.jpg" alt="Fruits" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1516,9 +1033,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Temple" data-gear="Panasonic DMC-FX33 · 54mm, f/4" data-location="Candikuning - Bali" data-year="2025">
         <span class="photo-num">039</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110275.jpg" alt="Temple" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1535,9 +1052,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Taxi vélo" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Yogyakarta - Java" data-year="2025">
         <span class="photo-num">038</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110197.jpg" alt="Taxi vélo" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1554,9 +1071,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Custom racing" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Yogyakarta - Java" data-year="2025">
         <span class="photo-num">037</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110176.jpg" alt="Custom racing" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1573,9 +1090,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="Balade du vendeur" data-gear="Panasonic DMC-FX33 · 58mm, f/4,1" data-location="Yogyakarta - Java" data-year="2025">
         <span class="photo-num">036</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110156.jpg" alt="Balade du vendeur" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1592,9 +1109,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Indonésie" data-title="ATM" data-gear="Panasonic DMC-FX33 · 30mm, f/2,9" data-location="Prambanan - Java" data-year="2025">
         <span class="photo-num">035</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110127.jpg" alt="ATM" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1611,9 +1128,9 @@
           </div>
         </div>
       </div>
-
-      <div class="photo-card" data-title="Bratwurs" data-gear="Panasonic DMC-FX33 · 40mm, f/3,3" data-location="Berlin - Allemagne" data-year="2025">
+      <div class="photo-card" data-category="" data-title="Bratwurs" data-gear="Panasonic DMC-FX33 · 40mm, f/3,3" data-location="Berlin - Allemagne" data-year="2025">
         <span class="photo-num">034</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Bratwurs.jpg" alt="Bratwurs" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1630,9 +1147,9 @@
           </div>
         </div>
       </div>
-
-      <div class="photo-card" data-title="Fernsehturm" data-gear="Panasonic DMC-FX33 · 63mm, f/4,3" data-location="Berlin - Allemagne" data-year="2025">
+      <div class="photo-card" data-category="" data-title="Fernsehturm" data-gear="Panasonic DMC-FX33 · 63mm, f/4,3" data-location="Berlin - Allemagne" data-year="2025">
         <span class="photo-num">033</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Fernsehturm.jpg" alt="Fernsehturm" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1649,9 +1166,9 @@
           </div>
         </div>
       </div>
-
-       <div class="photo-card" data-category="" data-title="Balade en famille" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="Munich, Allemagne" data-year="2024">
+      <div class="photo-card" data-category="" data-title="Balade en famille" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="Munich, Allemagne" data-year="2024">
         <span class="photo-num">032</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1100977.jpg" alt="Balade en famille" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1668,9 +1185,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="Portrait" data-title="Engagement" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Munich - Allemagne" data-year="2024">
         <span class="photo-num">031</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Engagement.jpg" alt="Engagement" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1687,9 +1204,9 @@
           </div>
         </div>
       </div>
-
-      <div class="photo-card" data-title="BMW E30" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Munich - Allemagne" data-year="2024">
+      <div class="photo-card" data-category="" data-title="BMW E30" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Munich - Allemagne" data-year="2024">
         <span class="photo-num">030</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Bmw E30.jpg" alt="BMW E30" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1706,9 +1223,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="" data-title="Laverie de fortune" data-gear="Panasonic DMC-FX33 · 32mm, f/3" data-location="Beyoglu, Turquie" data-year="2024">
         <span class="photo-num">029</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1100740.jpg" alt="Laverie de fortune" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1725,9 +1242,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="" data-title="Au rayon légumes" data-gear="Panasonic DMC-FX33 · 28mm, f/3,8" data-location="Istanbul, Turquie" data-year="2024">
         <span class="photo-num">028</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1100672.jpg" alt="Au rayon légumes" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1744,9 +1261,9 @@
           </div>
         </div>
       </div>
-
-        <div class="photo-card" data-title="Souvenirs" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Barcelone - Espagne" data-year="2024">
+      <div class="photo-card" data-category="" data-title="Souvenirs" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Barcelone - Espagne" data-year="2024">
         <span class="photo-num">027</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Souvenirs.jpg" alt="Souvenirs" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1763,9 +1280,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="" data-title="Vinyles" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Barcelone, Espagne" data-year="2024">
         <span class="photo-num">026</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1100527.jpg" alt="Vinyles" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1782,9 +1299,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="L'ombre des tours" data-gear="Panasonic DMC-FX33 · 63mm, f/4,3" data-location="New York - USA" data-year="2024">
         <span class="photo-num">025</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090875.jpg" alt="L'ombre des tours" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1801,9 +1318,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Little Italy Gift's Center" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Manhattan - New York" data-year="2024">
         <span class="photo-num">024</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090372.jpg" alt="Little Italy Gift's Center" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1820,9 +1337,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Building" data-gear="Panasonic DMC-FX33 · 43mm, f/3,4" data-location="New York - USA" data-year="2024">
         <span class="photo-num">023</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090878.jpg" alt="Building" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1839,9 +1356,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="STOP" data-gear="Panasonic DMC-FX33 · 58mm, f/4,1" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">022</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090862.jpg" alt="STOP" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1858,9 +1375,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="New York graffiti" data-gear="Panasonic DMC-FX33 · 86mm, f/5,2" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">021</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090855.jpg" alt="New York graffiti" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1877,9 +1394,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Au service de la ville" data-gear="Panasonic DMC-FX33 · 86mm, f/5,2" data-location="New York - USA" data-year="2024">
         <span class="photo-num">020</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090848.jpg" alt="Au service de la ville" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1896,9 +1413,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="LONG STORE" data-gear="Panasonic DMC-FX33 · 67mm, f/4,5" data-location="China Town - New York" data-year="2024">
         <span class="photo-num">019</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090387.jpg" alt="LONG STORE" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1915,9 +1432,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Poisson frais" data-gear="Panasonic DMC-FX33 · 58mm, f/4,1" data-location="China Town - New York" data-year="2024">
         <span class="photo-num">018</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090621.jpg" alt="Poisson frais" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1934,9 +1451,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="China Town" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="China Town - New York" data-year="2024">
         <span class="photo-num">017</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/China Town.jpg" alt="China Town" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1953,9 +1470,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Débordement" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">016</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Debordement.jpg" alt="Débordement" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1972,9 +1489,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Déchets à Brooklyn" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">015</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090794.jpg" alt="Déchets à Brooklyn" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1991,9 +1508,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Prêt à réparer" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">014</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090806.jpg" alt="Prêt à réparer" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2010,9 +1527,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Silhouette rétro" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">013</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090792.jpg" alt="Silhouette rétro" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2029,9 +1546,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Carcasse métallique" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">012</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090786.jpg" alt="Carcasse métallique" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2048,9 +1565,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Compagnons de route" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="New York - USA" data-year="2024">
         <span class="photo-num">011</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090749.jpg" alt="Compagnons de route" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2067,9 +1584,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="En attendant" data-gear="Panasonic DMC-FX33 · 45mm, f/3,5" data-location="New York - USA" data-year="2024">
         <span class="photo-num">010</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/En attendant.jpg" alt="En attendant" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2086,9 +1603,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Portail" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">009</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Portail.jpg" alt="Portail" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2105,9 +1622,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Patriote" data-gear="Panasonic DMC-FX33 · 63mm, f/4,3" data-location="New York - USA" data-year="2024">
         <span class="photo-num">008</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090713.jpg" alt="Patriote" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2124,9 +1641,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Freight Liner" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="New York - USA" data-year="2024">
         <span class="photo-num">007</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090428.jpg" alt="Freight Liner" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2143,9 +1660,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Wall Street" data-gear="Panasonic DMC-FX33 · 51mm, f/3,8" data-location="Wall Street - New York" data-year="2024">
         <span class="photo-num">006</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090184.jpg" alt="Wall Street" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2162,9 +1679,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="BUS" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="New York - USA" data-year="2024">
         <span class="photo-num">005</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090080.jpg" alt="BUS" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2181,9 +1698,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Vendeurs de rue" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="New York - USA" data-year="2024">
         <span class="photo-num">004</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090364.jpg" alt="Vendeurs de rue" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2200,9 +1717,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Brume urbaine" data-gear="Panasonic DMC-FX33 · 51mm, f/3,8" data-location="New York - USA" data-year="2024">
         <span class="photo-num">003</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090267.jpg" alt="Brume urbaine" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2219,9 +1736,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="Patrouille en ville" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="New York - USA" data-year="2024">
         <span class="photo-num">002</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090096.jpg" alt="Patrouille en ville" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2238,9 +1755,9 @@
           </div>
         </div>
       </div>
-
       <div class="photo-card" data-category="New York" data-title="F.D.N.Y" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="New York - USA" data-year="2024">
         <span class="photo-num">001</span>
+        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090101.jpg" alt="F.D.N.Y" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -2257,12 +1774,9 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
-  
-  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
     <div class="lightbox-counter" id="lbCounter"></div>
     <button class="lightbox-close" id="lbClose">Fermer</button>
@@ -2287,23 +1801,46 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <p>© 2026 — Focale · KP</p>
     <p>Tous droits réservés</p>
   </footer>
 
   <script>
-    
-    // ── SHUFFLE ──
-const gallery = document.getElementById('gallery');
-const cards = [...gallery.querySelectorAll('.photo-card')];
-cards.sort(() => Math.random() - 0.5);
-cards.forEach(card => gallery.appendChild(card));
-    
-    const allCards = document.querySelectorAll('.photo-card');
+    const allCards = [...document.querySelectorAll('.photo-card')];
+    const gallery = document.getElementById('gallery');
 
-    // ── COMPTEUR ANIMÉ ──
+    // ── SHUFFLE ──
+    allCards.sort(() => Math.random() - 0.5);
+    allCards.forEach(card => gallery.appendChild(card));
+
+    // ── FAVORIS ──
+    function getFavs() { return JSON.parse(localStorage.getItem('focale_favs') || '[]'); }
+    function saveFavs(favs) { localStorage.setItem('focale_favs', JSON.stringify(favs)); }
+    function toggleFav(btn, e) {
+      e.stopPropagation();
+      const card = btn.closest('.photo-card');
+      const title = card.dataset.title;
+      let favs = getFavs();
+      if (favs.includes(title)) {
+        favs = favs.filter(f => f !== title);
+        btn.classList.remove('active');
+      } else {
+        favs.push(title);
+        btn.classList.add('active');
+      }
+      saveFavs(favs);
+    }
+    function initFavs() {
+      const favs = getFavs();
+      allCards.forEach(card => {
+        const btn = card.querySelector('.photo-fav');
+        if (btn && favs.includes(card.dataset.title)) btn.classList.add('active');
+      });
+    }
+    initFavs();
+
+    // ── COMPTEUR ──
     function animateCount(target) {
       let count = 0;
       const step = Math.ceil(target / 40);
@@ -2327,29 +1864,66 @@ cards.forEach(card => gallery.appendChild(card));
     }, { threshold: 0.06 });
     allCards.forEach(card => observer.observe(card));
 
-    // ── FILTER AVEC TRANSITION ──
-    const filterBtns = document.querySelectorAll('.filter-btn');
+    // ── FILTER ──
+    let currentFilter = 'all';
+    function applyFilter(filter) {
+      currentFilter = filter;
+      allCards.forEach(card => {
+        let show = false;
+        if (filter === 'all') show = true;
+        else if (filter === 'favoris') show = getFavs().includes(card.dataset.title);
+        else show = card.dataset.category === filter;
+        if (show) {
+          card.style.display = '';
+          setTimeout(() => card.classList.add('visible'), 10);
+        } else {
+          card.classList.remove('visible');
+          setTimeout(() => { card.style.display = 'none'; }, 400);
+        }
+      });
+      setTimeout(() => {
+        animateCount(allCards.filter(c => c.style.display !== 'none').length);
+      }, 420);
+    }
+
+    const filterBtns = document.querySelectorAll('.filter-btn:not(.sort-btn)');
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        allCards.forEach(card => {
-          const show = filter === 'all' || card.dataset.category === filter;
-          if (show) {
-            card.style.display = '';
-            setTimeout(() => card.classList.add('visible'), 10);
-          } else {
-            card.classList.remove('visible');
-            setTimeout(() => { card.style.display = 'none'; }, 400);
-          }
-        });
-        setTimeout(() => {
-          const visible = [...allCards].filter(c => c.style.display !== 'none').length;
-          animateCount(visible);
-        }, 420);
+        applyFilter(btn.dataset.filter);
       });
     });
+
+    // ── TRI PAR DATE ──
+    const sortBtns = document.querySelectorAll('.sort-btn');
+    sortBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sortBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const dir = btn.dataset.sort;
+        const sorted = [...allCards].sort((a, b) =>
+          dir === 'asc'
+            ? parseInt(a.dataset.year) - parseInt(b.dataset.year)
+            : parseInt(b.dataset.year) - parseInt(a.dataset.year)
+        );
+        sorted.forEach(card => gallery.appendChild(card));
+        applyFilter(currentFilter);
+      });
+    });
+
+    // ── SWIPE MOBILE ──
+    let touchStartX = 0;
+    const lb = document.getElementById('lightbox');
+    lb.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) currentIndex = (currentIndex + 1) % visibleCards.length;
+        else currentIndex = (currentIndex - 1 + visibleCards.length) % visibleCards.length;
+        showSlide(currentIndex);
+      }
+    }, { passive: true });
 
     // ── LIGHTBOX ──
     const lightbox = document.getElementById('lightbox');
@@ -2359,13 +1933,10 @@ cards.forEach(card => gallery.appendChild(card));
     const lbYear = document.getElementById('lbYear');
     const lbGear = document.getElementById('lbGear');
     const lbCounter = document.getElementById('lbCounter');
-
     let visibleCards = [];
     let currentIndex = 0;
 
-    function getVisible() {
-      return [...allCards].filter(c => c.style.display !== 'none');
-    }
+    function getVisible() { return allCards.filter(c => c.style.display !== 'none'); }
 
     function openLightbox(card) {
       visibleCards = getVisible();
@@ -2402,19 +1973,8 @@ cards.forEach(card => gallery.appendChild(card));
     allCards.forEach(card => card.addEventListener('click', () => openLightbox(card)));
     document.getElementById('lbClose').addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-
-    document.getElementById('lbPrev').addEventListener('click', e => {
-      e.stopPropagation();
-      currentIndex = (currentIndex - 1 + visibleCards.length) % visibleCards.length;
-      showSlide(currentIndex);
-    });
-
-    document.getElementById('lbNext').addEventListener('click', e => {
-      e.stopPropagation();
-      currentIndex = (currentIndex + 1) % visibleCards.length;
-      showSlide(currentIndex);
-    });
-
+    document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); currentIndex = (currentIndex - 1 + visibleCards.length) % visibleCards.length; showSlide(currentIndex); });
+    document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); currentIndex = (currentIndex + 1) % visibleCards.length; showSlide(currentIndex); });
     document.addEventListener('keydown', e => {
       if (!lightbox.classList.contains('open')) return;
       if (e.key === 'Escape') closeLightbox();
