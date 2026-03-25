@@ -15,385 +15,72 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #f0ede6;
-      --surface: #e8e5de;
-      --border: #c8c4ba;
-      --text: #111111;
-      --muted: #555550;
-      --hint: #888880;
+      --bg: #f0ede6; --surface: #e8e5de; --border: #c8c4ba;
+      --text: #111111; --muted: #555550; --hint: #888880;
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-body: 'DM Sans', sans-serif;
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-weight: 300;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      height: 62px;
-      background: rgba(240,237,230,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 0.6px solid var(--border);
-    }
-
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; min-height: 100vh; overflow-x: hidden; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 62px; background: rgba(240,237,230,0.92); backdrop-filter: blur(12px); border-bottom: 0.6px solid var(--border); }
     .nav-left { display: flex; align-items: center; gap: 32px; }
-
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 5px;
-      color: var(--text);
-      text-decoration: none;
-      text-transform: uppercase;
-    }
-
+    .nav-logo { font-family: var(--font-display); font-size: 14px; font-weight: 800; letter-spacing: 5px; color: var(--text); text-decoration: none; text-transform: uppercase; }
     .nav-logo span { color: var(--muted); }
     .nav-index { font-size: 8px; letter-spacing: 1.5px; color: var(--hint); padding-top: 2px; }
-
     nav ul { list-style: none; display: flex; align-items: center; gap: 36px; }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 8px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      position: relative;
-      font-weight: 400;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 0.8px;
-      background: var(--text);
-      transition: width 0.3s;
-    }
-
+    nav a { color: var(--muted); text-decoration: none; font-size: 8px; letter-spacing: 3px; text-transform: uppercase; transition: color 0.2s; position: relative; font-weight: 400; }
+    nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 0.8px; background: var(--text); transition: width 0.3s; }
     nav a:hover { color: var(--text); }
     nav a:hover::after, nav a.active::after { width: 100%; }
     nav a.active { color: var(--text); font-weight: 500; }
-
-    /* ── HERO ── */
-    .hero {
-      margin-top: 62px;
-      height: auto;
-      min-height: 280px;
-      background: #111;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 40px 36px;
-    }
-
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(#1e1e1e 0.4px, transparent 0.4px),
-        linear-gradient(90deg, #1e1e1e 0.4px, transparent 0.4px);
-      background-size: 38px 38px;
-      pointer-events: none;
-      opacity: 0.6;
-    }
-
-    .hero-line-left {
-      position: absolute;
-      left: 40px; top: 0; bottom: 0;
-      width: 0.8px;
-      background: #2a2a2a;
-    }
-
-    .hero-year {
-      position: absolute;
-      top: 24px; left: 56px;
-      font-size: 7.5px;
-      letter-spacing: 3px;
-      color: #444;
-      text-transform: uppercase;
-    }
-
+    .hero { margin-top: 62px; height: auto; min-height: 280px; background: #111; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 40px 36px; }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(#1e1e1e 0.4px, transparent 0.4px), linear-gradient(90deg, #1e1e1e 0.4px, transparent 0.4px); background-size: 38px 38px; pointer-events: none; opacity: 0.6; }
+    .hero-line-left { position: absolute; left: 40px; top: 0; bottom: 0; width: 0.8px; background: #2a2a2a; }
+    .hero-year { position: absolute; top: 24px; left: 56px; font-size: 7.5px; letter-spacing: 3px; color: #444; text-transform: uppercase; }
     .hero-content { position: relative; z-index: 1; }
-
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(48px, 8vw, 96px);
-      font-weight: 800;
-      line-height: 0.88;
-      color: #fff;
-      letter-spacing: -2px;
-      text-transform: uppercase;
-      opacity: 0;
-      animation: fadeUp 0.9s ease 0.2s both;
-    }
-
-    .hero-divider {
-      width: 0;
-      height: 0.6px;
-      background: #2e2e2e;
-      margin: 14px 0 12px;
-      animation: expandLine 0.8s ease 0.7s both;
-    }
-
-    .hero-sub {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.7s ease 0.9s both;
-    }
-
-    .hero-sub span {
-      font-size: 8px;
-      letter-spacing: 4px;
-      color: #555;
-      text-transform: uppercase;
-      font-weight: 300;
-    }
-
+    .hero h1 { font-family: var(--font-display); font-size: clamp(48px, 8vw, 96px); font-weight: 800; line-height: 0.88; color: #fff; letter-spacing: -2px; text-transform: uppercase; opacity: 0; animation: fadeUp 0.9s ease 0.2s both; }
+    .hero-divider { width: 0; height: 0.6px; background: #2e2e2e; margin: 14px 0 12px; animation: expandLine 0.8s ease 0.7s both; }
+    .hero-sub { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s ease 0.9s both; }
+    .hero-sub span { font-size: 8px; letter-spacing: 4px; color: #555; text-transform: uppercase; font-weight: 300; }
     .hero-sub-sep { width: 16px; height: 0.6px; background: #333; flex-shrink: 0; }
-
-    /* ── CONTENT ── */
     .content { padding: 0 40px 80px; }
-
     .gear-section { margin-top: 48px; }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding-bottom: 16px;
-      border-bottom: 0.6px solid var(--border);
-    }
-
-    .section-num {
-      font-size: 7.5px;
-      letter-spacing: 2px;
-      color: var(--hint);
-    }
-
-    .section-title {
-      font-size: 8px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .section-count {
-      font-size: 7.5px;
-      letter-spacing: 2px;
-      color: var(--hint);
-      margin-left: auto;
-    }
-
-    /* ── CARDS ── */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.6px;
-      background: var(--border);
-    }
-
-    .gear-card {
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
-      transition: background 0.25s;
-    }
-
+    .section-header { display: flex; align-items: center; gap: 20px; padding-bottom: 16px; border-bottom: 0.6px solid var(--border); }
+    .section-num { font-size: 7.5px; letter-spacing: 2px; color: var(--hint); }
+    .section-title { font-size: 8px; letter-spacing: 4px; text-transform: uppercase; color: var(--text); font-weight: 500; }
+    .section-count { font-size: 7.5px; letter-spacing: 2px; color: var(--hint); margin-left: auto; }
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6px; background: var(--border); }
+    .gear-card { background: var(--bg); display: flex; flex-direction: column; transition: background 0.25s; }
     .gear-card:hover { background: #ebe8e1; }
-
-    .card-img {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background: var(--surface);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      padding: 1.2rem;
-      border-bottom: 0.6px solid var(--border);
-      position: relative;
-    }
-
-    .card-num {
-      position: absolute;
-      top: 12px; left: 14px;
-      font-size: 7px;
-      letter-spacing: 1.5px;
-      color: var(--hint);
-    }
-
-    .card-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      filter: grayscale(15%) brightness(0.95);
-      transition: filter 0.3s, transform 0.4s;
-    }
-
-    .gear-card:hover .card-img img {
-      filter: grayscale(0%) brightness(1);
-      transform: scale(1.03);
-    }
-
-    .card-body {
-      padding: 20px 20px 22px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card-type {
-      font-size: 7px;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .card-name {
-      font-family: var(--font-display);
-      font-size: clamp(16px, 2vw, 20px);
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.15;
-      letter-spacing: 0.3px;
-      margin-bottom: 14px;
-    }
-
-    .card-divider {
-      width: 20px;
-      height: 0.6px;
-      background: var(--border);
-      margin-bottom: 14px;
-    }
-
+    .card-img { width: 100%; aspect-ratio: 4/3; background: var(--surface); display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 1.2rem; border-bottom: 0.6px solid var(--border); position: relative; }
+    .card-num { position: absolute; top: 12px; left: 14px; font-size: 7px; letter-spacing: 1.5px; color: var(--hint); }
+    .card-img img { width: 100%; height: 100%; object-fit: contain; display: block; filter: grayscale(15%) brightness(0.95); transition: filter 0.3s, transform 0.4s; }
+    .gear-card:hover .card-img img { filter: grayscale(0%) brightness(1); transform: scale(1.03); }
+    .card-body { padding: 20px 20px 22px; flex: 1; display: flex; flex-direction: column; }
+    .card-type { font-size: 7px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .card-name { font-family: var(--font-display); font-size: clamp(16px, 2vw, 20px); font-weight: 700; color: var(--text); line-height: 1.15; letter-spacing: 0.3px; margin-bottom: 14px; }
+    .card-divider { width: 20px; height: 0.6px; background: var(--border); margin-bottom: 14px; }
     .card-specs { display: flex; flex-direction: column; gap: 8px; flex: 1; }
-
-    .spec-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .spec-key {
-      font-size: 7px;
-      color: var(--hint);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .spec-val {
-      font-size: 9px;
-      color: var(--muted);
-      letter-spacing: 0.5px;
-      text-align: right;
-    }
-
-    .card-footer {
-      margin-top: 16px;
-      padding-top: 14px;
-      border-top: 0.6px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .card-tag {
-      font-size: 7px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--muted);
-      border: 0.6px solid var(--border);
-      padding: 3px 8px;
-    }
-
-    .card-arrow {
-      width: 20px; height: 20px;
-      border: 0.6px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.2s;
-      flex-shrink: 0;
-    }
-
+    .spec-row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+    .spec-key { font-size: 7px; color: var(--hint); letter-spacing: 1.5px; text-transform: uppercase; white-space: nowrap; }
+    .spec-val { font-size: 9px; color: var(--muted); letter-spacing: 0.5px; text-align: right; }
+    .card-footer { margin-top: 16px; padding-top: 14px; border-top: 0.6px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .card-tag { font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); border: 0.6px solid var(--border); padding: 3px 8px; }
+    .card-arrow { width: 20px; height: 20px; border: 0.6px solid var(--border); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; flex-shrink: 0; }
     .gear-card:hover .card-arrow { opacity: 1; }
     .card-arrow svg { width: 10px; height: 10px; stroke: var(--muted); fill: none; }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 0.6px solid var(--border);
-      padding: 0 40px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--bg);
-    }
-
-    footer p {
-      font-size: 7.5px;
-      color: var(--hint);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes expandLine {
-      from { width: 0; }
-      to   { width: min(420px, 80vw); }
-    }
-
-    /* ── RESPONSIVE TABLETTE ── */
-    @media (max-width: 1024px) {
-      .cards-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    /* ── RESPONSIVE MOBILE ── */
+    footer { border-top: 0.6px solid var(--border); padding: 0 40px; height: 52px; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
+    footer p { font-size: 7.5px; color: var(--hint); letter-spacing: 2px; text-transform: uppercase; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes expandLine { from { width: 0; } to { width: min(420px, 80vw); } }
+    @media (max-width: 1024px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 640px) {
-      /* NAV */
       nav { padding: 0 16px; height: 54px; }
       .nav-index { display: none; }
       .nav-logo { font-size: 12px; letter-spacing: 4px; }
       nav a { font-size: 7px; letter-spacing: 2px; }
       nav ul { gap: 16px; }
-
-      /* HERO */
       .hero { padding: 0 20px 24px; min-height: 240px; }
       .hero h1 { font-size: clamp(42px, 13vw, 60px); letter-spacing: -1px; }
       .hero-line-left { left: 20px; }
@@ -401,33 +88,19 @@
       .hero-sub { gap: 10px; }
       .hero-sub span { font-size: 7px; letter-spacing: 3px; }
       .hero-sub-sep { width: 10px; }
-
-      /* CONTENT */
       .content { padding: 0 16px 60px; }
       .gear-section { margin-top: 32px; }
       .section-header { gap: 12px; }
-
-      /* CARDS — 1 colonne */
       .cards-grid { grid-template-columns: 1fr; }
       .card-img { aspect-ratio: 3/2; }
       .card-body { padding: 16px; }
       .card-name { font-size: clamp(18px, 5vw, 22px); }
       .spec-val { font-size: 9px; }
-
-      /* FOOTER */
-      footer {
-        padding: 14px 16px;
-        height: auto;
-        flex-direction: column;
-        gap: 4px;
-        text-align: center;
-      }
+      footer { padding: 14px 16px; height: auto; flex-direction: column; gap: 4px; text-align: center; }
     }
   </style>
 </head>
 <body>
-
-  <!-- NAV -->
   <nav>
     <div class="nav-left">
       <a href="index.html" class="nav-logo">Focale<span>.</span></a>
@@ -440,7 +113,6 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <header class="hero">
     <div class="hero-grid"></div>
     <div class="hero-line-left"></div>
@@ -449,19 +121,14 @@
       <h1>Équipements</h1>
       <div class="hero-divider"></div>
       <div class="hero-sub">
-        <span>Boîtiers</span>
-        <div class="hero-sub-sep"></div>
-        <span>Pellicules</span>
-        <div class="hero-sub-sep"></div>
+        <span>Boîtiers</span><div class="hero-sub-sep"></div>
+        <span>Pellicules</span><div class="hero-sub-sep"></div>
         <span>6 références</span>
       </div>
     </div>
   </header>
 
-  <!-- CONTENT -->
   <main class="content">
-
-    <!-- BOÎTIERS -->
     <section class="gear-section">
       <div class="section-header">
         <span class="section-num">01</span>
@@ -469,12 +136,8 @@
         <span class="section-count">3 appareils</span>
       </div>
       <div class="cards-grid">
-
         <div class="gear-card">
-          <div class="card-img">
-            <span class="card-num">001</span>
-            <img src="photos/Lumix.png" alt="Panasonic Lumix DMC-FX33" loading="lazy" />
-          </div>
+          <div class="card-img"><span class="card-num">001</span><img src="photos/Lumix.png" alt="Panasonic Lumix DMC-FX33" loading="lazy" /></div>
           <div class="card-body">
             <div class="card-type">Compact numérique</div>
             <div class="card-name">Panasonic Lumix DMC-FX33</div>
@@ -485,18 +148,11 @@
               <div class="spec-row"><span class="spec-key">Zoom</span><span class="spec-val">3,6× optique</span></div>
               <div class="spec-row"><span class="spec-key">Année</span><span class="spec-val">2007</span></div>
             </div>
-            <div class="card-footer">
-              <span class="card-tag">Premier appareil</span>
-              <div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
+            <div class="card-footer"><span class="card-tag">Premier appareil</span><div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
           </div>
         </div>
-
         <div class="gear-card">
-          <div class="card-img">
-            <span class="card-num">002</span>
-            <img src="photos/Epoca.png" alt="Canon Epoca" loading="lazy" />
-          </div>
+          <div class="card-img"><span class="card-num">002</span><img src="photos/Epoca.png" alt="Canon Epoca" loading="lazy" /></div>
           <div class="card-body">
             <div class="card-type">Compact argentique</div>
             <div class="card-name">Canon Epoca</div>
@@ -507,18 +163,11 @@
               <div class="spec-row"><span class="spec-key">Mise au point</span><span class="spec-val">Autofocus</span></div>
               <div class="spec-row"><span class="spec-key">Époque</span><span class="spec-val">Années 90</span></div>
             </div>
-            <div class="card-footer">
-              <span class="card-tag">Argentique</span>
-              <div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
+            <div class="card-footer"><span class="card-tag">Argentique</span><div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
           </div>
         </div>
-
         <div class="gear-card">
-          <div class="card-img">
-            <span class="card-num">003</span>
-            <img src="photos/Kodak.png" alt="Kodak Fun Flash" loading="lazy" />
-          </div>
+          <div class="card-img"><span class="card-num">003</span><img src="photos/Kodak.png" alt="Kodak Fun Flash" loading="lazy" /></div>
           <div class="card-body">
             <div class="card-type">Appareil jetable</div>
             <div class="card-name">Kodak Fun Flash</div>
@@ -529,17 +178,12 @@
               <div class="spec-row"><span class="spec-key">Flash</span><span class="spec-val">Intégré</span></div>
               <div class="spec-row"><span class="spec-key">ISO</span><span class="spec-val">800</span></div>
             </div>
-            <div class="card-footer">
-              <span class="card-tag">Jetable</span>
-              <div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
+            <div class="card-footer"><span class="card-tag">Jetable</span><div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- PELLICULES -->
     <section class="gear-section">
       <div class="section-header">
         <span class="section-num">02</span>
@@ -547,12 +191,8 @@
         <span class="section-count">3 références</span>
       </div>
       <div class="cards-grid">
-
         <div class="gear-card">
-          <div class="card-img">
-            <span class="card-num">004</span>
-            <img src="photos/KodakG.PNG" alt="Kodak Gold 200" loading="lazy" />
-          </div>
+          <div class="card-img"><span class="card-num">004</span><img src="photos/KodakG.PNG" alt="Kodak Gold 200" loading="lazy" /></div>
           <div class="card-body">
             <div class="card-type">Pellicule couleur</div>
             <div class="card-name">Kodak Gold 200</div>
@@ -563,18 +203,11 @@
               <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Couleur négatif</span></div>
               <div class="spec-row"><span class="spec-key">Rendu</span><span class="spec-val">Chaud, doré</span></div>
             </div>
-            <div class="card-footer">
-              <span class="card-tag">Couleur</span>
-              <div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
+            <div class="card-footer"><span class="card-tag">Couleur</span><div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
           </div>
         </div>
-
         <div class="gear-card">
-          <div class="card-img">
-            <span class="card-num">005</span>
-            <img src="photos/Ilford.png" alt="Ilford HP5 Plus 400" loading="lazy" />
-          </div>
+          <div class="card-img"><span class="card-num">005</span><img src="photos/Ilford.png" alt="Ilford HP5 Plus 400" loading="lazy" /></div>
           <div class="card-body">
             <div class="card-type">Pellicule noir & blanc</div>
             <div class="card-name">Ilford HP5 Plus 400</div>
@@ -585,18 +218,11 @@
               <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Noir & blanc négatif</span></div>
               <div class="spec-row"><span class="spec-key">Rendu</span><span class="spec-val">Granuleux, contrasté</span></div>
             </div>
-            <div class="card-footer">
-              <span class="card-tag">Noir & blanc</span>
-              <div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
+            <div class="card-footer"><span class="card-tag">Noir & blanc</span><div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
           </div>
         </div>
-
         <div class="gear-card">
-          <div class="card-img">
-            <span class="card-num">006</span>
-            <img src="photos/Fujifilm.png" alt="Fujifilm 200" loading="lazy" />
-          </div>
+          <div class="card-img"><span class="card-num">006</span><img src="photos/Fujifilm.png" alt="Fujifilm 200" loading="lazy" /></div>
           <div class="card-body">
             <div class="card-type">Pellicule couleur</div>
             <div class="card-name">Fujifilm 200</div>
@@ -607,16 +233,11 @@
               <div class="spec-row"><span class="spec-key">Type</span><span class="spec-val">Couleur négatif</span></div>
               <div class="spec-row"><span class="spec-key">Rendu</span><span class="spec-val">Saturé, vif</span></div>
             </div>
-            <div class="card-footer">
-              <span class="card-tag">Couleur</span>
-              <div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
+            <div class="card-footer"><span class="card-tag">Couleur</span><div class="card-arrow"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div></div>
           </div>
         </div>
-
       </div>
     </section>
-
   </main>
 
   <footer>
