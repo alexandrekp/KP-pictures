@@ -22,7 +22,7 @@
       --font-body: 'DM Sans', sans-serif;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; min-height: 100vh; overflow-x: hidden; animation: pageIn 0.4s ease both; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; min-height: 100vh; overflow-x: hidden; }
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 62px; background: rgba(240,237,230,0.92); backdrop-filter: blur(12px); border-bottom: 0.6px solid var(--border); }
     .nav-left { display: flex; align-items: center; gap: 32px; }
     .nav-logo { font-family: var(--font-display); font-size: 14px; font-weight: 800; letter-spacing: 5px; color: var(--text); text-decoration: none; text-transform: uppercase; }
@@ -59,8 +59,9 @@
     .masonry { columns: 3; column-gap: 2px; }
     .photo-card { break-inside: avoid; position: relative; overflow: hidden; cursor: pointer; margin-bottom: 2px; background: var(--surface); display: block; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .photo-card.visible { opacity: 1; transform: translateY(0); }
-    .photo-card img { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s; filter: brightness(0.9) saturate(0.95); }
-    .photo-card:hover img { transform: scale(1.03); filter: brightness(1) saturate(1); }
+    .photo-card img { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s, opacity 0.5s; filter: brightness(0.9) saturate(0.95) blur(8px); opacity: 0; }
+    .photo-card img.loaded { filter: brightness(0.9) saturate(0.95) blur(0px); opacity: 1; }
+    .photo-card:hover img.loaded { transform: scale(1.03); filter: brightness(1) saturate(1) blur(0px); }
     .photo-num { position: absolute; top: 12px; left: 14px; font-size: 7px; letter-spacing: 1.5px; color: rgba(255,255,255,0.35); font-weight: 400; z-index: 2; transition: opacity 0.3s; }
     .photo-card:hover .photo-num { opacity: 0; }
     .photo-fav { font-size: 13px; color: rgba(255,255,255,0.35); cursor: pointer; background: none; border: none; padding: 0 0 0 7px; line-height: 1; transition: color 0.2s, transform 0.2s; vertical-align: middle; position: relative; top: -1px; }
@@ -104,9 +105,6 @@
     footer p { font-size: 7.5px; color: var(--hint); letter-spacing: 2px; text-transform: uppercase; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes expandLine { from { width: 0; } to { width: 560px; } }
-    @keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    .page-out { animation: pageOut 0.3s ease forwards; }
-    @keyframes pageOut { to { opacity: 0; transform: translateY(-8px); } }
     img { -webkit-user-drag: none; user-select: none; pointer-events: none; }
     @media (max-width: 1024px) { .masonry { columns: 2; } }
     @media (max-width: 640px) {
@@ -1763,6 +1761,20 @@
     }
     initFavs();
 
+    // ── LAZY LOADING BLUR ──
+    function lazyLoad() {
+      document.querySelectorAll('.photo-card img').forEach(img => {
+        img.setAttribute('loading', 'lazy');
+        if (img.complete && img.naturalWidth > 0) {
+          img.classList.add('loaded');
+        } else {
+          img.addEventListener('load', () => img.classList.add('loaded'));
+          img.addEventListener('error', () => img.classList.add('loaded'));
+        }
+      });
+    }
+    lazyLoad();
+
     // ── COMPTEUR ──
     function animateCount(target) {
       let count = 0;
@@ -1883,28 +1895,6 @@
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + visibleCards.length) % visibleCards.length; showSlide(currentIndex); }
       if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % visibleCards.length; showSlide(currentIndex); }
-    });
-  </script>
-  <script>
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (!href || href.startsWith('#') || href.startsWith('http')) return;
-        e.preventDefault();
-        document.body.classList.add('page-out');
-        setTimeout(() => { window.location.href = href; }, 280);
-      });
-    });
-  </script>
-  <script>
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (!href || href.startsWith('#') || href.startsWith('http')) return;
-        e.preventDefault();
-        document.body.classList.add('page-out');
-        setTimeout(() => { window.location.href = href; }, 280);
-      });
     });
   </script>
   <script>
