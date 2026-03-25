@@ -128,6 +128,12 @@
       .lightbox-inner { justify-content: center; margin: auto; }
       .empty-state { padding: 60px 20px; }
     }
+
+    /* ── PAGE TRANSITION ── */
+    body { animation: pageIn 0.4s ease both; }
+    @keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .page-out { animation: pageOut 0.3s ease forwards; }
+    @keyframes pageOut { to { opacity: 0; transform: translateY(-8px); } }
   </style>
 </head>
 <body>
@@ -153,6 +159,7 @@
       <div class="hero-sub">
         <span>Mes sélections</span>
         <div class="hero-sub-sep"></div>
+        <span>Alexandre</span>
       </div>
     </div>
   </header>
@@ -200,6 +207,17 @@
     <p>Tous droits réservés</p>
   </footer>
 
+  <script>
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('http')) return;
+        e.preventDefault();
+        document.body.classList.add('page-out');
+        setTimeout(() => { window.location.href = href; }, 280);
+      });
+    });
+  </script>
   <script>
     // ── DONNÉES PHOTOS ──
     const allPhotos = [
