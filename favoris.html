@@ -17,7 +17,7 @@
       --font-body: 'DM Sans', sans-serif;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; min-height: 100vh; overflow-x: hidden; animation: pageIn 0.4s ease both; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; min-height: 100vh; overflow-x: hidden; }
 
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 62px; background: rgba(240,237,230,0.92); backdrop-filter: blur(12px); border-bottom: 0.6px solid var(--border); }
     .nav-left { display: flex; align-items: center; gap: 32px; }
@@ -60,9 +60,8 @@
 
     .photo-card { break-inside: avoid; position: relative; overflow: hidden; cursor: pointer; margin-bottom: 2px; background: var(--surface); display: block; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .photo-card.visible { opacity: 1; transform: translateY(0); }
-    .photo-card img { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s, opacity 0.5s; filter: brightness(0.9) saturate(0.95) blur(8px); opacity: 0; }
-    .photo-card img.loaded { filter: brightness(0.9) saturate(0.95) blur(0px); opacity: 1; }
-    .photo-card:hover img.loaded { transform: scale(1.03); filter: brightness(1) saturate(1) blur(0px); }
+    .photo-card img { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s; filter: brightness(0.9) saturate(0.95); }
+    .photo-card:hover img { transform: scale(1.03); filter: brightness(1) saturate(1); }
     .photo-fav { position: absolute; top: 10px; right: 14px; font-size: 16px; color: #e05555; cursor: pointer; z-index: 3; transition: color 0.2s, transform 0.2s; background: none; border: none; padding: 0; line-height: 1; }
     .photo-fav:hover { transform: scale(1.2); }
     .photo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 45%, transparent 70%); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
@@ -103,9 +102,6 @@
     footer { border-top: 0.6px solid var(--border); padding: 0 40px; height: 52px; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
     footer p { font-size: 7.5px; color: var(--hint); letter-spacing: 2px; text-transform: uppercase; }
 
-    @keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    .page-out { animation: pageOut 0.3s ease forwards; }
-    @keyframes pageOut { to { opacity: 0; transform: translateY(-8px); } }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes expandLine { from { width: 0; } to { width: 560px; } }
 
@@ -132,12 +128,6 @@
       .lightbox-inner { justify-content: center; margin: auto; }
       .empty-state { padding: 60px 20px; }
     }
-
-    /* ── PAGE TRANSITION ── */
-    body { animation: pageIn 0.4s ease both; }
-    @keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    .page-out { animation: pageOut 0.3s ease forwards; }
-    @keyframes pageOut { to { opacity: 0; transform: translateY(-8px); } }
   </style>
 </head>
 <body>
@@ -163,7 +153,6 @@
       <div class="hero-sub">
         <span>Mes sélections</span>
         <div class="hero-sub-sep"></div>
-        <span>Alexandre</span>
       </div>
     </div>
   </header>
@@ -211,17 +200,6 @@
     <p>Tous droits réservés</p>
   </footer>
 
-  <script>
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (!href || href.startsWith('#') || href.startsWith('http')) return;
-        e.preventDefault();
-        document.body.classList.add('page-out');
-        setTimeout(() => { window.location.href = href; }, 280);
-      });
-    });
-  </script>
   <script>
     // ── DONNÉES PHOTOS ──
     const allPhotos = [
@@ -409,23 +387,6 @@
 
     buildGallery();
 
-    // ── LAZY LOADING BLUR ──
-    function lazyLoad() {
-      document.querySelectorAll('.photo-card img').forEach(img => {
-        if (img.complete && img.naturalWidth > 0) {
-          img.classList.add('loaded');
-        } else {
-          img.addEventListener('load', () => img.classList.add('loaded'));
-          img.addEventListener('error', () => img.classList.add('loaded'));
-        }
-      });
-    }
-
-    // Observer pour relancer lazyLoad quand les cartes sont ajoutées dynamiquement
-    const galleryObserver = new MutationObserver(() => lazyLoad());
-    galleryObserver.observe(document.getElementById('gallery'), { childList: true });
-    lazyLoad();
-
     // ── LIGHTBOX ──
     const lightbox = document.getElementById('lightbox');
     const lbImgWrap = document.getElementById('lbImgWrap');
@@ -491,17 +452,6 @@
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + visibleCards.length) % visibleCards.length; showSlide(currentIndex); }
       if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % visibleCards.length; showSlide(currentIndex); }
-    });
-  </script>
-  <script>
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (!href || href.startsWith('#') || href.startsWith('http')) return;
-        e.preventDefault();
-        document.body.classList.add('page-out');
-        setTimeout(() => { window.location.href = href; }, 280);
-      });
     });
   </script>
 </body>
