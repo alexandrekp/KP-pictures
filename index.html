@@ -59,12 +59,11 @@
     .masonry { columns: 3; column-gap: 2px; }
     .photo-card { break-inside: avoid; position: relative; overflow: hidden; cursor: pointer; margin-bottom: 2px; background: var(--surface); display: block; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .photo-card.visible { opacity: 1; transform: translateY(0); }
-    .photo-card img { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s, opacity 0.5s; filter: brightness(0.9) saturate(0.95) blur(8px); opacity: 0; }
-    .photo-card img.loaded { filter: brightness(0.9) saturate(0.95) blur(0px); opacity: 1; }
-    .photo-card:hover img.loaded { transform: scale(1.03); filter: brightness(1) saturate(1) blur(0px); }
+    .photo-card img { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s; filter: brightness(0.9) saturate(0.95); }
+    .photo-card:hover img { transform: scale(1.03); filter: brightness(1) saturate(1); }
     .photo-num { position: absolute; top: 12px; left: 14px; font-size: 7px; letter-spacing: 1.5px; color: rgba(255,255,255,0.35); font-weight: 400; z-index: 2; transition: opacity 0.3s; }
     .photo-card:hover .photo-num { opacity: 0; }
-    .photo-fav { font-size: 13px; color: rgba(255,255,255,0.35); cursor: pointer; background: none; border: none; padding: 0 0 0 7px; line-height: 1; transition: color 0.2s, transform 0.2s; vertical-align: middle; position: relative; top: -1px; }
+    .photo-fav { font-size: 13px; color: rgba(255,255,255,0.35); cursor: pointer; background: none; border: none; padding: 0 0 0 7px; line-height: 1; transition: color 0.2s, transform 0.2s; vertical-align: middle; position: relative; top: 2px; }
     .photo-fav:hover { transform: scale(1.2); color: rgba(255,255,255,0.9); }
     .photo-fav.active { color: #e0b800; }
     .photo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 45%, transparent 70%); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
@@ -133,12 +132,6 @@
       .lightbox { align-items: center; padding: 80px 0 40px; overflow-y: auto; }
       .lightbox-inner { justify-content: center; margin: auto; }
     }
-
-    /* ── PAGE TRANSITION ── */
-    body { animation: pageIn 0.4s ease both; }
-    @keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    .page-out { animation: pageOut 0.3s ease forwards; }
-    @keyframes pageOut { to { opacity: 0; transform: translateY(-8px); } }
   </style>
 </head>
 <body>
@@ -1760,20 +1753,6 @@
       });
     }
     initFavs();
-
-    // ── LAZY LOADING BLUR ──
-    function lazyLoad() {
-      document.querySelectorAll('.photo-card img').forEach(img => {
-        img.setAttribute('loading', 'lazy');
-        if (img.complete && img.naturalWidth > 0) {
-          img.classList.add('loaded');
-        } else {
-          img.addEventListener('load', () => img.classList.add('loaded'));
-          img.addEventListener('error', () => img.classList.add('loaded'));
-        }
-      });
-    }
-    lazyLoad();
 
     // ── COMPTEUR ──
     function animateCount(target) {
