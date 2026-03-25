@@ -53,7 +53,6 @@
     .filter-btn { background: transparent; border: 0.6px solid transparent; color: var(--muted); padding: 5px 14px; font-family: var(--font-body); font-size: 7.5px; letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; font-weight: 400; }
     .filter-btn:hover { color: var(--text); border-color: var(--border); }
     .filter-btn.active { background: var(--text); color: #fff; border-color: var(--text); }
-    .filter-btn.fav-btn.active { background: #e05555; border-color: #e05555; }
     .filter-count { font-size: 7.5px; letter-spacing: 2.5px; color: var(--hint); text-transform: uppercase; }
     .filter-count span { color: var(--text); font-weight: 500; }
     .gallery-wrap { padding: 2px 40px 80px; background: var(--bg); }
@@ -64,9 +63,9 @@
     .photo-card:hover img { transform: scale(1.03); filter: brightness(1) saturate(1); }
     .photo-num { position: absolute; top: 12px; left: 14px; font-size: 7px; letter-spacing: 1.5px; color: rgba(255,255,255,0.35); font-weight: 400; z-index: 2; transition: opacity 0.3s; }
     .photo-card:hover .photo-num { opacity: 0; }
-    .photo-fav { position: absolute; bottom: 14px; right: 14px; font-size: 20px; color: rgba(255,255,255,0.5); cursor: pointer; z-index: 3; transition: color 0.2s, transform 0.2s; background: none; border: none; padding: 6px; line-height: 1; }
+    .photo-fav { font-size: 13px; color: rgba(255,255,255,0.35); cursor: pointer; background: none; border: none; padding: 0 0 0 7px; line-height: 1; transition: color 0.2s, transform 0.2s; vertical-align: middle; position: relative; top: -1px; }
     .photo-fav:hover { transform: scale(1.2); color: rgba(255,255,255,0.9); }
-    .photo-fav.active { color: #e05555; }
+    .photo-fav.active { color: #e0b800; }
     .photo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 45%, transparent 70%); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
     .photo-card:hover .photo-overlay { opacity: 1; }
     .photo-overlay-top { position: absolute; top: 0; left: 0; right: 0; padding: 12px 14px; display: flex; justify-content: space-between; align-items: flex-start; }
@@ -74,7 +73,7 @@
     .photo-year-tag { font-size: 7px; letter-spacing: 2px; color: rgba(255,255,255,0.4); background: rgba(0,0,0,0.5); padding: 3px 8px; backdrop-filter: blur(4px); }
     .photo-overlay-bottom { position: relative; }
     .photo-overlay-line { width: 24px; height: 0.6px; background: rgba(255,255,255,0.25); margin-bottom: 8px; }
-    .photo-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 5px; letter-spacing: 0.3px; }
+    .photo-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 5px; letter-spacing: 0.3px; display: flex; align-items: center; }
     .photo-meta-row { display: flex; align-items: center; justify-content: space-between; }
     .photo-gear { font-size: 7px; color: rgba(255,255,255,0.4); letter-spacing: 1.5px; text-transform: uppercase; }
     .photo-expand-icon { width: 22px; height: 22px; border: 0.6px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; transition: border-color 0.2s; }
@@ -170,8 +169,6 @@
         <button class="filter-btn" data-filter="Indonésie">Indonésie</button>
         <button class="filter-btn" data-filter="New York">New York</button>
         <button class="filter-btn" data-filter="Portrait">Portrait</button>
-        <button class="filter-btn sort-btn" data-sort="desc">↓ Récent</button>
-        <button class="filter-btn sort-btn" data-sort="asc">↑ Ancien</button>
       </div>
     </div>
     <div class="filter-count"><span id="photoCount">—</span> Résultats</div>
@@ -180,7 +177,6 @@
     <div class="masonry" id="gallery">
       <div class="photo-card" data-category="France" data-title="Tulipes" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Paris - France" data-year="2026">
         <span class="photo-num">084</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Tulipes.jpg" alt="Tulipes" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -189,7 +185,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Tulipes</div>
+            <div class="photo-title">Tulipes <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 100mm, f/5,6</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -199,7 +195,6 @@
       </div>
       <div class="photo-card" data-category="France" data-title="Ténéré 600" data-gear="Panasonic DMC-FX33 · 32mm, f/3" data-location="Paris - France" data-year="2026">
         <span class="photo-num">083</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Tenere.jpg" alt="Ténéré 600" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -208,7 +203,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Ténéré 600</div>
+            <div class="photo-title">Ténéré 600 <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 32mm, f/3</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -218,7 +213,6 @@
       </div>
       <div class="photo-card" data-category="Portrait" data-title="Portrait de groupe" data-gear="Panasonic DMC-FX33 · 36mm, f/3,1" data-location="Paris - France" data-year="2026">
         <span class="photo-num">082</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Copains.jpg" alt="Portrait de groupe" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -227,7 +221,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Portrait de groupe</div>
+            <div class="photo-title">Portrait de groupe <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 36mm, f/3,1</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -237,7 +231,6 @@
       </div>
       <div class="photo-card" data-category="Portrait" data-title="Pause Chantier" data-gear="Canon Epoca · Kodak Gold 35mm" data-location="Paris - France" data-year="2026">
         <span class="photo-num">081</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Pause Chantier.jpg" alt="Pause Chantier" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -246,7 +239,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Pause Chantier</div>
+            <div class="photo-title">Pause Chantier <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Canon Epoca · Kodak Gold 35mm</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -256,7 +249,6 @@
       </div>
       <div class="photo-card" data-category="France" data-title="Toyota Supra MKIII" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Villebon2 - Palaiseau" data-year="2026">
         <span class="photo-num">080</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Toyota Supra.jpg" alt="Toyota Supra MKIII" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -265,7 +257,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Toyota Supra MKIII</div>
+            <div class="photo-title">Toyota Supra MKIII <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -275,7 +267,6 @@
       </div>
       <div class="photo-card" data-category="France" data-title="Paris sous la neige" data-gear="iPhone 17 Pro · 24mm, f/1,78" data-location="Vincennes - Paris" data-year="2026">
         <span class="photo-num">079</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_8072 2.jpg" alt="Paris sous la neige" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -284,7 +275,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Paris sous la neige</div>
+            <div class="photo-title">Paris sous la neige <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">iPhone 17 Pro · 24mm, f/1,78</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -294,7 +285,6 @@
       </div>
       <div class="photo-card" data-category="France" data-title="Vespa" data-gear="Canon Epoca · Kodak Gold 35mm" data-location="Paris - France" data-year="2026">
         <span class="photo-num">078</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Vespa.jpg" alt="Vespa" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -303,7 +293,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Vespa</div>
+            <div class="photo-title">Vespa <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Canon Epoca · Kodak Gold 35mm</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -313,7 +303,6 @@
       </div>
       <div class="photo-card" data-category="France" data-title="Salon Sauvage" data-gear="iPhone 17 Pro · 140mm, f/2,8" data-location="L'aigle - Normandie" data-year="2025">
         <span class="photo-num">077</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7884.jpg" alt="Salon Sauvage" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -322,7 +311,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Salon Sauvage</div>
+            <div class="photo-title">Salon Sauvage <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">iPhone 17 Pro · 140mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -332,7 +321,6 @@
       </div>
       <div class="photo-card" data-category="France" data-title="Bretagne suspendue" data-gear="iPhone 17 Pro · 140mm, f/2,8" data-location="Pointe de la Varde Bunker - Bretagne" data-year="2025">
         <span class="photo-num">076</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7567.jpg" alt="Bretagne suspendue" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -341,7 +329,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Bretagne suspendue</div>
+            <div class="photo-title">Bretagne suspendue <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">iPhone 17 Pro · 140mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -351,7 +339,6 @@
       </div>
       <div class="photo-card" data-category="France" data-title="Horizon caché" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
         <span class="photo-num">075</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7499.jpg" alt="Horizon caché" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -360,7 +347,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Horizon caché</div>
+            <div class="photo-title">Horizon caché <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">iPhone 17 Pro · 100mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -370,7 +357,6 @@
       </div>
       <div class="photo-card" data-category="France" data-title="Horizon caché II" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
         <span class="photo-num">074</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7497.jpg" alt="Horizon caché II" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -379,7 +365,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Horizon caché II</div>
+            <div class="photo-title">Horizon caché II <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">iPhone 17 Pro · 100mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -389,7 +375,6 @@
       </div>
       <div class="photo-card" data-category="France" data-title="Au milieu de l'eau" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
         <span class="photo-num">073</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7498.jpg" alt="Au milieu de l'eau" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -398,7 +383,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Au milieu de l'eau</div>
+            <div class="photo-title">Au milieu de l'eau <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">iPhone 17 Pro · 100mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -408,7 +393,6 @@
       </div>
       <div class="photo-card" data-category="France" data-title="Falaise" data-gear="iPhone 17 Pro · 28mm, f/1,78" data-location="Cap Fréhel - Bretagne" data-year="2025">
         <span class="photo-num">072</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7687.jpg" alt="Falaise" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -417,7 +401,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Falaise</div>
+            <div class="photo-title">Falaise <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">iPhone 17 Pro · 28mm, f/1,78</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -427,7 +411,6 @@
       </div>
       <div class="photo-card" data-category="France" data-title="La pointe" data-gear="iPhone 17 Pro · 24mm, f/1,78" data-location="Cap Fréhel - Bretagne" data-year="2025">
         <span class="photo-num">071</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7680.jpg" alt="La pointe" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -436,7 +419,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">La pointe</div>
+            <div class="photo-title">La pointe <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">iPhone 17 Pro · 24mm, f/1,78</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -446,7 +429,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Toyota FJ 40" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
         <span class="photo-num">070</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Toyota FJ 40.jpg" alt="Toyota FJ 40" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -455,7 +437,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Toyota FJ 40</div>
+            <div class="photo-title">Toyota FJ 40 <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -465,7 +447,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Ravitaillement" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
         <span class="photo-num">069</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7901.jpg" alt="Ravitaillement" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -474,7 +455,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Ravitaillement</div>
+            <div class="photo-title">Ravitaillement <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -484,7 +465,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Scooter Honda" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">068</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7933.jpg" alt="Scooter Honda" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -493,7 +473,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Scooter Honda</div>
+            <div class="photo-title">Scooter Honda <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -503,7 +483,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Un moment de repos" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
         <span class="photo-num">067</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7924.jpg" alt="Un moment de repos" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -512,7 +491,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Un moment de repos</div>
+            <div class="photo-title">Un moment de repos <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -522,7 +501,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="ROCKSTEADY" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Gili Meno" data-year="2025">
         <span class="photo-num">066</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7908.jpg" alt="ROCKSTEADY" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -531,7 +509,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">ROCKSTEADY</div>
+            <div class="photo-title">ROCKSTEADY <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -541,7 +519,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Mont Bromo" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Java" data-year="2025">
         <span class="photo-num">065</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7911.jpg" alt="Mont Bromo" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -550,7 +527,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Mont Bromo</div>
+            <div class="photo-title">Mont Bromo <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -560,7 +537,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Vendeurs de fleurs" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
         <span class="photo-num">064</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7913.jpg" alt="Vendeurs de fleurs" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -569,7 +545,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Vendeurs de fleurs</div>
+            <div class="photo-title">Vendeurs de fleurs <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -579,7 +555,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Star ★" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
         <span class="photo-num">063</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/IMG_7899.jpg" alt="Star" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -588,7 +563,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Star ★</div>
+            <div class="photo-title">Star ★ <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -598,7 +573,6 @@
       </div>
       <div class="photo-card" data-category="Portrait" data-title="Juliette" data-gear="Panasonic DMC-FX33 · 40mm, f/3,3" data-location="Babahan - Bali" data-year="2025">
         <span class="photo-num">062</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Juliette.jpg" alt="Juliette" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -607,7 +581,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Juliette</div>
+            <div class="photo-title">Juliette <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 40mm, f/3,3</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -617,7 +591,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Réapprovisionnement" data-gear="Panasonic DMC-FX33 · 32mm, f/3" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">061</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110162.jpg" alt="Réapprovisionnement" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -626,7 +599,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Réapprovisionnement</div>
+            <div class="photo-title">Réapprovisionnement <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 32mm, f/3</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -636,7 +609,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Journée de l'indépendance" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Sindu Wati - Bali" data-year="2025">
         <span class="photo-num">060</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110583.jpg" alt="Journée de l'indépendance" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -645,7 +617,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Journée de l'indépendance</div>
+            <div class="photo-title">Journée de l'indépendance <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 100mm, f/5,6</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -655,7 +627,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Maisons sur les rizières" data-gear="Panasonic DMC-FX33 · 86mm, f/5,2" data-location="Sangkan - Bali" data-year="2025">
         <span class="photo-num">059</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110566.jpg" alt="Maisons sur les rizières" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -664,7 +635,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Maisons sur les rizières</div>
+            <div class="photo-title">Maisons sur les rizières <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 86mm, f/5,2</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -674,7 +645,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Fardeau" data-gear="Panasonic DMC-FX33 · 67mm, f/4,5" data-location="Jatiluwih - Bali" data-year="2025">
         <span class="photo-num">058</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Fardeau.jpg" alt="Fardeau" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -683,7 +653,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Fardeau</div>
+            <div class="photo-title">Fardeau <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 67mm, f/4,5</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -693,7 +663,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="La réserve" data-gear="Panasonic DMC-FX33 · 100mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
         <span class="photo-num">057</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110405_01.jpg" alt="La réserve" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -702,7 +671,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">La réserve</div>
+            <div class="photo-title">La réserve <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 100mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -712,7 +681,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Mobylette" data-gear="Panasonic DMC-FX33 · 40mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">056</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110557.jpg" alt="Mobylette" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -721,7 +689,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Mobylette</div>
+            <div class="photo-title">Mobylette <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 40mm, f/5,6</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -731,7 +699,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Mobylette II" data-gear="Panasonic DMC-FX33 · 40mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">055</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110558.jpg" alt="Mobylette II" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -740,7 +707,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Mobylette II</div>
+            <div class="photo-title">Mobylette II <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 40mm, f/5,6</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -750,7 +717,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières" data-gear="Panasonic DMC-FX33 · 51mm, f/3,8" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">054</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110559.jpg" alt="Chantier au milieu des rizières" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -759,7 +725,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Chantier au milieu des rizières</div>
+            <div class="photo-title">Chantier au milieu des rizières <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 51mm, f/3,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -769,7 +735,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières II" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">053</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110560.jpg" alt="Chantier au milieu des rizières II" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -778,7 +743,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Chantier au milieu des rizières II</div>
+            <div class="photo-title">Chantier au milieu des rizières II <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 92mm, f/5,4</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -788,7 +753,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Parking nature" data-gear="Panasonic DMC-FX33 · 32mm, f/9" data-location="Sangkan Gunung - Bali" data-year="2025">
         <span class="photo-num">052</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110540.jpg" alt="Parking nature" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -797,7 +761,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Parking nature</div>
+            <div class="photo-title">Parking nature <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 32mm, f/9</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -807,7 +771,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Au fil de l'eau" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Sangkan Gunung - Bali" data-year="2025">
         <span class="photo-num">051</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110538.jpg" alt="Au fil de l'eau" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -816,7 +779,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Au fil de l'eau</div>
+            <div class="photo-title">Au fil de l'eau <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 100mm, f/5,6</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -826,7 +789,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Plongeon entre amis" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Sangkan Gunung - Bali" data-year="2025">
         <span class="photo-num">050</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110537.jpg" alt="Plongeon entre amis" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -835,7 +797,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Plongeon entre amis</div>
+            <div class="photo-title">Plongeon entre amis <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 100mm, f/5,6</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -845,7 +807,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Rizière en mouvement" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
         <span class="photo-num">049</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110458.jpg" alt="Rizière en mouvement" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -854,7 +815,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Rizière en mouvement</div>
+            <div class="photo-title">Rizière en mouvement <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -864,7 +825,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Trajet quotidien" data-gear="Panasonic DMC-FX33 · 30mm, f/2,9" data-location="Jatiluwih - Bali" data-year="2025">
         <span class="photo-num">048</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110453.jpg" alt="Trajet quotidien" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -873,7 +833,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Trajet quotidien</div>
+            <div class="photo-title">Trajet quotidien <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 30mm, f/2,9</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -883,7 +843,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Livraison rurale" data-gear="Panasonic DMC-FX33 · 40mm, f/3,3" data-location="Jatiluwih - Bali" data-year="2025">
         <span class="photo-num">047</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110388.jpg" alt="Livraison rurale" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -892,7 +851,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Livraison rurale</div>
+            <div class="photo-title">Livraison rurale <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 40mm, f/3,3</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -902,7 +861,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Rizières" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Babahan - Bali" data-year="2025">
         <span class="photo-num">046</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Rizieres.jpg" alt="Rizières" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -911,7 +869,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Rizières</div>
+            <div class="photo-title">Rizières <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/3,2</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -921,7 +879,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Yamaha Jupiter MX" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
         <span class="photo-num">045</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Yamaha Jupiter MX.jpg" alt="Yamaha Jupiter MX" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -930,7 +887,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Yamaha Jupiter MX</div>
+            <div class="photo-title">Yamaha Jupiter MX <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -940,7 +897,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Refuge agricole" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">044</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110415.jpg" alt="Refuge agricole" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -949,7 +905,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Refuge agricole</div>
+            <div class="photo-title">Refuge agricole <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -959,7 +915,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Pause tranquille" data-gear="Panasonic DMC-FX33 · 38mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">043</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110402.jpg" alt="Pause tranquille" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -968,7 +923,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Pause tranquille</div>
+            <div class="photo-title">Pause tranquille <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/5,6</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -978,7 +933,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Honda M-F1" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">042</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110408_01.jpg" alt="Honda M-F1" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -987,7 +941,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Honda M-F1</div>
+            <div class="photo-title">Honda M-F1 <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/3,2</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -997,7 +951,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Suzuki Vitara" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="Babahan - Bali" data-year="2025">
         <span class="photo-num">041</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110315.jpg" alt="Suzuki Vitara" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1006,7 +959,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Suzuki Vitara</div>
+            <div class="photo-title">Suzuki Vitara <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 48mm, f/3,7</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1016,7 +969,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Fruits" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">040</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110262.jpg" alt="Fruits" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1025,7 +977,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Fruits</div>
+            <div class="photo-title">Fruits <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1035,7 +987,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Temple" data-gear="Panasonic DMC-FX33 · 54mm, f/4" data-location="Candikuning - Bali" data-year="2025">
         <span class="photo-num">039</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110275.jpg" alt="Temple" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1044,7 +995,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Temple</div>
+            <div class="photo-title">Temple <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 54mm, f/4</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1054,7 +1005,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Taxi vélo" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Yogyakarta - Java" data-year="2025">
         <span class="photo-num">038</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110197.jpg" alt="Taxi vélo" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1063,7 +1013,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Taxi vélo</div>
+            <div class="photo-title">Taxi vélo <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1073,7 +1023,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Custom racing" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Yogyakarta - Java" data-year="2025">
         <span class="photo-num">037</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110176.jpg" alt="Custom racing" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1082,7 +1031,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Custom racing</div>
+            <div class="photo-title">Custom racing <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1092,7 +1041,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="Balade du vendeur" data-gear="Panasonic DMC-FX33 · 58mm, f/4,1" data-location="Yogyakarta - Java" data-year="2025">
         <span class="photo-num">036</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110156.jpg" alt="Balade du vendeur" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1101,7 +1049,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Balade du vendeur</div>
+            <div class="photo-title">Balade du vendeur <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 58mm, f/4,1</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1111,7 +1059,6 @@
       </div>
       <div class="photo-card" data-category="Indonésie" data-title="ATM" data-gear="Panasonic DMC-FX33 · 30mm, f/2,9" data-location="Prambanan - Java" data-year="2025">
         <span class="photo-num">035</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1110127.jpg" alt="ATM" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1120,7 +1067,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">ATM</div>
+            <div class="photo-title">ATM <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 30mm, f/2,9</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1130,7 +1077,6 @@
       </div>
       <div class="photo-card" data-category="" data-title="Bratwurs" data-gear="Panasonic DMC-FX33 · 40mm, f/3,3" data-location="Berlin - Allemagne" data-year="2025">
         <span class="photo-num">034</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Bratwurs.jpg" alt="Bratwurs" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1139,7 +1085,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Bratwurs</div>
+            <div class="photo-title">Bratwurs <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 40mm, f/3,3</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1149,7 +1095,6 @@
       </div>
       <div class="photo-card" data-category="" data-title="Fernsehturm" data-gear="Panasonic DMC-FX33 · 63mm, f/4,3" data-location="Berlin - Allemagne" data-year="2025">
         <span class="photo-num">033</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Fernsehturm.jpg" alt="Fernsehturm" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1158,7 +1103,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Fernsehturm</div>
+            <div class="photo-title">Fernsehturm <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 63mm, f/4,3</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1168,7 +1113,6 @@
       </div>
       <div class="photo-card" data-category="" data-title="Balade en famille" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="Munich, Allemagne" data-year="2024">
         <span class="photo-num">032</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1100977.jpg" alt="Balade en famille" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1177,7 +1121,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Balade en famille</div>
+            <div class="photo-title">Balade en famille <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 48mm, f/3,7</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1187,7 +1131,6 @@
       </div>
       <div class="photo-card" data-category="Portrait" data-title="Engagement" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Munich - Allemagne" data-year="2024">
         <span class="photo-num">031</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Engagement.jpg" alt="Engagement" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1196,7 +1139,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Engagement</div>
+            <div class="photo-title">Engagement <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1206,7 +1149,6 @@
       </div>
       <div class="photo-card" data-category="" data-title="BMW E30" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Munich - Allemagne" data-year="2024">
         <span class="photo-num">030</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Bmw E30.jpg" alt="BMW E30" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1215,7 +1157,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">BMW E30</div>
+            <div class="photo-title">BMW E30 <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1225,7 +1167,6 @@
       </div>
       <div class="photo-card" data-category="" data-title="Laverie de fortune" data-gear="Panasonic DMC-FX33 · 32mm, f/3" data-location="Beyoglu, Turquie" data-year="2024">
         <span class="photo-num">029</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1100740.jpg" alt="Laverie de fortune" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1234,7 +1175,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Laverie de fortune</div>
+            <div class="photo-title">Laverie de fortune <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 32mm, f/3</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1244,7 +1185,6 @@
       </div>
       <div class="photo-card" data-category="" data-title="Au rayon légumes" data-gear="Panasonic DMC-FX33 · 28mm, f/3,8" data-location="Istanbul, Turquie" data-year="2024">
         <span class="photo-num">028</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1100672.jpg" alt="Au rayon légumes" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1253,7 +1193,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Au rayon légumes</div>
+            <div class="photo-title">Au rayon légumes <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/3,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1263,7 +1203,6 @@
       </div>
       <div class="photo-card" data-category="" data-title="Souvenirs" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Barcelone - Espagne" data-year="2024">
         <span class="photo-num">027</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Souvenirs.jpg" alt="Souvenirs" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1272,7 +1211,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Souvenirs</div>
+            <div class="photo-title">Souvenirs <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1282,7 +1221,6 @@
       </div>
       <div class="photo-card" data-category="" data-title="Vinyles" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Barcelone, Espagne" data-year="2024">
         <span class="photo-num">026</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1100527.jpg" alt="Vinyles" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1291,7 +1229,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Vinyles</div>
+            <div class="photo-title">Vinyles <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1301,7 +1239,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="L'ombre des tours" data-gear="Panasonic DMC-FX33 · 63mm, f/4,3" data-location="New York - USA" data-year="2024">
         <span class="photo-num">025</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090875.jpg" alt="L'ombre des tours" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1310,7 +1247,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">L'ombre des tours</div>
+            <div class="photo-title">L'ombre des tours <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 63mm, f/4,3</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1320,7 +1257,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Little Italy Gift's Center" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Manhattan - New York" data-year="2024">
         <span class="photo-num">024</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090372.jpg" alt="Little Italy Gift's Center" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1329,7 +1265,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Little Italy Gift's Center</div>
+            <div class="photo-title">Little Italy Gift's Center <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1339,7 +1275,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Building" data-gear="Panasonic DMC-FX33 · 43mm, f/3,4" data-location="New York - USA" data-year="2024">
         <span class="photo-num">023</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090878.jpg" alt="Building" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1348,7 +1283,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Building</div>
+            <div class="photo-title">Building <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 43mm, f/3,4</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1358,7 +1293,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="STOP" data-gear="Panasonic DMC-FX33 · 58mm, f/4,1" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">022</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090862.jpg" alt="STOP" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1367,7 +1301,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">STOP</div>
+            <div class="photo-title">STOP <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 58mm, f/4,1</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1377,7 +1311,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="New York graffiti" data-gear="Panasonic DMC-FX33 · 86mm, f/5,2" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">021</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090855.jpg" alt="New York graffiti" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1386,7 +1319,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">New York graffiti</div>
+            <div class="photo-title">New York graffiti <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 86mm, f/5,2</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1396,7 +1329,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Au service de la ville" data-gear="Panasonic DMC-FX33 · 86mm, f/5,2" data-location="New York - USA" data-year="2024">
         <span class="photo-num">020</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090848.jpg" alt="Au service de la ville" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1405,7 +1337,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Au service de la ville</div>
+            <div class="photo-title">Au service de la ville <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 86mm, f/5,2</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1415,7 +1347,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="LONG STORE" data-gear="Panasonic DMC-FX33 · 67mm, f/4,5" data-location="China Town - New York" data-year="2024">
         <span class="photo-num">019</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090387.jpg" alt="LONG STORE" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1424,7 +1355,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">LONG STORE</div>
+            <div class="photo-title">LONG STORE <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 67mm, f/4,5</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1434,7 +1365,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Poisson frais" data-gear="Panasonic DMC-FX33 · 58mm, f/4,1" data-location="China Town - New York" data-year="2024">
         <span class="photo-num">018</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090621.jpg" alt="Poisson frais" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1443,7 +1373,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Poisson frais</div>
+            <div class="photo-title">Poisson frais <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 58mm, f/4,1</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1453,7 +1383,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="China Town" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="China Town - New York" data-year="2024">
         <span class="photo-num">017</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/China Town.jpg" alt="China Town" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1462,7 +1391,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">China Town</div>
+            <div class="photo-title">China Town <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/3,2</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1472,7 +1401,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Débordement" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">016</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Debordement.jpg" alt="Débordement" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1481,7 +1409,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Débordement</div>
+            <div class="photo-title">Débordement <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/3,2</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1491,7 +1419,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Déchets à Brooklyn" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">015</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090794.jpg" alt="Déchets à Brooklyn" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1500,7 +1427,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Déchets à Brooklyn</div>
+            <div class="photo-title">Déchets à Brooklyn <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1510,7 +1437,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Prêt à réparer" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">014</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090806.jpg" alt="Prêt à réparer" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1519,7 +1445,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Prêt à réparer</div>
+            <div class="photo-title">Prêt à réparer <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 92mm, f/5,4</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1529,7 +1455,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Silhouette rétro" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">013</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090792.jpg" alt="Silhouette rétro" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1538,7 +1463,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Silhouette rétro</div>
+            <div class="photo-title">Silhouette rétro <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1548,7 +1473,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Carcasse métallique" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">012</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090786.jpg" alt="Carcasse métallique" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1557,7 +1481,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Carcasse métallique</div>
+            <div class="photo-title">Carcasse métallique <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/3,2</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1567,7 +1491,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Compagnons de route" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="New York - USA" data-year="2024">
         <span class="photo-num">011</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090749.jpg" alt="Compagnons de route" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1576,7 +1499,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Compagnons de route</div>
+            <div class="photo-title">Compagnons de route <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/3,2</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1586,7 +1509,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="En attendant" data-gear="Panasonic DMC-FX33 · 45mm, f/3,5" data-location="New York - USA" data-year="2024">
         <span class="photo-num">010</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/En attendant.jpg" alt="En attendant" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1595,7 +1517,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">En attendant</div>
+            <div class="photo-title">En attendant <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 45mm, f/3,5</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1605,7 +1527,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Portail" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Brooklyn - New York" data-year="2024">
         <span class="photo-num">009</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/Portail.jpg" alt="Portail" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1614,7 +1535,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Portail</div>
+            <div class="photo-title">Portail <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1624,7 +1545,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Patriote" data-gear="Panasonic DMC-FX33 · 63mm, f/4,3" data-location="New York - USA" data-year="2024">
         <span class="photo-num">008</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090713.jpg" alt="Patriote" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1633,7 +1553,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Patriote</div>
+            <div class="photo-title">Patriote <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 63mm, f/4,3</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1643,7 +1563,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Freight Liner" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="New York - USA" data-year="2024">
         <span class="photo-num">007</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090428.jpg" alt="Freight Liner" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1652,7 +1571,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Freight Liner</div>
+            <div class="photo-title">Freight Liner <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 100mm, f/5,6</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1662,7 +1581,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Wall Street" data-gear="Panasonic DMC-FX33 · 51mm, f/3,8" data-location="Wall Street - New York" data-year="2024">
         <span class="photo-num">006</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090184.jpg" alt="Wall Street" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1671,7 +1589,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Wall Street</div>
+            <div class="photo-title">Wall Street <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 51mm, f/3,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1681,7 +1599,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="BUS" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="New York - USA" data-year="2024">
         <span class="photo-num">005</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090080.jpg" alt="BUS" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1690,7 +1607,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">BUS</div>
+            <div class="photo-title">BUS <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 48mm, f/3,7</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1700,7 +1617,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Vendeurs de rue" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="New York - USA" data-year="2024">
         <span class="photo-num">004</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090364.jpg" alt="Vendeurs de rue" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1709,7 +1625,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Vendeurs de rue</div>
+            <div class="photo-title">Vendeurs de rue <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 48mm, f/3,7</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1719,7 +1635,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Brume urbaine" data-gear="Panasonic DMC-FX33 · 51mm, f/3,8" data-location="New York - USA" data-year="2024">
         <span class="photo-num">003</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090267.jpg" alt="Brume urbaine" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1728,7 +1643,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Brume urbaine</div>
+            <div class="photo-title">Brume urbaine <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 51mm, f/3,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1738,7 +1653,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="Patrouille en ville" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="New York - USA" data-year="2024">
         <span class="photo-num">002</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090096.jpg" alt="Patrouille en ville" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1747,7 +1661,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Patrouille en ville</div>
+            <div class="photo-title">Patrouille en ville <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 92mm, f/5,4</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1757,7 +1671,6 @@
       </div>
       <div class="photo-card" data-category="New York" data-title="F.D.N.Y" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="New York - USA" data-year="2024">
         <span class="photo-num">001</span>
-        <button class="photo-fav" onclick="toggleFav(this, event)">♥</button>
         <img src="photos/P1090101.jpg" alt="F.D.N.Y" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
@@ -1766,7 +1679,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">F.D.N.Y</div>
+            <div class="photo-title">F.D.N.Y <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1869,10 +1782,7 @@
     function applyFilter(filter) {
       currentFilter = filter;
       allCards.forEach(card => {
-        let show = false;
-        if (filter === 'all') show = true;
-        else if (filter === 'favoris') show = getFavs().includes(card.dataset.title);
-        else show = card.dataset.category === filter;
+        const show = filter === 'all' || card.dataset.category === filter;
         if (show) {
           card.style.display = '';
           setTimeout(() => card.classList.add('visible'), 10);
@@ -1886,29 +1796,12 @@
       }, 420);
     }
 
-    const filterBtns = document.querySelectorAll('.filter-btn:not(.sort-btn)');
+    const filterBtns = document.querySelectorAll('.filter-btn');
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         applyFilter(btn.dataset.filter);
-      });
-    });
-
-    // ── TRI PAR DATE ──
-    const sortBtns = document.querySelectorAll('.sort-btn');
-    sortBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        sortBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const dir = btn.dataset.sort;
-        const sorted = [...allCards].sort((a, b) =>
-          dir === 'asc'
-            ? parseInt(a.dataset.year) - parseInt(b.dataset.year)
-            : parseInt(b.dataset.year) - parseInt(a.dataset.year)
-        );
-        sorted.forEach(card => gallery.appendChild(card));
-        applyFilter(currentFilter);
       });
     });
 
@@ -1960,7 +1853,7 @@
       lbLocation.textContent = card.dataset.location || '';
       lbYear.textContent = card.dataset.year || '';
       lbGear.textContent = card.dataset.gear || '';
-      lbCounter.textContent = (index + 1).toString().padStart(2,'0') + ' / ' + visibleCards.length.toString().padStart(2,'0');
+      lbCounter.textContent = (index + 1).toString().padStart(2,'0') + ' / ' + visibleCards.length.toString().padStart(2,'00');
       document.title = card.dataset.title + ' — Focale';
     }
 
