@@ -2294,6 +2294,13 @@
   </footer>
 
   <script>
+    
+    // ── SHUFFLE ──
+const gallery = document.getElementById('gallery');
+const cards = [...gallery.querySelectorAll('.photo-card')];
+cards.sort(() => Math.random() - 0.5);
+cards.forEach(card => gallery.appendChild(card));
+    
     const allCards = document.querySelectorAll('.photo-card');
 
     // ── COMPTEUR ANIMÉ ──
