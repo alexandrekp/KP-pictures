@@ -63,7 +63,7 @@
     .photo-card:hover img { transform: scale(1.03); filter: brightness(1) saturate(1); }
     .photo-num { position: absolute; top: 12px; left: 14px; font-size: 7px; letter-spacing: 1.5px; color: rgba(255,255,255,0.35); font-weight: 400; z-index: 2; transition: opacity 0.3s; }
     .photo-card:hover .photo-num { opacity: 0; }
-    .photo-fav { font-size: 13px; color: rgba(255,255,255,0.35); cursor: pointer; background: none; border: none; padding: 0 0 0 7px; line-height: 1; transition: color 0.2s, transform 0.2s; vertical-align: middle; position: relative; top: 2px; }
+    .photo-fav { font-size: 13px; color: rgba(255,255,255,0.35); cursor: pointer; background: none; border: none; padding: 0 0 0 7px; line-height: 1; transition: color 0.2s, transform 0.2s; vertical-align: middle; position: relative; top: -1px; }
     .photo-fav:hover { transform: scale(1.2); color: rgba(255,255,255,0.9); }
     .photo-fav.active { color: #e0b800; }
     .photo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 45%, transparent 70%); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
@@ -104,6 +104,7 @@
     footer p { font-size: 7.5px; color: var(--hint); letter-spacing: 2px; text-transform: uppercase; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes expandLine { from { width: 0; } to { width: 560px; } }
+    img { -webkit-user-drag: none; user-select: none; pointer-events: none; }
     @media (max-width: 1024px) { .masonry { columns: 2; } }
     @media (max-width: 640px) {
       nav { padding: 0 16px; height: 54px; }
@@ -1874,6 +1875,10 @@
       if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + visibleCards.length) % visibleCards.length; showSlide(currentIndex); }
       if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % visibleCards.length; showSlide(currentIndex); }
     });
+  </script>
+  <script>
+    document.addEventListener('contextmenu', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
+    document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
   </script>
 </body>
 </html>
