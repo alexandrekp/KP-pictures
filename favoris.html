@@ -60,10 +60,12 @@
 
     .photo-card { break-inside: avoid; position: relative; overflow: hidden; cursor: pointer; margin-bottom: 2px; background: var(--surface); display: block; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .photo-card.visible { opacity: 1; transform: translateY(0); }
-    .photo-card img { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s; filter: brightness(0.9) saturate(0.95); }
-    .photo-card:hover img { transform: scale(1.03); filter: brightness(1) saturate(1); }
-    .photo-fav { position: absolute; top: 10px; right: 14px; font-size: 16px; color: #e05555; cursor: pointer; z-index: 3; transition: color 0.2s, transform 0.2s; background: none; border: none; padding: 0; line-height: 1; }
-    .photo-fav:hover { transform: scale(1.2); }
+    .photo-card img { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s, opacity 0.5s; filter: brightness(0.9) saturate(0.95) blur(8px); opacity: 0; }
+    .photo-card img.loaded { filter: brightness(0.9) saturate(0.95) blur(0px); opacity: 1; }
+    .photo-card:hover img.loaded { transform: scale(1.03); filter: brightness(1) saturate(1) blur(0px); }
+    .photo-fav { font-size: 13px; color: rgba(255,255,255,0.35); cursor: pointer; background: none; border: none; padding: 0 0 0 7px; line-height: 1; transition: color 0.2s, transform 0.2s; vertical-align: middle; position: relative; top: 0.5px; }
+    .photo-fav:hover { transform: scale(1.2); color: rgba(255,255,255,0.9); }
+    .photo-fav.active { color: #e0b800; }
     .photo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 45%, transparent 70%); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
     .photo-card:hover .photo-overlay { opacity: 1; }
     .photo-overlay-top { position: absolute; top: 0; left: 0; right: 0; padding: 12px 14px; display: flex; justify-content: space-between; align-items: flex-start; }
@@ -71,7 +73,7 @@
     .photo-year-tag { font-size: 7px; letter-spacing: 2px; color: rgba(255,255,255,0.4); background: rgba(0,0,0,0.5); padding: 3px 8px; backdrop-filter: blur(4px); }
     .photo-overlay-bottom { position: relative; }
     .photo-overlay-line { width: 24px; height: 0.6px; background: rgba(255,255,255,0.25); margin-bottom: 8px; }
-    .photo-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 5px; letter-spacing: 0.3px; }
+    .photo-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 5px; letter-spacing: 0.3px; display: flex; align-items: center; }
     .photo-meta-row { display: flex; align-items: center; justify-content: space-between; }
     .photo-gear { font-size: 7px; color: rgba(255,255,255,0.4); letter-spacing: 1.5px; text-transform: uppercase; }
     .photo-expand-icon { width: 22px; height: 22px; border: 0.6px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; }
@@ -128,6 +130,12 @@
       .lightbox-inner { justify-content: center; margin: auto; }
       .empty-state { padding: 60px 20px; }
     }
+
+    /* ── PAGE TRANSITION ── */
+    body { animation: pageIn 0.4s ease both; }
+    @keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .page-out { animation: pageOut 0.3s ease forwards; }
+    @keyframes pageOut { to { opacity: 0; transform: translateY(-8px); } }
   </style>
 </head>
 <body>
@@ -152,7 +160,7 @@
       <div class="hero-divider"></div>
       <div class="hero-sub">
         <span>Mes sélections</span>
-         <div class="hero-sub-sep"></div>
+        <div class="hero-sub-sep"></div>
         <span>Alexandre</span>
       </div>
     </div>
@@ -354,7 +362,6 @@
         div.dataset.year = p.year;
         div.dataset.gear = p.gear;
         div.innerHTML = `
-          <button class="photo-fav active" onclick="toggleFav(this, event)">♥</button>
           <img src="${p.src}" alt="${p.title}" loading="lazy" />
           <div class="photo-overlay">
             <div class="photo-overlay-top">
@@ -363,7 +370,7 @@
             </div>
             <div class="photo-overlay-bottom">
               <div class="photo-overlay-line"></div>
-              <div class="photo-title">${p.title}</div>
+              <div class="photo-title">${p.title} <button class="photo-fav active" onclick="toggleFav(this, event)">★</button></div>
               <div class="photo-meta-row">
                 <span class="photo-gear">${p.gear}</span>
                 <div class="photo-expand-icon">${svg_icon}</div>
@@ -387,6 +394,23 @@
     }
 
     buildGallery();
+
+    // ── LAZY LOADING BLUR ──
+    function lazyLoad() {
+      document.querySelectorAll('.photo-card img').forEach(img => {
+        if (img.complete && img.naturalWidth > 0) {
+          img.classList.add('loaded');
+        } else {
+          img.addEventListener('load', () => img.classList.add('loaded'));
+          img.addEventListener('error', () => img.classList.add('loaded'));
+        }
+      });
+    }
+
+    // Observer pour relancer lazyLoad quand les cartes sont ajoutées dynamiquement
+    const galleryObserver = new MutationObserver(() => lazyLoad());
+    galleryObserver.observe(document.getElementById('gallery'), { childList: true });
+    lazyLoad();
 
     // ── LIGHTBOX ──
     const lightbox = document.getElementById('lightbox');
