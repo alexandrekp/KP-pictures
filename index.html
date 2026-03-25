@@ -59,12 +59,11 @@
     .masonry { columns: 3; column-gap: 2px; }
     .photo-card { break-inside: avoid; position: relative; overflow: hidden; cursor: pointer; margin-bottom: 2px; background: var(--surface); display: block; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .photo-card.visible { opacity: 1; transform: translateY(0); }
-    .photo-card img { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s, opacity 0.5s; filter: brightness(0.9) saturate(0.95) blur(8px); opacity: 0; }
-    .photo-card img.loaded { filter: brightness(0.9) saturate(0.95) blur(0px); opacity: 1; }
-    .photo-card:hover img.loaded { transform: scale(1.03); filter: brightness(1) saturate(1) blur(0px); }
+    .photo-card img { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s; filter: brightness(0.9) saturate(0.95); }
+    .photo-card:hover img { transform: scale(1.03); filter: brightness(1) saturate(1); }
     .photo-num { position: absolute; top: 12px; left: 14px; font-size: 7px; letter-spacing: 1.5px; color: rgba(255,255,255,0.35); font-weight: 400; z-index: 2; transition: opacity 0.3s; }
     .photo-card:hover .photo-num { opacity: 0; }
-    .photo-fav { font-size: 13px; color: rgba(255,255,255,0.35); cursor: pointer; background: none; border: none; padding: 0 0 0 7px; line-height: 1; transition: color 0.2s, transform 0.2s; vertical-align: middle; position: relative; top: -1px; }
+    .photo-fav { font-size: 13px; color: rgba(255,255,255,0.35); cursor: pointer; background: none; border: none; padding: 0 0 0 7px; line-height: 1; transition: color 0.2s, transform 0.2s; }
     .photo-fav:hover { transform: scale(1.2); color: rgba(255,255,255,0.9); }
     .photo-fav.active { color: #e0b800; }
     .photo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 45%, transparent 70%); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
@@ -74,7 +73,7 @@
     .photo-year-tag { font-size: 7px; letter-spacing: 2px; color: rgba(255,255,255,0.4); background: rgba(0,0,0,0.5); padding: 3px 8px; backdrop-filter: blur(4px); }
     .photo-overlay-bottom { position: relative; }
     .photo-overlay-line { width: 24px; height: 0.6px; background: rgba(255,255,255,0.25); margin-bottom: 8px; }
-    .photo-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 5px; letter-spacing: 0.3px; display: flex; align-items: center; }
+    .photo-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 5px; letter-spacing: 0.3px; display: flex; align-items: baseline; }
     .photo-meta-row { display: flex; align-items: center; justify-content: space-between; }
     .photo-gear { font-size: 7px; color: rgba(255,255,255,0.4); letter-spacing: 1.5px; text-transform: uppercase; }
     .photo-expand-icon { width: 22px; height: 22px; border: 0.6px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; transition: border-color 0.2s; }
@@ -133,12 +132,6 @@
       .lightbox { align-items: center; padding: 80px 0 40px; overflow-y: auto; }
       .lightbox-inner { justify-content: center; margin: auto; }
     }
-
-    /* ── PAGE TRANSITION ── */
-    body { animation: pageIn 0.4s ease both; }
-    @keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    .page-out { animation: pageOut 0.3s ease forwards; }
-    @keyframes pageOut { to { opacity: 0; transform: translateY(-8px); } }
   </style>
 </head>
 <body>
@@ -172,18 +165,17 @@
     <div class="filter-left">
       <span class="filter-sort-label">Trier par</span>
       <div class="filter-buttons">
-        <button class="filter-btn active" data-filter="France">France</button>
+        <button class="filter-btn active" data-filter="all">Tout</button>
+        <button class="filter-btn" data-filter="France">France</button>
         <button class="filter-btn" data-filter="Indonésie">Indonésie</button>
         <button class="filter-btn" data-filter="New York">New York</button>
         <button class="filter-btn" data-filter="Portrait">Portrait</button>
-        <button class="filter-btn" data-filter="all">Tout</button>
       </div>
     </div>
     <div class="filter-count"><span id="photoCount">—</span> Résultats</div>
   </div>
   <div class="gallery-wrap">
     <div class="masonry" id="gallery">
-      
       <div class="photo-card" data-category="France" data-title="Tulipes" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Paris - France" data-year="2026">
         <span class="photo-num">084</span>
         <img src="photos/Tulipes.jpg" alt="Tulipes" />
@@ -202,7 +194,6 @@
           </div>
         </div>
       </div>
-      
       <div class="photo-card" data-category="France" data-title="Ténéré 600" data-gear="Panasonic DMC-FX33 · 32mm, f/3" data-location="Paris - France" data-year="2026">
         <span class="photo-num">083</span>
         <img src="photos/Tenere.jpg" alt="Ténéré 600" />
@@ -221,7 +212,6 @@
           </div>
         </div>
       </div>
-      
       <div class="photo-card" data-category="Portrait" data-title="Portrait de groupe" data-gear="Panasonic DMC-FX33 · 36mm, f/3,1" data-location="Paris - France" data-year="2026">
         <span class="photo-num">082</span>
         <img src="photos/Copains.jpg" alt="Portrait de groupe" />
@@ -240,7 +230,6 @@
           </div>
         </div>
       </div>
-      
       <div class="photo-card" data-category="Portrait" data-title="Pause Chantier" data-gear="Canon Epoca · Kodak Gold 35mm" data-location="Paris - France" data-year="2026">
         <span class="photo-num">081</span>
         <img src="photos/Pause Chantier.jpg" alt="Pause Chantier" />
@@ -259,7 +248,6 @@
           </div>
         </div>
       </div>
-      
       <div class="photo-card" data-category="France" data-title="Toyota Supra MKIII" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Villebon2 - Palaiseau" data-year="2026">
         <span class="photo-num">080</span>
         <img src="photos/Toyota Supra.jpg" alt="Toyota Supra MKIII" />
@@ -278,7 +266,6 @@
           </div>
         </div>
       </div>
-      
       <div class="photo-card" data-category="France" data-title="Paris sous la neige" data-gear="iPhone 17 Pro · 24mm, f/1,78" data-location="Vincennes - Paris" data-year="2026">
         <span class="photo-num">079</span>
         <img src="photos/IMG_8072 2.jpg" alt="Paris sous la neige" />
@@ -297,7 +284,6 @@
           </div>
         </div>
       </div>
-      
       <div class="photo-card" data-category="France" data-title="Vespa" data-gear="Canon Epoca · Kodak Gold 35mm" data-location="Paris - France" data-year="2026">
         <span class="photo-num">078</span>
         <img src="photos/Vespa.jpg" alt="Vespa" />
@@ -370,9 +356,9 @@
           </div>
         </div>
       </div>
-      <div class="photo-card" data-category="France" data-title="Horizon caché II" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
+      <div class="photo-card" data-category="France" data-title="Horizon caché" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
         <span class="photo-num">074</span>
-        <img src="photos/IMG_7497.jpg" alt="Horizon caché II" />
+        <img src="photos/IMG_7497.jpg" alt="Horizon caché" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
             <span class="photo-location-tag">Cancale - Bretagne</span>
@@ -380,7 +366,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Horizon caché II <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
+            <div class="photo-title">Horizon caché <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">iPhone 17 Pro · 100mm, f/2,8</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -712,9 +698,9 @@
           </div>
         </div>
       </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Mobylette II" data-gear="Panasonic DMC-FX33 · 40mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Mobylette" data-gear="Panasonic DMC-FX33 · 40mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">055</span>
-        <img src="photos/P1110558.jpg" alt="Mobylette II" />
+        <img src="photos/P1110558.jpg" alt="Mobylette" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
             <span class="photo-location-tag">Bali</span>
@@ -722,7 +708,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Mobylette II <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
+            <div class="photo-title">Mobylette <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 40mm, f/5,6</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -748,9 +734,9 @@
           </div>
         </div>
       </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières II" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="Bali - Indonésie" data-year="2025">
+      <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="Bali - Indonésie" data-year="2025">
         <span class="photo-num">053</span>
-        <img src="photos/P1110560.jpg" alt="Chantier au milieu des rizières II" />
+        <img src="photos/P1110560.jpg" alt="Chantier au milieu des rizières" />
         <div class="photo-overlay">
           <div class="photo-overlay-top">
             <span class="photo-location-tag">Bali</span>
@@ -758,7 +744,7 @@
           </div>
           <div class="photo-overlay-bottom">
             <div class="photo-overlay-line"></div>
-            <div class="photo-title">Chantier au milieu des rizières II <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
+            <div class="photo-title">Chantier au milieu des rizières <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
             <div class="photo-meta-row">
               <span class="photo-gear">Panasonic DMC-FX33 · 92mm, f/5,4</span>
               <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -1768,20 +1754,6 @@
     }
     initFavs();
 
-    // ── LAZY LOADING BLUR ──
-    function lazyLoad() {
-      document.querySelectorAll('.photo-card img').forEach(img => {
-        img.setAttribute('loading', 'lazy');
-        if (img.complete && img.naturalWidth > 0) {
-          img.classList.add('loaded');
-        } else {
-          img.addEventListener('load', () => img.classList.add('loaded'));
-          img.addEventListener('error', () => img.classList.add('loaded'));
-        }
-      });
-    }
-    lazyLoad();
-
     // ── COMPTEUR ──
     function animateCount(target) {
       let count = 0;
@@ -1794,7 +1766,6 @@
       }, 28);
     }
     animateCount(allCards.length);
-    applyFilter('France');
 
     // ── SCROLL REVEAL ──
     const observer = new IntersectionObserver((entries) => {
@@ -1808,7 +1779,7 @@
     allCards.forEach(card => observer.observe(card));
 
     // ── FILTER ──
-    let currentFilter = 'France';
+    let currentFilter = 'all';
     function applyFilter(filter) {
       currentFilter = filter;
       allCards.forEach(card => {
