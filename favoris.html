@@ -17,7 +17,7 @@
       --font-body: 'DM Sans', sans-serif;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; min-height: 100vh; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; min-height: 100vh; overflow-x: hidden; animation: pageIn 0.4s ease both; }
 
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 62px; background: rgba(240,237,230,0.92); backdrop-filter: blur(12px); border-bottom: 0.6px solid var(--border); }
     .nav-left { display: flex; align-items: center; gap: 32px; }
@@ -102,6 +102,9 @@
     footer { border-top: 0.6px solid var(--border); padding: 0 40px; height: 52px; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
     footer p { font-size: 7.5px; color: var(--hint); letter-spacing: 2px; text-transform: uppercase; }
 
+    @keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .page-out { animation: pageOut 0.3s ease forwards; }
+    @keyframes pageOut { to { opacity: 0; transform: translateY(-8px); } }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes expandLine { from { width: 0; } to { width: 560px; } }
 
@@ -128,6 +131,12 @@
       .lightbox-inner { justify-content: center; margin: auto; }
       .empty-state { padding: 60px 20px; }
     }
+
+    /* ── PAGE TRANSITION ── */
+    body { animation: pageIn 0.4s ease both; }
+    @keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .page-out { animation: pageOut 0.3s ease forwards; }
+    @keyframes pageOut { to { opacity: 0; transform: translateY(-8px); } }
   </style>
 </head>
 <body>
@@ -153,6 +162,7 @@
       <div class="hero-sub">
         <span>Mes sélections</span>
         <div class="hero-sub-sep"></div>
+        <span>Alexandre</span>
       </div>
     </div>
   </header>
@@ -164,6 +174,7 @@
 
   <div class="gallery-wrap">
     <div id="empty-state" class="empty-state" style="display:none">
+      <div class="heart">♥</div>
       <h2>Aucun favori</h2>
       <p>Ajoutez des photos depuis la galerie</p>
       <a href="index.html">Voir la galerie</a>
@@ -200,6 +211,17 @@
     <p>Tous droits réservés</p>
   </footer>
 
+  <script>
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('http')) return;
+        e.preventDefault();
+        document.body.classList.add('page-out');
+        setTimeout(() => { window.location.href = href; }, 280);
+      });
+    });
+  </script>
   <script>
     // ── DONNÉES PHOTOS ──
     const allPhotos = [
@@ -452,6 +474,17 @@
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + visibleCards.length) % visibleCards.length; showSlide(currentIndex); }
       if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % visibleCards.length; showSlide(currentIndex); }
+    });
+  </script>
+  <script>
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('http')) return;
+        e.preventDefault();
+        document.body.classList.add('page-out');
+        setTimeout(() => { window.location.href = href; }, 280);
+      });
     });
   </script>
 </body>
