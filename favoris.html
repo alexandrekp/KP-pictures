@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Focale — Favoris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f0ede6; --surface: #e8e5de; --border: #c8c4ba;
+      --text: #111111; --muted: #888880; --hint: #bbbbbb;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 300; min-height: 100vh; overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 62px; background: rgba(240,237,230,0.92); backdrop-filter: blur(12px); border-bottom: 0.6px solid var(--border); }
+    .nav-left { display: flex; align-items: center; gap: 32px; }
+    .nav-logo { font-family: var(--font-display); font-size: 14px; font-weight: 800; letter-spacing: 5px; color: var(--text); text-decoration: none; text-transform: uppercase; }
+    .nav-logo span { color: var(--muted); }
+    .nav-index { font-size: 8px; letter-spacing: 1.5px; color: var(--hint); padding-top: 2px; }
+    nav ul { list-style: none; display: flex; align-items: center; gap: 36px; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 8px; letter-spacing: 3px; text-transform: uppercase; transition: color 0.2s; position: relative; font-weight: 400; }
+    nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 0.8px; background: var(--text); transition: width 0.3s; }
+    nav a:hover { color: var(--text); }
+    nav a:hover::after, nav a.active::after { width: 100%; }
+    nav a.active { color: var(--text); font-weight: 500; }
+
+    .hero { margin-top: 62px; height: 38vh; min-height: 340px; background: #111; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 40px 36px; }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(#1e1e1e 0.4px, transparent 0.4px), linear-gradient(90deg, #1e1e1e 0.4px, transparent 0.4px); background-size: 38px 38px; pointer-events: none; opacity: 0.6; }
+    .hero-line-left { position: absolute; left: 40px; top: 0; bottom: 0; width: 0.8px; background: #2a2a2a; }
+    .hero-year { position: absolute; top: 24px; left: 56px; font-size: 7.5px; letter-spacing: 3px; color: #444; text-transform: uppercase; }
+    .hero-content { position: relative; z-index: 1; }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(72px, 11vw, 118px); font-weight: 800; line-height: 0.88; color: #fff; letter-spacing: -3px; text-transform: uppercase; opacity: 0; animation: fadeUp 0.9s ease 0.2s both; }
+    .hero-divider { width: 0; height: 0.6px; background: #2e2e2e; margin: 14px 0 12px; animation: expandLine 0.8s ease 0.7s both; }
+    .hero-sub { display: flex; align-items: center; gap: 14px; opacity: 0; animation: fadeUp 0.7s ease 0.9s both; }
+    .hero-sub span { font-size: 8px; letter-spacing: 4px; color: #555; text-transform: uppercase; font-weight: 300; }
+    .hero-sub-sep { width: 16px; height: 0.6px; background: #333; }
+
+    .filter-bar { height: 52px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 0.6px solid var(--border); background: var(--bg); }
+    .filter-count { font-size: 7.5px; letter-spacing: 2.5px; color: var(--hint); text-transform: uppercase; }
+    .filter-count span { color: var(--text); font-weight: 500; }
+    .clear-btn { background: transparent; border: 0.6px solid var(--border); color: var(--muted); padding: 5px 14px; font-family: var(--font-body); font-size: 7.5px; letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+    .clear-btn:hover { color: #e05555; border-color: #e05555; }
+
+    .gallery-wrap { padding: 2px 40px 80px; background: var(--bg); }
+    .masonry { columns: 3; column-gap: 2px; }
+
+    .empty-state { padding: 80px 40px; text-align: center; }
+    .empty-state .heart { font-size: 48px; color: var(--border); margin-bottom: 24px; }
+    .empty-state h2 { font-family: var(--font-display); font-size: 32px; font-weight: 300; color: var(--muted); margin-bottom: 12px; }
+    .empty-state p { font-size: 8px; letter-spacing: 3px; color: var(--hint); text-transform: uppercase; margin-bottom: 32px; }
+    .empty-state a { display: inline-block; border: 0.6px solid var(--text); color: var(--text); padding: 8px 20px; font-size: 7.5px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
+    .empty-state a:hover { background: var(--text); color: #fff; }
+
+    .photo-card { break-inside: avoid; position: relative; overflow: hidden; cursor: pointer; margin-bottom: 2px; background: var(--surface); display: block; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .photo-card.visible { opacity: 1; transform: translateY(0); }
+    .photo-card img { width: 100%; height: auto; display: block; transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s; filter: brightness(0.9) saturate(0.95); }
+    .photo-card:hover img { transform: scale(1.03); filter: brightness(1) saturate(1); }
+    .photo-fav { position: absolute; top: 10px; right: 14px; font-size: 16px; color: #e05555; cursor: pointer; z-index: 3; transition: color 0.2s, transform 0.2s; background: none; border: none; padding: 0; line-height: 1; }
+    .photo-fav:hover { transform: scale(1.2); }
+    .photo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 45%, transparent 70%); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
+    .photo-card:hover .photo-overlay { opacity: 1; }
+    .photo-overlay-top { position: absolute; top: 0; left: 0; right: 0; padding: 12px 14px; display: flex; justify-content: space-between; align-items: flex-start; }
+    .photo-location-tag { font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); background: rgba(0,0,0,0.5); padding: 3px 8px; backdrop-filter: blur(4px); }
+    .photo-year-tag { font-size: 7px; letter-spacing: 2px; color: rgba(255,255,255,0.4); background: rgba(0,0,0,0.5); padding: 3px 8px; backdrop-filter: blur(4px); }
+    .photo-overlay-bottom { position: relative; }
+    .photo-overlay-line { width: 24px; height: 0.6px; background: rgba(255,255,255,0.25); margin-bottom: 8px; }
+    .photo-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: #fff; line-height: 1.1; margin-bottom: 5px; letter-spacing: 0.3px; }
+    .photo-meta-row { display: flex; align-items: center; justify-content: space-between; }
+    .photo-gear { font-size: 7px; color: rgba(255,255,255,0.4); letter-spacing: 1.5px; text-transform: uppercase; }
+    .photo-expand-icon { width: 22px; height: 22px; border: 0.6px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; }
+    .photo-expand-icon svg { width: 10px; height: 10px; stroke: rgba(255,255,255,0.6); fill: none; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(15,15,15,0.98); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox-inner { position: relative; max-width: 1200px; width: 92%; display: flex; flex-direction: column; align-items: center; gap: 20px; transform: translateY(10px); transition: transform 0.35s; }
+    .lightbox.open .lightbox-inner { transform: translateY(0); }
+    .lightbox-img-wrap { width: 100%; display: flex; align-items: center; justify-content: center; }
+    .lightbox-img-wrap img { max-width: 100%; max-height: 78vh; width: auto; height: auto; display: block; }
+    .lightbox-info { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .lightbox-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+    .lightbox-meta { display: flex; align-items: center; gap: 14px; }
+    .lightbox-location { font-size: 7.5px; letter-spacing: 2.5px; text-transform: uppercase; color: #666; }
+    .lightbox-sep { width: 14px; height: 0.6px; background: #333; }
+    .lightbox-year { font-size: 7.5px; letter-spacing: 2.5px; color: #555; }
+    .lightbox-gear { font-size: 7.5px; color: #555; letter-spacing: 1.5px; text-transform: uppercase; }
+    .lightbox-close { position: fixed; top: 24px; right: 32px; background: none; border: 0.6px solid #333; color: #666; cursor: pointer; font-size: 7.5px; letter-spacing: 2.5px; text-transform: uppercase; padding: 6px 14px; transition: all 0.2s; font-family: var(--font-body); }
+    .lightbox-close:hover { color: #fff; border-color: #666; }
+    .lightbox-counter { position: fixed; top: 26px; left: 32px; font-size: 7.5px; letter-spacing: 2px; color: #444; }
+    .lightbox-nav { position: fixed; top: 50%; transform: translateY(-50%); background: transparent; border: 0.6px solid #2a2a2a; color: #555; cursor: pointer; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .lightbox-nav:hover { border-color: #555; color: #fff; }
+    .lightbox-nav.prev { left: 24px; }
+    .lightbox-nav.next { right: 24px; }
+    .lightbox-nav svg { width: 16px; height: 16px; stroke: currentColor; fill: none; }
+
+    footer { border-top: 0.6px solid var(--border); padding: 0 40px; height: 52px; display: flex; align-items: center; justify-content: space-between; background: var(--bg); }
+    footer p { font-size: 7.5px; color: var(--hint); letter-spacing: 2px; text-transform: uppercase; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes expandLine { from { width: 0; } to { width: 560px; } }
+
+    @media (max-width: 1024px) { .masonry { columns: 2; } }
+    @media (max-width: 640px) {
+      nav { padding: 0 16px; height: 54px; }
+      .nav-index { display: none; }
+      .nav-logo { font-size: 12px; letter-spacing: 4px; }
+      nav a { font-size: 7px; letter-spacing: 2px; }
+      nav ul { gap: 16px; }
+      .hero { padding: 0 20px 24px; height: auto; min-height: 260px; }
+      .hero h1 { font-size: clamp(48px, 15vw, 68px); letter-spacing: -1px; }
+      .hero-line-left { left: 20px; }
+      .hero-year { left: 36px; }
+      .filter-bar { padding: 10px 16px; height: auto; }
+      .gallery-wrap { padding: 2px 0 60px; }
+      .masonry { columns: 1; column-gap: 0; }
+      .lightbox-nav.prev { left: 8px; }
+      .lightbox-nav.next { right: 8px; }
+      .lightbox-close { right: 12px; top: 16px; font-size: 7px; padding: 5px 10px; }
+      .lightbox-counter { left: 12px; top: 18px; }
+      footer { padding: 14px 16px; flex-direction: column; height: auto; gap: 4px; text-align: center; }
+      .lightbox { align-items: center; padding: 80px 0 40px; overflow-y: auto; }
+      .lightbox-inner { justify-content: center; margin: auto; }
+      .empty-state { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">Focale<span>.</span></a>
+      <span class="nav-index">03 / 03</span>
+    </div>
+    <ul>
+      <li><a href="index.html">Galerie</a></li>
+      <li><a href="equipements.html">Équipements</a></li>
+      <li><a href="favoris.html" class="active">Favoris</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-line-left"></div>
+    <div class="hero-year">© 2026</div>
+    <div class="hero-content">
+      <h1>Favoris</h1>
+      <div class="hero-divider"></div>
+      <div class="hero-sub">
+        <span>Mes sélections</span>
+        <div class="hero-sub-sep"></div>
+        <span>Alexandre</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="filter-bar">
+    <div class="filter-count"><span id="photoCount">—</span> Résultats</div>
+    <button class="clear-btn" onclick="clearFavs()">Tout effacer</button>
+  </div>
+
+  <div class="gallery-wrap">
+    <div id="empty-state" class="empty-state" style="display:none">
+      <div class="heart">♥</div>
+      <h2>Aucun favori</h2>
+      <p>Ajoutez des photos depuis la galerie</p>
+      <a href="index.html">Voir la galerie</a>
+    </div>
+    <div class="masonry" id="gallery"></div>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-counter" id="lbCounter"></div>
+    <button class="lightbox-close" id="lbClose">Fermer</button>
+    <button class="lightbox-nav prev" id="lbPrev">
+      <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button class="lightbox-nav next" id="lbNext">
+      <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <div class="lightbox-inner">
+      <div class="lightbox-img-wrap" id="lbImgWrap"></div>
+      <div class="lightbox-info">
+        <div class="lightbox-title" id="lbTitle"></div>
+        <div class="lightbox-meta">
+          <span class="lightbox-location" id="lbLocation"></span>
+          <div class="lightbox-sep"></div>
+          <span class="lightbox-year" id="lbYear"></span>
+          <div class="lightbox-sep"></div>
+          <span class="lightbox-gear" id="lbGear"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 — Focale · KP</p>
+    <p>Tous droits réservés</p>
+  </footer>
+
+  <script>
+    // ── DONNÉES PHOTOS ──
+    const allPhotos = [
+      { num: "084", category: "France", title: "Tulipes", gear: "Panasonic DMC-FX33 · 100mm, f/5,6", location: "Paris - France", year: "2026", src: "photos/Tulipes.jpg", locTag: "Jardin des Plantes - Paris" },
+      { num: "083", category: "France", title: "Ténéré 600", gear: "Panasonic DMC-FX33 · 32mm, f/3", location: "Paris - France", year: "2026", src: "photos/Tenere.jpg", locTag: "Paris" },
+      { num: "082", category: "Portrait", title: "Portrait de groupe", gear: "Panasonic DMC-FX33 · 36mm, f/3,1", location: "Paris - France", year: "2026", src: "photos/Copains.jpg", locTag: "Paris" },
+      { num: "081", category: "Portrait", title: "Pause Chantier", gear: "Canon Epoca · Kodak Gold 35mm", location: "Paris - France", year: "2026", src: "photos/Pause Chantier.jpg", locTag: "Paris" },
+      { num: "080", category: "France", title: "Toyota Supra MKIII", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Villebon2 - Palaiseau", year: "2026", src: "photos/Toyota Supra.jpg", locTag: "Villebon2 - Palaiseau" },
+      { num: "079", category: "France", title: "Paris sous la neige", gear: "iPhone 17 Pro · 24mm, f/1,78", location: "Vincennes - Paris", year: "2026", src: "photos/IMG_8072 2.jpg", locTag: "Vincennes - Paris" },
+      { num: "078", category: "France", title: "Vespa", gear: "Canon Epoca · Kodak Gold 35mm", location: "Paris - France", year: "2026", src: "photos/Vespa.jpg", locTag: "Paris" },
+      { num: "077", category: "France", title: "Salon Sauvage", gear: "iPhone 17 Pro · 140mm, f/2,8", location: "L'aigle - Normandie", year: "2025", src: "photos/IMG_7884.jpg", locTag: "L'aigle - Normandie" },
+      { num: "076", category: "France", title: "Bretagne suspendue", gear: "iPhone 17 Pro · 140mm, f/2,8", location: "Pointe de la Varde Bunker - Bretagne", year: "2025", src: "photos/IMG_7567.jpg", locTag: "Pointe de la Varde - Bretagne" },
+      { num: "075", category: "France", title: "Horizon caché", gear: "iPhone 17 Pro · 100mm, f/2,8", location: "Cancale - Bretagne", year: "2025", src: "photos/IMG_7499.jpg", locTag: "Cancale - Bretagne" },
+      { num: "074", category: "France", title: "Horizon caché II", gear: "iPhone 17 Pro · 100mm, f/2,8", location: "Cancale - Bretagne", year: "2025", src: "photos/IMG_7497.jpg", locTag: "Cancale - Bretagne" },
+      { num: "073", category: "France", title: "Au milieu de l'eau", gear: "iPhone 17 Pro · 100mm, f/2,8", location: "Cancale - Bretagne", year: "2025", src: "photos/IMG_7498.jpg", locTag: "Cancale - Bretagne" },
+      { num: "072", category: "France", title: "Falaise", gear: "iPhone 17 Pro · 28mm, f/1,78", location: "Cap Fréhel - Bretagne", year: "2025", src: "photos/IMG_7687.jpg", locTag: "Cap Fréhel - Bretagne" },
+      { num: "071", category: "France", title: "La pointe", gear: "iPhone 17 Pro · 24mm, f/1,78", location: "Cap Fréhel - Bretagne", year: "2025", src: "photos/IMG_7680.jpg", locTag: "Cap Fréhel - Bretagne" },
+      { num: "070", category: "Indonésie", title: "Toyota FJ 40", gear: "Kodak Fun Flash · 35mm, ISO 800", location: "Mont Bromo - Java", year: "2025", src: "photos/Toyota FJ 40.jpg", locTag: "Mont Bromo - Java" },
+      { num: "069", category: "Indonésie", title: "Ravitaillement", gear: "Kodak Fun Flash · 35mm, ISO 800", location: "Mont Bromo - Java", year: "2025", src: "photos/IMG_7901.jpg", locTag: "Mont Bromo - Java" },
+      { num: "068", category: "Indonésie", title: "Scooter Honda", gear: "Kodak Fun Flash · 35mm, ISO 800", location: "Bali - Indonésie", year: "2025", src: "photos/IMG_7933.jpg", locTag: "Bali" },
+      { num: "067", category: "Indonésie", title: "Un moment de repos", gear: "Kodak Fun Flash · 35mm, ISO 800", location: "Mont Bromo - Java", year: "2025", src: "photos/IMG_7924.jpg", locTag: "Mont Bromo - Java" },
+      { num: "066", category: "Indonésie", title: "ROCKSTEADY", gear: "Kodak Fun Flash · 35mm, ISO 800", location: "Gili Meno", year: "2025", src: "photos/IMG_7908.jpg", locTag: "Gili Meno" },
+      { num: "065", category: "Indonésie", title: "Mont Bromo", gear: "Kodak Fun Flash · 35mm, ISO 800", location: "Java", year: "2025", src: "photos/IMG_7911.jpg", locTag: "Java" },
+      { num: "064", category: "Indonésie", title: "Vendeurs de fleurs", gear: "Kodak Fun Flash · 35mm, ISO 800", location: "Mont Bromo - Java", year: "2025", src: "photos/IMG_7913.jpg", locTag: "Mont Bromo - Java" },
+      { num: "063", category: "Indonésie", title: "Star ★", gear: "Kodak Fun Flash · 35mm, ISO 800", location: "Mont Bromo - Java", year: "2025", src: "photos/IMG_7899.jpg", locTag: "Mont Bromo - Java" },
+      { num: "062", category: "Portrait", title: "Juliette", gear: "Panasonic DMC-FX33 · 40mm, f/3,3", location: "Babahan - Bali", year: "2025", src: "photos/Juliette.jpg", locTag: "Babahan - Bali" },
+      { num: "061", category: "Indonésie", title: "Réapprovisionnement", gear: "Panasonic DMC-FX33 · 32mm, f/3", location: "Bali - Indonésie", year: "2025", src: "photos/P1110162.jpg", locTag: "Bali" },
+      { num: "060", category: "Indonésie", title: "Journée de l'indépendance", gear: "Panasonic DMC-FX33 · 100mm, f/5,6", location: "Sindu Wati - Bali", year: "2025", src: "photos/P1110583.jpg", locTag: "Sindu Wati - Bali" },
+      { num: "059", category: "Indonésie", title: "Maisons sur les rizières", gear: "Panasonic DMC-FX33 · 86mm, f/5,2", location: "Sangkan - Bali", year: "2025", src: "photos/P1110566.jpg", locTag: "Sangkan - Bali" },
+      { num: "058", category: "Indonésie", title: "Fardeau", gear: "Panasonic DMC-FX33 · 67mm, f/4,5", location: "Jatiluwih - Bali", year: "2025", src: "photos/Fardeau.jpg", locTag: "Jatiluwih - Bali" },
+      { num: "057", category: "Indonésie", title: "La réserve", gear: "Panasonic DMC-FX33 · 100mm, f/2,8", location: "Jatiluwih - Bali", year: "2025", src: "photos/P1110405_01.jpg", locTag: "Jatiluwih - Bali" },
+      { num: "056", category: "Indonésie", title: "Mobylette", gear: "Panasonic DMC-FX33 · 40mm, f/5,6", location: "Bali - Indonésie", year: "2025", src: "photos/P1110557.jpg", locTag: "Bali" },
+      { num: "055", category: "Indonésie", title: "Mobylette II", gear: "Panasonic DMC-FX33 · 40mm, f/5,6", location: "Bali - Indonésie", year: "2025", src: "photos/P1110558.jpg", locTag: "Bali" },
+      { num: "054", category: "Indonésie", title: "Chantier au milieu des rizières", gear: "Panasonic DMC-FX33 · 51mm, f/3,8", location: "Bali - Indonésie", year: "2025", src: "photos/P1110559.jpg", locTag: "Bali" },
+      { num: "053", category: "Indonésie", title: "Chantier au milieu des rizières II", gear: "Panasonic DMC-FX33 · 92mm, f/5,4", location: "Bali - Indonésie", year: "2025", src: "photos/P1110560.jpg", locTag: "Bali" },
+      { num: "052", category: "Indonésie", title: "Parking nature", gear: "Panasonic DMC-FX33 · 32mm, f/9", location: "Sangkan Gunung - Bali", year: "2025", src: "photos/P1110540.jpg", locTag: "Sangkan Gunung - Bali" },
+      { num: "051", category: "Indonésie", title: "Au fil de l'eau", gear: "Panasonic DMC-FX33 · 100mm, f/5,6", location: "Sangkan Gunung - Bali", year: "2025", src: "photos/P1110538.jpg", locTag: "Sangkan Gunung - Bali" },
+      { num: "050", category: "Indonésie", title: "Plongeon entre amis", gear: "Panasonic DMC-FX33 · 100mm, f/5,6", location: "Sangkan Gunung - Bali", year: "2025", src: "photos/P1110537.jpg", locTag: "Sangkan Gunung - Bali" },
+      { num: "049", category: "Indonésie", title: "Rizière en mouvement", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Jatiluwih - Bali", year: "2025", src: "photos/P1110458.jpg", locTag: "Jatiluwih - Bali" },
+      { num: "048", category: "Indonésie", title: "Trajet quotidien", gear: "Panasonic DMC-FX33 · 30mm, f/2,9", location: "Jatiluwih - Bali", year: "2025", src: "photos/P1110453.jpg", locTag: "Jatiluwih - Bali" },
+      { num: "047", category: "Indonésie", title: "Livraison rurale", gear: "Panasonic DMC-FX33 · 40mm, f/3,3", location: "Jatiluwih - Bali", year: "2025", src: "photos/P1110388.jpg", locTag: "Jatiluwih - Bali" },
+      { num: "046", category: "Indonésie", title: "Rizières", gear: "Panasonic DMC-FX33 · 38mm, f/3,2", location: "Babahan - Bali", year: "2025", src: "photos/Rizieres.jpg", locTag: "Babahan - Bali" },
+      { num: "045", category: "Indonésie", title: "Yamaha Jupiter MX", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Jatiluwih - Bali", year: "2025", src: "photos/Yamaha Jupiter MX.jpg", locTag: "Jatiluwih - Bali" },
+      { num: "044", category: "Indonésie", title: "Refuge agricole", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Bali - Indonésie", year: "2025", src: "photos/P1110415.jpg", locTag: "Bali" },
+      { num: "043", category: "Indonésie", title: "Pause tranquille", gear: "Panasonic DMC-FX33 · 38mm, f/5,6", location: "Bali - Indonésie", year: "2025", src: "photos/P1110402.jpg", locTag: "Bali" },
+      { num: "042", category: "Indonésie", title: "Honda M-F1", gear: "Panasonic DMC-FX33 · 38mm, f/3,2", location: "Bali - Indonésie", year: "2025", src: "photos/P1110408_01.jpg", locTag: "Bali" },
+      { num: "041", category: "Indonésie", title: "Suzuki Vitara", gear: "Panasonic DMC-FX33 · 48mm, f/3,7", location: "Babahan - Bali", year: "2025", src: "photos/P1110315.jpg", locTag: "Babahan - Bali" },
+      { num: "040", category: "Indonésie", title: "Fruits", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Bali - Indonésie", year: "2025", src: "photos/P1110262.jpg", locTag: "Bali" },
+      { num: "039", category: "Indonésie", title: "Temple", gear: "Panasonic DMC-FX33 · 54mm, f/4", location: "Candikuning - Bali", year: "2025", src: "photos/P1110275.jpg", locTag: "Candikuning - Bali" },
+      { num: "038", category: "Indonésie", title: "Taxi vélo", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Yogyakarta - Java", year: "2025", src: "photos/P1110197.jpg", locTag: "Yogyakarta - Java" },
+      { num: "037", category: "Indonésie", title: "Custom racing", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Yogyakarta - Java", year: "2025", src: "photos/P1110176.jpg", locTag: "Yogyakarta - Java" },
+      { num: "036", category: "Indonésie", title: "Balade du vendeur", gear: "Panasonic DMC-FX33 · 58mm, f/4,1", location: "Yogyakarta - Java", year: "2025", src: "photos/P1110156.jpg", locTag: "Yogyakarta - Java" },
+      { num: "035", category: "Indonésie", title: "ATM", gear: "Panasonic DMC-FX33 · 30mm, f/2,9", location: "Prambanan - Java", year: "2025", src: "photos/P1110127.jpg", locTag: "Prambanan - Java" },
+      { num: "034", category: "", title: "Bratwurs", gear: "Panasonic DMC-FX33 · 40mm, f/3,3", location: "Berlin - Allemagne", year: "2025", src: "photos/Bratwurs.jpg", locTag: "Berlin" },
+      { num: "033", category: "", title: "Fernsehturm", gear: "Panasonic DMC-FX33 · 63mm, f/4,3", location: "Berlin - Allemagne", year: "2025", src: "photos/Fernsehturm.jpg", locTag: "Berlin" },
+      { num: "032", category: "", title: "Balade en famille", gear: "Panasonic DMC-FX33 · 48mm, f/3,7", location: "Munich, Allemagne", year: "2024", src: "photos/P1100977.jpg", locTag: "Munich - Allemagne" },
+      { num: "031", category: "Portrait", title: "Engagement", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Munich - Allemagne", year: "2024", src: "photos/Engagement.jpg", locTag: "SendlingerDeld - Munich" },
+      { num: "030", category: "", title: "BMW E30", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Munich - Allemagne", year: "2024", src: "photos/Bmw E30.jpg", locTag: "Schwanthalerhöhe - Munich" },
+      { num: "029", category: "", title: "Laverie de fortune", gear: "Panasonic DMC-FX33 · 32mm, f/3", location: "Beyoglu, Turquie", year: "2024", src: "photos/P1100740.jpg", locTag: "Beyoglu - Turquie" },
+      { num: "028", category: "", title: "Au rayon légumes", gear: "Panasonic DMC-FX33 · 28mm, f/3,8", location: "Istanbul, Turquie", year: "2024", src: "photos/P1100672.jpg", locTag: "Istanbul - Turquie" },
+      { num: "027", category: "", title: "Souvenirs", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Barcelone - Espagne", year: "2024", src: "photos/Souvenirs.jpg", locTag: "Barcelone - Espagne" },
+      { num: "026", category: "", title: "Vinyles", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Barcelone, Espagne", year: "2024", src: "photos/P1100527.jpg", locTag: "Barcelone - Espagne" },
+      { num: "025", category: "New York", title: "L'ombre des tours", gear: "Panasonic DMC-FX33 · 63mm, f/4,3", location: "New York - USA", year: "2024", src: "photos/P1090875.jpg", locTag: "New York - USA" },
+      { num: "024", category: "New York", title: "Little Italy Gift's Center", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Manhattan - New York", year: "2024", src: "photos/P1090372.jpg", locTag: "Manhattan - NY" },
+      { num: "023", category: "New York", title: "Building", gear: "Panasonic DMC-FX33 · 43mm, f/3,4", location: "New York - USA", year: "2024", src: "photos/P1090878.jpg", locTag: "New York - USA" },
+      { num: "022", category: "New York", title: "STOP", gear: "Panasonic DMC-FX33 · 58mm, f/4,1", location: "Brooklyn - New York", year: "2024", src: "photos/P1090862.jpg", locTag: "Brooklyn - NY" },
+      { num: "021", category: "New York", title: "New York graffiti", gear: "Panasonic DMC-FX33 · 86mm, f/5,2", location: "Brooklyn - New York", year: "2024", src: "photos/P1090855.jpg", locTag: "Brooklyn - NY" },
+      { num: "020", category: "New York", title: "Au service de la ville", gear: "Panasonic DMC-FX33 · 86mm, f/5,2", location: "New York - USA", year: "2024", src: "photos/P1090848.jpg", locTag: "New York - USA" },
+      { num: "019", category: "New York", title: "LONG STORE", gear: "Panasonic DMC-FX33 · 67mm, f/4,5", location: "China Town - New York", year: "2024", src: "photos/P1090387.jpg", locTag: "China Town - NY" },
+      { num: "018", category: "New York", title: "Poisson frais", gear: "Panasonic DMC-FX33 · 58mm, f/4,1", location: "China Town - New York", year: "2024", src: "photos/P1090621.jpg", locTag: "China Town - NY" },
+      { num: "017", category: "New York", title: "China Town", gear: "Panasonic DMC-FX33 · 38mm, f/3,2", location: "China Town - New York", year: "2024", src: "photos/China Town.jpg", locTag: "China Town - NY" },
+      { num: "016", category: "New York", title: "Débordement", gear: "Panasonic DMC-FX33 · 38mm, f/3,2", location: "Brooklyn - New York", year: "2024", src: "photos/Debordement.jpg", locTag: "Brooklyn - NY" },
+      { num: "015", category: "New York", title: "Déchets à Brooklyn", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Brooklyn - New York", year: "2024", src: "photos/P1090794.jpg", locTag: "Brooklyn - NY" },
+      { num: "014", category: "New York", title: "Prêt à réparer", gear: "Panasonic DMC-FX33 · 92mm, f/5,4", location: "Brooklyn - New York", year: "2024", src: "photos/P1090806.jpg", locTag: "Brooklyn - NY" },
+      { num: "013", category: "New York", title: "Silhouette rétro", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Brooklyn - New York", year: "2024", src: "photos/P1090792.jpg", locTag: "Brooklyn - NY" },
+      { num: "012", category: "New York", title: "Carcasse métallique", gear: "Panasonic DMC-FX33 · 38mm, f/3,2", location: "Brooklyn - New York", year: "2024", src: "photos/P1090786.jpg", locTag: "Brooklyn - NY" },
+      { num: "011", category: "New York", title: "Compagnons de route", gear: "Panasonic DMC-FX33 · 38mm, f/3,2", location: "New York - USA", year: "2024", src: "photos/P1090749.jpg", locTag: "New York - USA" },
+      { num: "010", category: "New York", title: "En attendant", gear: "Panasonic DMC-FX33 · 45mm, f/3,5", location: "New York - USA", year: "2024", src: "photos/En attendant.jpg", locTag: "New York - USA" },
+      { num: "009", category: "New York", title: "Portail", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "Brooklyn - New York", year: "2024", src: "photos/Portail.jpg", locTag: "Brooklyn - NY" },
+      { num: "008", category: "New York", title: "Patriote", gear: "Panasonic DMC-FX33 · 63mm, f/4,3", location: "New York - USA", year: "2024", src: "photos/P1090713.jpg", locTag: "Brooklyn - NY" },
+      { num: "007", category: "New York", title: "Freight Liner", gear: "Panasonic DMC-FX33 · 100mm, f/5,6", location: "New York - USA", year: "2024", src: "photos/P1090428.jpg", locTag: "Times Square - USA" },
+      { num: "006", category: "New York", title: "Wall Street", gear: "Panasonic DMC-FX33 · 51mm, f/3,8", location: "Wall Street - New York", year: "2024", src: "photos/P1090184.jpg", locTag: "Wall Street - NY" },
+      { num: "005", category: "New York", title: "BUS", gear: "Panasonic DMC-FX33 · 48mm, f/3,7", location: "New York - USA", year: "2024", src: "photos/P1090080.jpg", locTag: "New York - USA" },
+      { num: "004", category: "New York", title: "Vendeurs de rue", gear: "Panasonic DMC-FX33 · 48mm, f/3,7", location: "New York - USA", year: "2024", src: "photos/P1090364.jpg", locTag: "New York - USA" },
+      { num: "003", category: "New York", title: "Brume urbaine", gear: "Panasonic DMC-FX33 · 51mm, f/3,8", location: "New York - USA", year: "2024", src: "photos/P1090267.jpg", locTag: "New York - USA" },
+      { num: "002", category: "New York", title: "Patrouille en ville", gear: "Panasonic DMC-FX33 · 92mm, f/5,4", location: "New York - USA", year: "2024", src: "photos/P1090096.jpg", locTag: "New York - USA" },
+      { num: "001", category: "New York", title: "F.D.N.Y", gear: "Panasonic DMC-FX33 · 28mm, f/2,8", location: "New York - USA", year: "2024", src: "photos/P1090101.jpg", locTag: "New York - USA" },
+    ];
+
+    const svg_icon = '<svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';
+
+    function getFavs() { return JSON.parse(localStorage.getItem('focale_favs') || '[]'); }
+    function saveFavs(favs) { localStorage.setItem('focale_favs', JSON.stringify(favs)); }
+
+    function toggleFav(btn, e) {
+      e.stopPropagation();
+      const card = btn.closest('.photo-card');
+      const title = card.dataset.title;
+      let favs = getFavs();
+      favs = favs.filter(f => f !== title);
+      saveFavs(favs);
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        card.remove();
+        updateCount();
+        checkEmpty();
+      }, 400);
+    }
+
+    function clearFavs() {
+      if (!confirm('Supprimer tous les favoris ?')) return;
+      saveFavs([]);
+      document.getElementById('gallery').innerHTML = '';
+      checkEmpty();
+      document.getElementById('photoCount').textContent = '0';
+    }
+
+    function checkEmpty() {
+      const gallery = document.getElementById('gallery');
+      const empty = document.getElementById('empty-state');
+      if (gallery.children.length === 0) {
+        empty.style.display = 'block';
+      }
+    }
+
+    function updateCount() {
+      const n = document.getElementById('gallery').children.length;
+      document.getElementById('photoCount').textContent = n;
+    }
+
+    function buildGallery() {
+      const favs = getFavs();
+      const gallery = document.getElementById('gallery');
+      const empty = document.getElementById('empty-state');
+
+      if (favs.length === 0) {
+        empty.style.display = 'block';
+        document.getElementById('photoCount').textContent = '0';
+        return;
+      }
+
+      const favPhotos = allPhotos.filter(p => favs.includes(p.title));
+      document.getElementById('photoCount').textContent = favPhotos.length;
+
+      favPhotos.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'photo-card';
+        div.dataset.title = p.title;
+        div.dataset.location = p.location;
+        div.dataset.year = p.year;
+        div.dataset.gear = p.gear;
+        div.innerHTML = `
+          <button class="photo-fav active" onclick="toggleFav(this, event)">♥</button>
+          <img src="${p.src}" alt="${p.title}" loading="lazy" />
+          <div class="photo-overlay">
+            <div class="photo-overlay-top">
+              <span class="photo-location-tag">${p.locTag}</span>
+              <span class="photo-year-tag">${p.year}</span>
+            </div>
+            <div class="photo-overlay-bottom">
+              <div class="photo-overlay-line"></div>
+              <div class="photo-title">${p.title}</div>
+              <div class="photo-meta-row">
+                <span class="photo-gear">${p.gear}</span>
+                <div class="photo-expand-icon">${svg_icon}</div>
+              </div>
+            </div>
+          </div>`;
+        div.addEventListener('click', () => openLightbox(div));
+        gallery.appendChild(div);
+      });
+
+      // scroll reveal
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('visible'), 60);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.06 });
+      [...gallery.querySelectorAll('.photo-card')].forEach(c => observer.observe(c));
+    }
+
+    buildGallery();
+
+    // ── LIGHTBOX ──
+    const lightbox = document.getElementById('lightbox');
+    const lbImgWrap = document.getElementById('lbImgWrap');
+    const lbTitle = document.getElementById('lbTitle');
+    const lbLocation = document.getElementById('lbLocation');
+    const lbYear = document.getElementById('lbYear');
+    const lbGear = document.getElementById('lbGear');
+    const lbCounter = document.getElementById('lbCounter');
+    let visibleCards = [];
+    let currentIndex = 0;
+
+    function openLightbox(card) {
+      visibleCards = [...document.querySelectorAll('.photo-card')];
+      currentIndex = visibleCards.indexOf(card);
+      showSlide(currentIndex);
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function showSlide(index) {
+      const card = visibleCards[index];
+      const img = card.querySelector('img');
+      lbImgWrap.innerHTML = '';
+      if (img) {
+        const clone = document.createElement('img');
+        clone.src = img.src;
+        clone.alt = card.dataset.title;
+        lbImgWrap.appendChild(clone);
+      }
+      lbTitle.textContent = card.dataset.title;
+      lbLocation.textContent = card.dataset.location || '';
+      lbYear.textContent = card.dataset.year || '';
+      lbGear.textContent = card.dataset.gear || '';
+      lbCounter.textContent = (index + 1).toString().padStart(2,'0') + ' / ' + visibleCards.length.toString().padStart(2,'0');
+      document.title = card.dataset.title + ' — Focale';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+      document.title = 'Focale — Favoris';
+    }
+
+    document.getElementById('lbClose').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); currentIndex = (currentIndex - 1 + visibleCards.length) % visibleCards.length; showSlide(currentIndex); });
+    document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); currentIndex = (currentIndex + 1) % visibleCards.length; showSlide(currentIndex); });
+
+    // swipe mobile
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    lightbox.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) currentIndex = (currentIndex + 1) % visibleCards.length;
+        else currentIndex = (currentIndex - 1 + visibleCards.length) % visibleCards.length;
+        showSlide(currentIndex);
+      }
+    }, { passive: true });
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + visibleCards.length) % visibleCards.length; showSlide(currentIndex); }
+      if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % visibleCards.length; showSlide(currentIndex); }
+    });
+  </script>
+</body>
+</html>
