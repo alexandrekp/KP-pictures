@@ -66,8 +66,8 @@
     .photo-fav { font-size: 13px; color: rgba(255,255,255,0.35); cursor: pointer; background: none; border: none; padding: 0 0 0 7px; line-height: 1; transition: color 0.2s, transform 0.2s; }
     .photo-fav:hover { transform: scale(1.2); color: rgba(255,255,255,0.9); }
     .photo-fav.active { color: #e0b800; }
-    .photo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 45%, transparent 70%); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
-    .photo-card:hover .photo-overlay { opacity: 1; }
+    .photo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.2) 45%, transparent 70%); opacity: 0; pointer-events: none; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
+    .photo-card:hover .photo-overlay { opacity: 1; pointer-events: all; }
     .photo-overlay-top { position: absolute; top: 0; left: 0; right: 0; padding: 12px 14px; display: flex; justify-content: space-between; align-items: flex-start; }
     .photo-location-tag { font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); background: rgba(0,0,0,0.5); padding: 3px 8px; backdrop-filter: blur(4px); }
     .photo-year-tag { font-size: 7px; letter-spacing: 2px; color: rgba(255,255,255,0.4); background: rgba(0,0,0,0.5); padding: 3px 8px; backdrop-filter: blur(4px); }
@@ -176,1518 +176,6 @@
   </div>
   <div class="gallery-wrap">
     <div class="masonry" id="gallery">
-      <div class="photo-card" data-category="France" data-title="Tulipes" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Paris - France" data-year="2026">
-        <span class="photo-num">084</span>
-        <img src="photos/Tulipes.jpg" alt="Tulipes" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Jardin des Plantes - Paris</span>
-            <span class="photo-year-tag">2026</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Tulipes <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 100mm, f/5,6</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="France" data-title="Ténéré 600" data-gear="Panasonic DMC-FX33 · 32mm, f/3" data-location="Paris - France" data-year="2026">
-        <span class="photo-num">083</span>
-        <img src="photos/Tenere.jpg" alt="Ténéré 600" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Paris</span>
-            <span class="photo-year-tag">2026</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Ténéré 600 <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 32mm, f/3</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Portrait" data-title="Portrait de groupe" data-gear="Panasonic DMC-FX33 · 36mm, f/3,1" data-location="Paris - France" data-year="2026">
-        <span class="photo-num">082</span>
-        <img src="photos/Copains.jpg" alt="Portrait de groupe" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Paris</span>
-            <span class="photo-year-tag">2026</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Portrait de groupe <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 36mm, f/3,1</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Portrait" data-title="Pause Chantier" data-gear="Canon Epoca · Kodak Gold 35mm" data-location="Paris - France" data-year="2026">
-        <span class="photo-num">081</span>
-        <img src="photos/Pause Chantier.jpg" alt="Pause Chantier" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Paris</span>
-            <span class="photo-year-tag">2026</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Pause Chantier <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Canon Epoca · Kodak Gold 35mm</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="France" data-title="Toyota Supra MKIII" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Villebon2 - Palaiseau" data-year="2026">
-        <span class="photo-num">080</span>
-        <img src="photos/Toyota Supra.jpg" alt="Toyota Supra MKIII" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Villebon2 - Palaiseau</span>
-            <span class="photo-year-tag">2026</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Toyota Supra MKIII <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="France" data-title="Paris sous la neige" data-gear="iPhone 17 Pro · 24mm, f/1,78" data-location="Vincennes - Paris" data-year="2026">
-        <span class="photo-num">079</span>
-        <img src="photos/IMG_8072 2.jpg" alt="Paris sous la neige" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Vincennes - Paris</span>
-            <span class="photo-year-tag">2026</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Paris sous la neige <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">iPhone 17 Pro · 24mm, f/1,78</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="France" data-title="Vespa" data-gear="Canon Epoca · Kodak Gold 35mm" data-location="Paris - France" data-year="2026">
-        <span class="photo-num">078</span>
-        <img src="photos/Vespa.jpg" alt="Vespa" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Paris</span>
-            <span class="photo-year-tag">2026</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Vespa <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Canon Epoca · Kodak Gold 35mm</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="France" data-title="Salon Sauvage" data-gear="iPhone 17 Pro · 140mm, f/2,8" data-location="L'aigle - Normandie" data-year="2025">
-        <span class="photo-num">077</span>
-        <img src="photos/IMG_7884.jpg" alt="Salon Sauvage" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">L'aigle - Normandie</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Salon Sauvage <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">iPhone 17 Pro · 140mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="France" data-title="Bretagne suspendue" data-gear="iPhone 17 Pro · 140mm, f/2,8" data-location="Pointe de la Varde Bunker - Bretagne" data-year="2025">
-        <span class="photo-num">076</span>
-        <img src="photos/IMG_7567.jpg" alt="Bretagne suspendue" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Pointe de la Varde - Bretagne</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Bretagne suspendue <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">iPhone 17 Pro · 140mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="France" data-title="Horizon caché" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
-        <span class="photo-num">075</span>
-        <img src="photos/IMG_7499.jpg" alt="Horizon caché" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Cancale - Bretagne</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Horizon caché <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">iPhone 17 Pro · 100mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="France" data-title="Horizon caché" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
-        <span class="photo-num">074</span>
-        <img src="photos/IMG_7497.jpg" alt="Horizon caché" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Cancale - Bretagne</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Horizon caché <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">iPhone 17 Pro · 100mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="France" data-title="Au milieu de l'eau" data-gear="iPhone 17 Pro · 100mm, f/2,8" data-location="Cancale - Bretagne" data-year="2025">
-        <span class="photo-num">073</span>
-        <img src="photos/IMG_7498.jpg" alt="Au milieu de l'eau" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Cancale - Bretagne</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Au milieu de l'eau <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">iPhone 17 Pro · 100mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="France" data-title="Falaise" data-gear="iPhone 17 Pro · 28mm, f/1,78" data-location="Cap Fréhel - Bretagne" data-year="2025">
-        <span class="photo-num">072</span>
-        <img src="photos/IMG_7687.jpg" alt="Falaise" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Cap Fréhel - Bretagne</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Falaise <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">iPhone 17 Pro · 28mm, f/1,78</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="France" data-title="La pointe" data-gear="iPhone 17 Pro · 24mm, f/1,78" data-location="Cap Fréhel - Bretagne" data-year="2025">
-        <span class="photo-num">071</span>
-        <img src="photos/IMG_7680.jpg" alt="La pointe" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Cap Fréhel - Bretagne</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">La pointe <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">iPhone 17 Pro · 24mm, f/1,78</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Toyota FJ 40" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
-        <span class="photo-num">070</span>
-        <img src="photos/Toyota FJ 40.jpg" alt="Toyota FJ 40" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Mont Bromo - Java</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Toyota FJ 40 <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Ravitaillement" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
-        <span class="photo-num">069</span>
-        <img src="photos/IMG_7901.jpg" alt="Ravitaillement" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Mont Bromo - Java</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Ravitaillement <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Scooter Honda" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Bali - Indonésie" data-year="2025">
-        <span class="photo-num">068</span>
-        <img src="photos/IMG_7933.jpg" alt="Scooter Honda" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Scooter Honda <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Un moment de repos" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
-        <span class="photo-num">067</span>
-        <img src="photos/IMG_7924.jpg" alt="Un moment de repos" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Mont Bromo - Java</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Un moment de repos <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="ROCKSTEADY" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Gili Meno" data-year="2025">
-        <span class="photo-num">066</span>
-        <img src="photos/IMG_7908.jpg" alt="ROCKSTEADY" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Gili Meno</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">ROCKSTEADY <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Mont Bromo" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Java" data-year="2025">
-        <span class="photo-num">065</span>
-        <img src="photos/IMG_7911.jpg" alt="Mont Bromo" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Java</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Mont Bromo <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Vendeurs de fleurs" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
-        <span class="photo-num">064</span>
-        <img src="photos/IMG_7913.jpg" alt="Vendeurs de fleurs" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Mont Bromo - Java</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Vendeurs de fleurs <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Star ★" data-gear="Kodak Fun Flash · 35mm, ISO 800" data-location="Mont Bromo - Java" data-year="2025">
-        <span class="photo-num">063</span>
-        <img src="photos/IMG_7899.jpg" alt="Star" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Mont Bromo - Java</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Star ★ <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Kodak Fun Flash · 35mm, ISO 800</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Portrait" data-title="Juliette" data-gear="Panasonic DMC-FX33 · 40mm, f/3,3" data-location="Babahan - Bali" data-year="2025">
-        <span class="photo-num">062</span>
-        <img src="photos/Juliette.jpg" alt="Juliette" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Babahan - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Juliette <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 40mm, f/3,3</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Réapprovisionnement" data-gear="Panasonic DMC-FX33 · 32mm, f/3" data-location="Bali - Indonésie" data-year="2025">
-        <span class="photo-num">061</span>
-        <img src="photos/P1110162.jpg" alt="Réapprovisionnement" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Réapprovisionnement <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 32mm, f/3</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Journée de l'indépendance" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Sindu Wati - Bali" data-year="2025">
-        <span class="photo-num">060</span>
-        <img src="photos/P1110583.jpg" alt="Journée de l'indépendance" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Sindu Wati - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Journée de l'indépendance <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 100mm, f/5,6</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Maisons sur les rizières" data-gear="Panasonic DMC-FX33 · 86mm, f/5,2" data-location="Sangkan - Bali" data-year="2025">
-        <span class="photo-num">059</span>
-        <img src="photos/P1110566.jpg" alt="Maisons sur les rizières" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Sangkan - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Maisons sur les rizières <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 86mm, f/5,2</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Fardeau" data-gear="Panasonic DMC-FX33 · 67mm, f/4,5" data-location="Jatiluwih - Bali" data-year="2025">
-        <span class="photo-num">058</span>
-        <img src="photos/Fardeau.jpg" alt="Fardeau" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Jatiluwih - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Fardeau <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 67mm, f/4,5</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="La réserve" data-gear="Panasonic DMC-FX33 · 100mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
-        <span class="photo-num">057</span>
-        <img src="photos/P1110405_01.jpg" alt="La réserve" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Jatiluwih - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">La réserve <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 100mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Mobylette" data-gear="Panasonic DMC-FX33 · 40mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
-        <span class="photo-num">056</span>
-        <img src="photos/P1110557.jpg" alt="Mobylette" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Mobylette <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 40mm, f/5,6</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Mobylette" data-gear="Panasonic DMC-FX33 · 40mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
-        <span class="photo-num">055</span>
-        <img src="photos/P1110558.jpg" alt="Mobylette" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Mobylette <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 40mm, f/5,6</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières" data-gear="Panasonic DMC-FX33 · 51mm, f/3,8" data-location="Bali - Indonésie" data-year="2025">
-        <span class="photo-num">054</span>
-        <img src="photos/P1110559.jpg" alt="Chantier au milieu des rizières" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Chantier au milieu des rizières <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 51mm, f/3,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Chantier au milieu des rizières" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="Bali - Indonésie" data-year="2025">
-        <span class="photo-num">053</span>
-        <img src="photos/P1110560.jpg" alt="Chantier au milieu des rizières" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Chantier au milieu des rizières <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 92mm, f/5,4</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Parking nature" data-gear="Panasonic DMC-FX33 · 32mm, f/9" data-location="Sangkan Gunung - Bali" data-year="2025">
-        <span class="photo-num">052</span>
-        <img src="photos/P1110540.jpg" alt="Parking nature" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Sangkan Gunung - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Parking nature <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 32mm, f/9</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Au fil de l'eau" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Sangkan Gunung - Bali" data-year="2025">
-        <span class="photo-num">051</span>
-        <img src="photos/P1110538.jpg" alt="Au fil de l'eau" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Sangkan Gunung - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Au fil de l'eau <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 100mm, f/5,6</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Plongeon entre amis" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="Sangkan Gunung - Bali" data-year="2025">
-        <span class="photo-num">050</span>
-        <img src="photos/P1110537.jpg" alt="Plongeon entre amis" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Sangkan Gunung - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Plongeon entre amis <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 100mm, f/5,6</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Rizière en mouvement" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
-        <span class="photo-num">049</span>
-        <img src="photos/P1110458.jpg" alt="Rizière en mouvement" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Jatiluwih - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Rizière en mouvement <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Trajet quotidien" data-gear="Panasonic DMC-FX33 · 30mm, f/2,9" data-location="Jatiluwih - Bali" data-year="2025">
-        <span class="photo-num">048</span>
-        <img src="photos/P1110453.jpg" alt="Trajet quotidien" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Jatiluwih - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Trajet quotidien <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 30mm, f/2,9</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Livraison rurale" data-gear="Panasonic DMC-FX33 · 40mm, f/3,3" data-location="Jatiluwih - Bali" data-year="2025">
-        <span class="photo-num">047</span>
-        <img src="photos/P1110388.jpg" alt="Livraison rurale" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Jatiluwih - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Livraison rurale <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 40mm, f/3,3</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Rizières" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Babahan - Bali" data-year="2025">
-        <span class="photo-num">046</span>
-        <img src="photos/Rizieres.jpg" alt="Rizières" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Babahan - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Rizières <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/3,2</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Yamaha Jupiter MX" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Jatiluwih - Bali" data-year="2025">
-        <span class="photo-num">045</span>
-        <img src="photos/Yamaha Jupiter MX.jpg" alt="Yamaha Jupiter MX" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Jatiluwih - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Yamaha Jupiter MX <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Refuge agricole" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Bali - Indonésie" data-year="2025">
-        <span class="photo-num">044</span>
-        <img src="photos/P1110415.jpg" alt="Refuge agricole" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Refuge agricole <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Pause tranquille" data-gear="Panasonic DMC-FX33 · 38mm, f/5,6" data-location="Bali - Indonésie" data-year="2025">
-        <span class="photo-num">043</span>
-        <img src="photos/P1110402.jpg" alt="Pause tranquille" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Pause tranquille <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/5,6</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Honda M-F1" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Bali - Indonésie" data-year="2025">
-        <span class="photo-num">042</span>
-        <img src="photos/P1110408_01.jpg" alt="Honda M-F1" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Honda M-F1 <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/3,2</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Suzuki Vitara" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="Babahan - Bali" data-year="2025">
-        <span class="photo-num">041</span>
-        <img src="photos/P1110315.jpg" alt="Suzuki Vitara" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Babahan - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Suzuki Vitara <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 48mm, f/3,7</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Fruits" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Bali - Indonésie" data-year="2025">
-        <span class="photo-num">040</span>
-        <img src="photos/P1110262.jpg" alt="Fruits" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Fruits <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Temple" data-gear="Panasonic DMC-FX33 · 54mm, f/4" data-location="Candikuning - Bali" data-year="2025">
-        <span class="photo-num">039</span>
-        <img src="photos/P1110275.jpg" alt="Temple" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Candikuning - Bali</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Temple <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 54mm, f/4</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Taxi vélo" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Yogyakarta - Java" data-year="2025">
-        <span class="photo-num">038</span>
-        <img src="photos/P1110197.jpg" alt="Taxi vélo" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Yogyakarta - Java</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Taxi vélo <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Custom racing" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Yogyakarta - Java" data-year="2025">
-        <span class="photo-num">037</span>
-        <img src="photos/P1110176.jpg" alt="Custom racing" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Yogyakarta - Java</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Custom racing <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="Balade du vendeur" data-gear="Panasonic DMC-FX33 · 58mm, f/4,1" data-location="Yogyakarta - Java" data-year="2025">
-        <span class="photo-num">036</span>
-        <img src="photos/P1110156.jpg" alt="Balade du vendeur" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Yogyakarta - Java</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Balade du vendeur <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 58mm, f/4,1</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Indonésie" data-title="ATM" data-gear="Panasonic DMC-FX33 · 30mm, f/2,9" data-location="Prambanan - Java" data-year="2025">
-        <span class="photo-num">035</span>
-        <img src="photos/P1110127.jpg" alt="ATM" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Prambanan - Java</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">ATM <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 30mm, f/2,9</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="" data-title="Bratwurs" data-gear="Panasonic DMC-FX33 · 40mm, f/3,3" data-location="Berlin - Allemagne" data-year="2025">
-        <span class="photo-num">034</span>
-        <img src="photos/Bratwurs.jpg" alt="Bratwurs" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Berlin</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Bratwurs <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 40mm, f/3,3</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="" data-title="Fernsehturm" data-gear="Panasonic DMC-FX33 · 63mm, f/4,3" data-location="Berlin - Allemagne" data-year="2025">
-        <span class="photo-num">033</span>
-        <img src="photos/Fernsehturm.jpg" alt="Fernsehturm" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Berlin</span>
-            <span class="photo-year-tag">2025</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Fernsehturm <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 63mm, f/4,3</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="" data-title="Balade en famille" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="Munich, Allemagne" data-year="2024">
-        <span class="photo-num">032</span>
-        <img src="photos/P1100977.jpg" alt="Balade en famille" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Munich - Allemagne</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Balade en famille <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 48mm, f/3,7</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="Portrait" data-title="Engagement" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Munich - Allemagne" data-year="2024">
-        <span class="photo-num">031</span>
-        <img src="photos/Engagement.jpg" alt="Engagement" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">SendlingerDeld - Munich</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Engagement <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="" data-title="BMW E30" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Munich - Allemagne" data-year="2024">
-        <span class="photo-num">030</span>
-        <img src="photos/Bmw E30.jpg" alt="BMW E30" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Schwanthalerhöhe - Munich</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">BMW E30 <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="" data-title="Laverie de fortune" data-gear="Panasonic DMC-FX33 · 32mm, f/3" data-location="Beyoglu, Turquie" data-year="2024">
-        <span class="photo-num">029</span>
-        <img src="photos/P1100740.jpg" alt="Laverie de fortune" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Beyoglu - Turquie</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Laverie de fortune <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 32mm, f/3</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="" data-title="Au rayon légumes" data-gear="Panasonic DMC-FX33 · 28mm, f/3,8" data-location="Istanbul, Turquie" data-year="2024">
-        <span class="photo-num">028</span>
-        <img src="photos/P1100672.jpg" alt="Au rayon légumes" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Istanbul - Turquie</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Au rayon légumes <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/3,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="" data-title="Souvenirs" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Barcelone - Espagne" data-year="2024">
-        <span class="photo-num">027</span>
-        <img src="photos/Souvenirs.jpg" alt="Souvenirs" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Barcelone - Espagne</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Souvenirs <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="" data-title="Vinyles" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Barcelone, Espagne" data-year="2024">
-        <span class="photo-num">026</span>
-        <img src="photos/P1100527.jpg" alt="Vinyles" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Barcelone - Espagne</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Vinyles <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="L'ombre des tours" data-gear="Panasonic DMC-FX33 · 63mm, f/4,3" data-location="New York - USA" data-year="2024">
-        <span class="photo-num">025</span>
-        <img src="photos/P1090875.jpg" alt="L'ombre des tours" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">New York - USA</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">L'ombre des tours <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 63mm, f/4,3</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Little Italy Gift's Center" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Manhattan - New York" data-year="2024">
-        <span class="photo-num">024</span>
-        <img src="photos/P1090372.jpg" alt="Little Italy Gift's Center" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Manhattan - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Little Italy Gift's Center <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Building" data-gear="Panasonic DMC-FX33 · 43mm, f/3,4" data-location="New York - USA" data-year="2024">
-        <span class="photo-num">023</span>
-        <img src="photos/P1090878.jpg" alt="Building" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">New York - USA</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Building <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 43mm, f/3,4</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="STOP" data-gear="Panasonic DMC-FX33 · 58mm, f/4,1" data-location="Brooklyn - New York" data-year="2024">
-        <span class="photo-num">022</span>
-        <img src="photos/P1090862.jpg" alt="STOP" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Brooklyn - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">STOP <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 58mm, f/4,1</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="New York graffiti" data-gear="Panasonic DMC-FX33 · 86mm, f/5,2" data-location="Brooklyn - New York" data-year="2024">
-        <span class="photo-num">021</span>
-        <img src="photos/P1090855.jpg" alt="New York graffiti" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Brooklyn - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">New York graffiti <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 86mm, f/5,2</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Au service de la ville" data-gear="Panasonic DMC-FX33 · 86mm, f/5,2" data-location="New York - USA" data-year="2024">
-        <span class="photo-num">020</span>
-        <img src="photos/P1090848.jpg" alt="Au service de la ville" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">New York - USA</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Au service de la ville <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 86mm, f/5,2</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="LONG STORE" data-gear="Panasonic DMC-FX33 · 67mm, f/4,5" data-location="China Town - New York" data-year="2024">
-        <span class="photo-num">019</span>
-        <img src="photos/P1090387.jpg" alt="LONG STORE" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">China Town - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">LONG STORE <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 67mm, f/4,5</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Poisson frais" data-gear="Panasonic DMC-FX33 · 58mm, f/4,1" data-location="China Town - New York" data-year="2024">
-        <span class="photo-num">018</span>
-        <img src="photos/P1090621.jpg" alt="Poisson frais" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">China Town - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Poisson frais <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 58mm, f/4,1</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="China Town" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="China Town - New York" data-year="2024">
-        <span class="photo-num">017</span>
-        <img src="photos/China Town.jpg" alt="China Town" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">China Town - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">China Town <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/3,2</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Débordement" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Brooklyn - New York" data-year="2024">
-        <span class="photo-num">016</span>
-        <img src="photos/Debordement.jpg" alt="Débordement" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Brooklyn - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Débordement <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/3,2</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Déchets à Brooklyn" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Brooklyn - New York" data-year="2024">
-        <span class="photo-num">015</span>
-        <img src="photos/P1090794.jpg" alt="Déchets à Brooklyn" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Brooklyn - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Déchets à Brooklyn <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Prêt à réparer" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="Brooklyn - New York" data-year="2024">
-        <span class="photo-num">014</span>
-        <img src="photos/P1090806.jpg" alt="Prêt à réparer" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Brooklyn - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Prêt à réparer <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 92mm, f/5,4</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Silhouette rétro" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Brooklyn - New York" data-year="2024">
-        <span class="photo-num">013</span>
-        <img src="photos/P1090792.jpg" alt="Silhouette rétro" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Brooklyn - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Silhouette rétro <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Carcasse métallique" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="Brooklyn - New York" data-year="2024">
-        <span class="photo-num">012</span>
-        <img src="photos/P1090786.jpg" alt="Carcasse métallique" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Brooklyn - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Carcasse métallique <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/3,2</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Compagnons de route" data-gear="Panasonic DMC-FX33 · 38mm, f/3,2" data-location="New York - USA" data-year="2024">
-        <span class="photo-num">011</span>
-        <img src="photos/P1090749.jpg" alt="Compagnons de route" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">New York - USA</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Compagnons de route <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 38mm, f/3,2</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="En attendant" data-gear="Panasonic DMC-FX33 · 45mm, f/3,5" data-location="New York - USA" data-year="2024">
-        <span class="photo-num">010</span>
-        <img src="photos/En attendant.jpg" alt="En attendant" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">New York - USA</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">En attendant <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 45mm, f/3,5</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Portail" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="Brooklyn - New York" data-year="2024">
-        <span class="photo-num">009</span>
-        <img src="photos/Portail.jpg" alt="Portail" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Brooklyn - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Portail <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Patriote" data-gear="Panasonic DMC-FX33 · 63mm, f/4,3" data-location="New York - USA" data-year="2024">
-        <span class="photo-num">008</span>
-        <img src="photos/P1090713.jpg" alt="Patriote" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Brooklyn - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Patriote <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 63mm, f/4,3</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Freight Liner" data-gear="Panasonic DMC-FX33 · 100mm, f/5,6" data-location="New York - USA" data-year="2024">
-        <span class="photo-num">007</span>
-        <img src="photos/P1090428.jpg" alt="Freight Liner" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Times Square - USA</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Freight Liner <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 100mm, f/5,6</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Wall Street" data-gear="Panasonic DMC-FX33 · 51mm, f/3,8" data-location="Wall Street - New York" data-year="2024">
-        <span class="photo-num">006</span>
-        <img src="photos/P1090184.jpg" alt="Wall Street" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">Wall Street - NY</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Wall Street <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 51mm, f/3,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="BUS" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="New York - USA" data-year="2024">
-        <span class="photo-num">005</span>
-        <img src="photos/P1090080.jpg" alt="BUS" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">New York - USA</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">BUS <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 48mm, f/3,7</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Vendeurs de rue" data-gear="Panasonic DMC-FX33 · 48mm, f/3,7" data-location="New York - USA" data-year="2024">
-        <span class="photo-num">004</span>
-        <img src="photos/P1090364.jpg" alt="Vendeurs de rue" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">New York - USA</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Vendeurs de rue <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 48mm, f/3,7</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Brume urbaine" data-gear="Panasonic DMC-FX33 · 51mm, f/3,8" data-location="New York - USA" data-year="2024">
-        <span class="photo-num">003</span>
-        <img src="photos/P1090267.jpg" alt="Brume urbaine" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">New York - USA</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Brume urbaine <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 51mm, f/3,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="Patrouille en ville" data-gear="Panasonic DMC-FX33 · 92mm, f/5,4" data-location="New York - USA" data-year="2024">
-        <span class="photo-num">002</span>
-        <img src="photos/P1090096.jpg" alt="Patrouille en ville" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">New York - USA</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">Patrouille en ville <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 92mm, f/5,4</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="photo-card" data-category="New York" data-title="F.D.N.Y" data-gear="Panasonic DMC-FX33 · 28mm, f/2,8" data-location="New York - USA" data-year="2024">
-        <span class="photo-num">001</span>
-        <img src="photos/P1090101.jpg" alt="F.D.N.Y" />
-        <div class="photo-overlay">
-          <div class="photo-overlay-top">
-            <span class="photo-location-tag">New York - USA</span>
-            <span class="photo-year-tag">2024</span>
-          </div>
-          <div class="photo-overlay-bottom">
-            <div class="photo-overlay-line"></div>
-            <div class="photo-title">F.D.N.Y <button class="photo-fav" onclick="toggleFav(this, event)">★</button></div>
-            <div class="photo-meta-row">
-              <span class="photo-gear">Panasonic DMC-FX33 · 28mm, f/2,8</span>
-              <div class="photo-expand-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -1721,6 +209,978 @@
   </footer>
 
   <script>
+    // ── DONNÉES PHOTOS (tableau JS) ──
+    // Pour ajouter une photo : { num, category, title, gear, location, year, src, srcFull, locTag }
+    const photos = [
+  {
+    "num": "084",
+    "category": "France",
+    "title": "Tulipes",
+    "gear": "Panasonic DMC-FX33 · 100mm, f/5,6",
+    "location": "Paris - France",
+    "year": "2026",
+    "src": "photos/thumb/Tulipes.jpg",
+    "srcFull": "photos/Tulipes.jpg",
+    "locTag": "Jardin des Plantes - Paris"
+  },
+  {
+    "num": "083",
+    "category": "France",
+    "title": "Ténéré 600",
+    "gear": "Panasonic DMC-FX33 · 32mm, f/3",
+    "location": "Paris - France",
+    "year": "2026",
+    "src": "photos/thumb/Tenere.jpg",
+    "srcFull": "photos/Tenere.jpg",
+    "locTag": "Paris"
+  },
+  {
+    "num": "082",
+    "category": "Portrait",
+    "title": "Portrait de groupe",
+    "gear": "Panasonic DMC-FX33 · 36mm, f/3,1",
+    "location": "Paris - France",
+    "year": "2026",
+    "src": "photos/thumb/Copains.jpg",
+    "srcFull": "photos/Copains.jpg",
+    "locTag": "Paris"
+  },
+  {
+    "num": "081",
+    "category": "Portrait",
+    "title": "Pause Chantier",
+    "gear": "Canon Epoca · Kodak Gold 35mm",
+    "location": "Paris - France",
+    "year": "2026",
+    "src": "photos/thumb/Pause Chantier.jpg",
+    "srcFull": "photos/Pause Chantier.jpg",
+    "locTag": "Paris"
+  },
+  {
+    "num": "080",
+    "category": "France",
+    "title": "Toyota Supra MKIII",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Villebon2 - Palaiseau",
+    "year": "2026",
+    "src": "photos/thumb/Toyota Supra.jpg",
+    "srcFull": "photos/Toyota Supra.jpg",
+    "locTag": "Villebon2 - Palaiseau"
+  },
+  {
+    "num": "079",
+    "category": "France",
+    "title": "Paris sous la neige",
+    "gear": "iPhone 17 Pro · 24mm, f/1,78",
+    "location": "Vincennes - Paris",
+    "year": "2026",
+    "src": "photos/thumb/IMG_8072 2.jpg",
+    "srcFull": "photos/IMG_8072 2.jpg",
+    "locTag": "Vincennes - Paris"
+  },
+  {
+    "num": "078",
+    "category": "France",
+    "title": "Vespa",
+    "gear": "Canon Epoca · Kodak Gold 35mm",
+    "location": "Paris - France",
+    "year": "2026",
+    "src": "photos/thumb/Vespa.jpg",
+    "srcFull": "photos/Vespa.jpg",
+    "locTag": "Paris"
+  },
+  {
+    "num": "077",
+    "category": "France",
+    "title": "Salon Sauvage",
+    "gear": "iPhone 17 Pro · 140mm, f/2,8",
+    "location": "L'aigle - Normandie",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7884.jpg",
+    "srcFull": "photos/IMG_7884.jpg",
+    "locTag": "L'aigle - Normandie"
+  },
+  {
+    "num": "076",
+    "category": "France",
+    "title": "Bretagne suspendue",
+    "gear": "iPhone 17 Pro · 140mm, f/2,8",
+    "location": "Pointe de la Varde Bunker - Bretagne",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7567.jpg",
+    "srcFull": "photos/IMG_7567.jpg",
+    "locTag": "Pointe de la Varde - Bretagne"
+  },
+  {
+    "num": "075",
+    "category": "France",
+    "title": "Horizon caché",
+    "gear": "iPhone 17 Pro · 100mm, f/2,8",
+    "location": "Cancale - Bretagne",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7499.jpg",
+    "srcFull": "photos/IMG_7499.jpg",
+    "locTag": "Cancale - Bretagne"
+  },
+  {
+    "num": "074",
+    "category": "France",
+    "title": "Horizon caché",
+    "gear": "iPhone 17 Pro · 100mm, f/2,8",
+    "location": "Cancale - Bretagne",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7497.jpg",
+    "srcFull": "photos/IMG_7497.jpg",
+    "locTag": "Cancale - Bretagne"
+  },
+  {
+    "num": "073",
+    "category": "France",
+    "title": "Au milieu de l'eau",
+    "gear": "iPhone 17 Pro · 100mm, f/2,8",
+    "location": "Cancale - Bretagne",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7498.jpg",
+    "srcFull": "photos/IMG_7498.jpg",
+    "locTag": "Cancale - Bretagne"
+  },
+  {
+    "num": "072",
+    "category": "France",
+    "title": "Falaise",
+    "gear": "iPhone 17 Pro · 28mm, f/1,78",
+    "location": "Cap Fréhel - Bretagne",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7687.jpg",
+    "srcFull": "photos/IMG_7687.jpg",
+    "locTag": "Cap Fréhel - Bretagne"
+  },
+  {
+    "num": "071",
+    "category": "France",
+    "title": "La pointe",
+    "gear": "iPhone 17 Pro · 24mm, f/1,78",
+    "location": "Cap Fréhel - Bretagne",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7680.jpg",
+    "srcFull": "photos/IMG_7680.jpg",
+    "locTag": "Cap Fréhel - Bretagne"
+  },
+  {
+    "num": "070",
+    "category": "Indonésie",
+    "title": "Toyota FJ 40",
+    "gear": "Kodak Fun Flash · 35mm, ISO 800",
+    "location": "Mont Bromo - Java",
+    "year": "2025",
+    "src": "photos/thumb/Toyota FJ 40.jpg",
+    "srcFull": "photos/Toyota FJ 40.jpg",
+    "locTag": "Mont Bromo - Java"
+  },
+  {
+    "num": "069",
+    "category": "Indonésie",
+    "title": "Ravitaillement",
+    "gear": "Kodak Fun Flash · 35mm, ISO 800",
+    "location": "Mont Bromo - Java",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7901.jpg",
+    "srcFull": "photos/IMG_7901.jpg",
+    "locTag": "Mont Bromo - Java"
+  },
+  {
+    "num": "068",
+    "category": "Indonésie",
+    "title": "Scooter Honda",
+    "gear": "Kodak Fun Flash · 35mm, ISO 800",
+    "location": "Bali - Indonésie",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7933.jpg",
+    "srcFull": "photos/IMG_7933.jpg",
+    "locTag": "Bali"
+  },
+  {
+    "num": "067",
+    "category": "Indonésie",
+    "title": "Un moment de repos",
+    "gear": "Kodak Fun Flash · 35mm, ISO 800",
+    "location": "Mont Bromo - Java",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7924.jpg",
+    "srcFull": "photos/IMG_7924.jpg",
+    "locTag": "Mont Bromo - Java"
+  },
+  {
+    "num": "066",
+    "category": "Indonésie",
+    "title": "ROCKSTEADY",
+    "gear": "Kodak Fun Flash · 35mm, ISO 800",
+    "location": "Gili Meno",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7908.jpg",
+    "srcFull": "photos/IMG_7908.jpg",
+    "locTag": "Gili Meno"
+  },
+  {
+    "num": "065",
+    "category": "Indonésie",
+    "title": "Mont Bromo",
+    "gear": "Kodak Fun Flash · 35mm, ISO 800",
+    "location": "Java",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7911.jpg",
+    "srcFull": "photos/IMG_7911.jpg",
+    "locTag": "Java"
+  },
+  {
+    "num": "064",
+    "category": "Indonésie",
+    "title": "Vendeurs de fleurs",
+    "gear": "Kodak Fun Flash · 35mm, ISO 800",
+    "location": "Mont Bromo - Java",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7913.jpg",
+    "srcFull": "photos/IMG_7913.jpg",
+    "locTag": "Mont Bromo - Java"
+  },
+  {
+    "num": "063",
+    "category": "Indonésie",
+    "title": "Star ★",
+    "gear": "Kodak Fun Flash · 35mm, ISO 800",
+    "location": "Mont Bromo - Java",
+    "year": "2025",
+    "src": "photos/thumb/IMG_7899.jpg",
+    "srcFull": "photos/IMG_7899.jpg",
+    "locTag": "Mont Bromo - Java"
+  },
+  {
+    "num": "062",
+    "category": "Portrait",
+    "title": "Juliette",
+    "gear": "Panasonic DMC-FX33 · 40mm, f/3,3",
+    "location": "Babahan - Bali",
+    "year": "2025",
+    "src": "photos/thumb/Juliette.jpg",
+    "srcFull": "photos/Juliette.jpg",
+    "locTag": "Babahan - Bali"
+  },
+  {
+    "num": "061",
+    "category": "Indonésie",
+    "title": "Réapprovisionnement",
+    "gear": "Panasonic DMC-FX33 · 32mm, f/3",
+    "location": "Bali - Indonésie",
+    "year": "2025",
+    "src": "photos/thumb/P1110162.jpg",
+    "srcFull": "photos/P1110162.jpg",
+    "locTag": "Bali"
+  },
+  {
+    "num": "060",
+    "category": "Indonésie",
+    "title": "Journée de l'indépendance",
+    "gear": "Panasonic DMC-FX33 · 100mm, f/5,6",
+    "location": "Sindu Wati - Bali",
+    "year": "2025",
+    "src": "photos/thumb/P1110583.jpg",
+    "srcFull": "photos/P1110583.jpg",
+    "locTag": "Sindu Wati - Bali"
+  },
+  {
+    "num": "059",
+    "category": "Indonésie",
+    "title": "Maisons sur les rizières",
+    "gear": "Panasonic DMC-FX33 · 86mm, f/5,2",
+    "location": "Sangkan - Bali",
+    "year": "2025",
+    "src": "photos/thumb/P1110566.jpg",
+    "srcFull": "photos/P1110566.jpg",
+    "locTag": "Sangkan - Bali"
+  },
+  {
+    "num": "058",
+    "category": "Indonésie",
+    "title": "Fardeau",
+    "gear": "Panasonic DMC-FX33 · 67mm, f/4,5",
+    "location": "Jatiluwih - Bali",
+    "year": "2025",
+    "src": "photos/thumb/Fardeau.jpg",
+    "srcFull": "photos/Fardeau.jpg",
+    "locTag": "Jatiluwih - Bali"
+  },
+  {
+    "num": "057",
+    "category": "Indonésie",
+    "title": "La réserve",
+    "gear": "Panasonic DMC-FX33 · 100mm, f/2,8",
+    "location": "Jatiluwih - Bali",
+    "year": "2025",
+    "src": "photos/thumb/P1110405_01.jpg",
+    "srcFull": "photos/P1110405_01.jpg",
+    "locTag": "Jatiluwih - Bali"
+  },
+  {
+    "num": "056",
+    "category": "Indonésie",
+    "title": "Mobylette",
+    "gear": "Panasonic DMC-FX33 · 40mm, f/5,6",
+    "location": "Bali - Indonésie",
+    "year": "2025",
+    "src": "photos/thumb/P1110557.jpg",
+    "srcFull": "photos/P1110557.jpg",
+    "locTag": "Bali"
+  },
+  {
+    "num": "055",
+    "category": "Indonésie",
+    "title": "Mobylette",
+    "gear": "Panasonic DMC-FX33 · 40mm, f/5,6",
+    "location": "Bali - Indonésie",
+    "year": "2025",
+    "src": "photos/thumb/P1110558.jpg",
+    "srcFull": "photos/P1110558.jpg",
+    "locTag": "Bali"
+  },
+  {
+    "num": "054",
+    "category": "Indonésie",
+    "title": "Chantier au milieu des rizières",
+    "gear": "Panasonic DMC-FX33 · 51mm, f/3,8",
+    "location": "Bali - Indonésie",
+    "year": "2025",
+    "src": "photos/thumb/P1110559.jpg",
+    "srcFull": "photos/P1110559.jpg",
+    "locTag": "Bali"
+  },
+  {
+    "num": "053",
+    "category": "Indonésie",
+    "title": "Chantier au milieu des rizières",
+    "gear": "Panasonic DMC-FX33 · 92mm, f/5,4",
+    "location": "Bali - Indonésie",
+    "year": "2025",
+    "src": "photos/thumb/P1110560.jpg",
+    "srcFull": "photos/P1110560.jpg",
+    "locTag": "Bali"
+  },
+  {
+    "num": "052",
+    "category": "Indonésie",
+    "title": "Parking nature",
+    "gear": "Panasonic DMC-FX33 · 32mm, f/9",
+    "location": "Sangkan Gunung - Bali",
+    "year": "2025",
+    "src": "photos/thumb/P1110540.jpg",
+    "srcFull": "photos/P1110540.jpg",
+    "locTag": "Sangkan Gunung - Bali"
+  },
+  {
+    "num": "051",
+    "category": "Indonésie",
+    "title": "Au fil de l'eau",
+    "gear": "Panasonic DMC-FX33 · 100mm, f/5,6",
+    "location": "Sangkan Gunung - Bali",
+    "year": "2025",
+    "src": "photos/thumb/P1110538.jpg",
+    "srcFull": "photos/P1110538.jpg",
+    "locTag": "Sangkan Gunung - Bali"
+  },
+  {
+    "num": "050",
+    "category": "Indonésie",
+    "title": "Plongeon entre amis",
+    "gear": "Panasonic DMC-FX33 · 100mm, f/5,6",
+    "location": "Sangkan Gunung - Bali",
+    "year": "2025",
+    "src": "photos/thumb/P1110537.jpg",
+    "srcFull": "photos/P1110537.jpg",
+    "locTag": "Sangkan Gunung - Bali"
+  },
+  {
+    "num": "049",
+    "category": "Indonésie",
+    "title": "Rizière en mouvement",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Jatiluwih - Bali",
+    "year": "2025",
+    "src": "photos/thumb/P1110458.jpg",
+    "srcFull": "photos/P1110458.jpg",
+    "locTag": "Jatiluwih - Bali"
+  },
+  {
+    "num": "048",
+    "category": "Indonésie",
+    "title": "Trajet quotidien",
+    "gear": "Panasonic DMC-FX33 · 30mm, f/2,9",
+    "location": "Jatiluwih - Bali",
+    "year": "2025",
+    "src": "photos/thumb/P1110453.jpg",
+    "srcFull": "photos/P1110453.jpg",
+    "locTag": "Jatiluwih - Bali"
+  },
+  {
+    "num": "047",
+    "category": "Indonésie",
+    "title": "Livraison rurale",
+    "gear": "Panasonic DMC-FX33 · 40mm, f/3,3",
+    "location": "Jatiluwih - Bali",
+    "year": "2025",
+    "src": "photos/thumb/P1110388.jpg",
+    "srcFull": "photos/P1110388.jpg",
+    "locTag": "Jatiluwih - Bali"
+  },
+  {
+    "num": "046",
+    "category": "Indonésie",
+    "title": "Rizières",
+    "gear": "Panasonic DMC-FX33 · 38mm, f/3,2",
+    "location": "Babahan - Bali",
+    "year": "2025",
+    "src": "photos/thumb/Rizieres.jpg",
+    "srcFull": "photos/Rizieres.jpg",
+    "locTag": "Babahan - Bali"
+  },
+  {
+    "num": "045",
+    "category": "Indonésie",
+    "title": "Yamaha Jupiter MX",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Jatiluwih - Bali",
+    "year": "2025",
+    "src": "photos/thumb/Yamaha Jupiter MX.jpg",
+    "srcFull": "photos/Yamaha Jupiter MX.jpg",
+    "locTag": "Jatiluwih - Bali"
+  },
+  {
+    "num": "044",
+    "category": "Indonésie",
+    "title": "Refuge agricole",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Bali - Indonésie",
+    "year": "2025",
+    "src": "photos/thumb/P1110415.jpg",
+    "srcFull": "photos/P1110415.jpg",
+    "locTag": "Bali"
+  },
+  {
+    "num": "043",
+    "category": "Indonésie",
+    "title": "Pause tranquille",
+    "gear": "Panasonic DMC-FX33 · 38mm, f/5,6",
+    "location": "Bali - Indonésie",
+    "year": "2025",
+    "src": "photos/thumb/P1110402.jpg",
+    "srcFull": "photos/P1110402.jpg",
+    "locTag": "Bali"
+  },
+  {
+    "num": "042",
+    "category": "Indonésie",
+    "title": "Honda M-F1",
+    "gear": "Panasonic DMC-FX33 · 38mm, f/3,2",
+    "location": "Bali - Indonésie",
+    "year": "2025",
+    "src": "photos/thumb/P1110408_01.jpg",
+    "srcFull": "photos/P1110408_01.jpg",
+    "locTag": "Bali"
+  },
+  {
+    "num": "041",
+    "category": "Indonésie",
+    "title": "Suzuki Vitara",
+    "gear": "Panasonic DMC-FX33 · 48mm, f/3,7",
+    "location": "Babahan - Bali",
+    "year": "2025",
+    "src": "photos/thumb/P1110315.jpg",
+    "srcFull": "photos/P1110315.jpg",
+    "locTag": "Babahan - Bali"
+  },
+  {
+    "num": "040",
+    "category": "Indonésie",
+    "title": "Fruits",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Bali - Indonésie",
+    "year": "2025",
+    "src": "photos/thumb/P1110262.jpg",
+    "srcFull": "photos/P1110262.jpg",
+    "locTag": "Bali"
+  },
+  {
+    "num": "039",
+    "category": "Indonésie",
+    "title": "Temple",
+    "gear": "Panasonic DMC-FX33 · 54mm, f/4",
+    "location": "Candikuning - Bali",
+    "year": "2025",
+    "src": "photos/thumb/P1110275.jpg",
+    "srcFull": "photos/P1110275.jpg",
+    "locTag": "Candikuning - Bali"
+  },
+  {
+    "num": "038",
+    "category": "Indonésie",
+    "title": "Taxi vélo",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Yogyakarta - Java",
+    "year": "2025",
+    "src": "photos/thumb/P1110197.jpg",
+    "srcFull": "photos/P1110197.jpg",
+    "locTag": "Yogyakarta - Java"
+  },
+  {
+    "num": "037",
+    "category": "Indonésie",
+    "title": "Custom racing",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Yogyakarta - Java",
+    "year": "2025",
+    "src": "photos/thumb/P1110176.jpg",
+    "srcFull": "photos/P1110176.jpg",
+    "locTag": "Yogyakarta - Java"
+  },
+  {
+    "num": "036",
+    "category": "Indonésie",
+    "title": "Balade du vendeur",
+    "gear": "Panasonic DMC-FX33 · 58mm, f/4,1",
+    "location": "Yogyakarta - Java",
+    "year": "2025",
+    "src": "photos/thumb/P1110156.jpg",
+    "srcFull": "photos/P1110156.jpg",
+    "locTag": "Yogyakarta - Java"
+  },
+  {
+    "num": "035",
+    "category": "Indonésie",
+    "title": "ATM",
+    "gear": "Panasonic DMC-FX33 · 30mm, f/2,9",
+    "location": "Prambanan - Java",
+    "year": "2025",
+    "src": "photos/thumb/P1110127.jpg",
+    "srcFull": "photos/P1110127.jpg",
+    "locTag": "Prambanan - Java"
+  },
+  {
+    "num": "034",
+    "category": "",
+    "title": "Bratwurs",
+    "gear": "Panasonic DMC-FX33 · 40mm, f/3,3",
+    "location": "Berlin - Allemagne",
+    "year": "2025",
+    "src": "photos/thumb/Bratwurs.jpg",
+    "srcFull": "photos/Bratwurs.jpg",
+    "locTag": "Berlin"
+  },
+  {
+    "num": "033",
+    "category": "",
+    "title": "Fernsehturm",
+    "gear": "Panasonic DMC-FX33 · 63mm, f/4,3",
+    "location": "Berlin - Allemagne",
+    "year": "2025",
+    "src": "photos/thumb/Fernsehturm.jpg",
+    "srcFull": "photos/Fernsehturm.jpg",
+    "locTag": "Berlin"
+  },
+  {
+    "num": "032",
+    "category": "",
+    "title": "Balade en famille",
+    "gear": "Panasonic DMC-FX33 · 48mm, f/3,7",
+    "location": "Munich, Allemagne",
+    "year": "2024",
+    "src": "photos/thumb/P1100977.jpg",
+    "srcFull": "photos/P1100977.jpg",
+    "locTag": "Munich - Allemagne"
+  },
+  {
+    "num": "031",
+    "category": "Portrait",
+    "title": "Engagement",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Munich - Allemagne",
+    "year": "2024",
+    "src": "photos/thumb/Engagement.jpg",
+    "srcFull": "photos/Engagement.jpg",
+    "locTag": "SendlingerDeld - Munich"
+  },
+  {
+    "num": "030",
+    "category": "",
+    "title": "BMW E30",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Munich - Allemagne",
+    "year": "2024",
+    "src": "photos/thumb/Bmw E30.jpg",
+    "srcFull": "photos/Bmw E30.jpg",
+    "locTag": "Schwanthalerhöhe - Munich"
+  },
+  {
+    "num": "029",
+    "category": "",
+    "title": "Laverie de fortune",
+    "gear": "Panasonic DMC-FX33 · 32mm, f/3",
+    "location": "Beyoglu, Turquie",
+    "year": "2024",
+    "src": "photos/thumb/P1100740.jpg",
+    "srcFull": "photos/P1100740.jpg",
+    "locTag": "Beyoglu - Turquie"
+  },
+  {
+    "num": "028",
+    "category": "",
+    "title": "Au rayon légumes",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/3,8",
+    "location": "Istanbul, Turquie",
+    "year": "2024",
+    "src": "photos/thumb/P1100672.jpg",
+    "srcFull": "photos/P1100672.jpg",
+    "locTag": "Istanbul - Turquie"
+  },
+  {
+    "num": "027",
+    "category": "",
+    "title": "Souvenirs",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Barcelone - Espagne",
+    "year": "2024",
+    "src": "photos/thumb/Souvenirs.jpg",
+    "srcFull": "photos/Souvenirs.jpg",
+    "locTag": "Barcelone - Espagne"
+  },
+  {
+    "num": "026",
+    "category": "",
+    "title": "Vinyles",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Barcelone, Espagne",
+    "year": "2024",
+    "src": "photos/thumb/P1100527.jpg",
+    "srcFull": "photos/P1100527.jpg",
+    "locTag": "Barcelone - Espagne"
+  },
+  {
+    "num": "025",
+    "category": "New York",
+    "title": "L'ombre des tours",
+    "gear": "Panasonic DMC-FX33 · 63mm, f/4,3",
+    "location": "New York - USA",
+    "year": "2024",
+    "src": "photos/thumb/P1090875.jpg",
+    "srcFull": "photos/P1090875.jpg",
+    "locTag": "New York - USA"
+  },
+  {
+    "num": "024",
+    "category": "New York",
+    "title": "Little Italy Gift's Center",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Manhattan - New York",
+    "year": "2024",
+    "src": "photos/thumb/P1090372.jpg",
+    "srcFull": "photos/P1090372.jpg",
+    "locTag": "Manhattan - NY"
+  },
+  {
+    "num": "023",
+    "category": "New York",
+    "title": "Building",
+    "gear": "Panasonic DMC-FX33 · 43mm, f/3,4",
+    "location": "New York - USA",
+    "year": "2024",
+    "src": "photos/thumb/P1090878.jpg",
+    "srcFull": "photos/P1090878.jpg",
+    "locTag": "New York - USA"
+  },
+  {
+    "num": "022",
+    "category": "New York",
+    "title": "STOP",
+    "gear": "Panasonic DMC-FX33 · 58mm, f/4,1",
+    "location": "Brooklyn - New York",
+    "year": "2024",
+    "src": "photos/thumb/P1090862.jpg",
+    "srcFull": "photos/P1090862.jpg",
+    "locTag": "Brooklyn - NY"
+  },
+  {
+    "num": "021",
+    "category": "New York",
+    "title": "New York graffiti",
+    "gear": "Panasonic DMC-FX33 · 86mm, f/5,2",
+    "location": "Brooklyn - New York",
+    "year": "2024",
+    "src": "photos/thumb/P1090855.jpg",
+    "srcFull": "photos/P1090855.jpg",
+    "locTag": "Brooklyn - NY"
+  },
+  {
+    "num": "020",
+    "category": "New York",
+    "title": "Au service de la ville",
+    "gear": "Panasonic DMC-FX33 · 86mm, f/5,2",
+    "location": "New York - USA",
+    "year": "2024",
+    "src": "photos/thumb/P1090848.jpg",
+    "srcFull": "photos/P1090848.jpg",
+    "locTag": "New York - USA"
+  },
+  {
+    "num": "019",
+    "category": "New York",
+    "title": "LONG STORE",
+    "gear": "Panasonic DMC-FX33 · 67mm, f/4,5",
+    "location": "China Town - New York",
+    "year": "2024",
+    "src": "photos/thumb/P1090387.jpg",
+    "srcFull": "photos/P1090387.jpg",
+    "locTag": "China Town - NY"
+  },
+  {
+    "num": "018",
+    "category": "New York",
+    "title": "Poisson frais",
+    "gear": "Panasonic DMC-FX33 · 58mm, f/4,1",
+    "location": "China Town - New York",
+    "year": "2024",
+    "src": "photos/thumb/P1090621.jpg",
+    "srcFull": "photos/P1090621.jpg",
+    "locTag": "China Town - NY"
+  },
+  {
+    "num": "017",
+    "category": "New York",
+    "title": "China Town",
+    "gear": "Panasonic DMC-FX33 · 38mm, f/3,2",
+    "location": "China Town - New York",
+    "year": "2024",
+    "src": "photos/thumb/China Town.jpg",
+    "srcFull": "photos/China Town.jpg",
+    "locTag": "China Town - NY"
+  },
+  {
+    "num": "016",
+    "category": "New York",
+    "title": "Débordement",
+    "gear": "Panasonic DMC-FX33 · 38mm, f/3,2",
+    "location": "Brooklyn - New York",
+    "year": "2024",
+    "src": "photos/thumb/Debordement.jpg",
+    "srcFull": "photos/Debordement.jpg",
+    "locTag": "Brooklyn - NY"
+  },
+  {
+    "num": "015",
+    "category": "New York",
+    "title": "Déchets à Brooklyn",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Brooklyn - New York",
+    "year": "2024",
+    "src": "photos/thumb/P1090794.jpg",
+    "srcFull": "photos/P1090794.jpg",
+    "locTag": "Brooklyn - NY"
+  },
+  {
+    "num": "014",
+    "category": "New York",
+    "title": "Prêt à réparer",
+    "gear": "Panasonic DMC-FX33 · 92mm, f/5,4",
+    "location": "Brooklyn - New York",
+    "year": "2024",
+    "src": "photos/thumb/P1090806.jpg",
+    "srcFull": "photos/P1090806.jpg",
+    "locTag": "Brooklyn - NY"
+  },
+  {
+    "num": "013",
+    "category": "New York",
+    "title": "Silhouette rétro",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Brooklyn - New York",
+    "year": "2024",
+    "src": "photos/thumb/P1090792.jpg",
+    "srcFull": "photos/P1090792.jpg",
+    "locTag": "Brooklyn - NY"
+  },
+  {
+    "num": "012",
+    "category": "New York",
+    "title": "Carcasse métallique",
+    "gear": "Panasonic DMC-FX33 · 38mm, f/3,2",
+    "location": "Brooklyn - New York",
+    "year": "2024",
+    "src": "photos/thumb/P1090786.jpg",
+    "srcFull": "photos/P1090786.jpg",
+    "locTag": "Brooklyn - NY"
+  },
+  {
+    "num": "011",
+    "category": "New York",
+    "title": "Compagnons de route",
+    "gear": "Panasonic DMC-FX33 · 38mm, f/3,2",
+    "location": "New York - USA",
+    "year": "2024",
+    "src": "photos/thumb/P1090749.jpg",
+    "srcFull": "photos/P1090749.jpg",
+    "locTag": "New York - USA"
+  },
+  {
+    "num": "010",
+    "category": "New York",
+    "title": "En attendant",
+    "gear": "Panasonic DMC-FX33 · 45mm, f/3,5",
+    "location": "New York - USA",
+    "year": "2024",
+    "src": "photos/thumb/En attendant.jpg",
+    "srcFull": "photos/En attendant.jpg",
+    "locTag": "New York - USA"
+  },
+  {
+    "num": "009",
+    "category": "New York",
+    "title": "Portail",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "Brooklyn - New York",
+    "year": "2024",
+    "src": "photos/thumb/Portail.jpg",
+    "srcFull": "photos/Portail.jpg",
+    "locTag": "Brooklyn - NY"
+  },
+  {
+    "num": "008",
+    "category": "New York",
+    "title": "Patriote",
+    "gear": "Panasonic DMC-FX33 · 63mm, f/4,3",
+    "location": "New York - USA",
+    "year": "2024",
+    "src": "photos/thumb/P1090713.jpg",
+    "srcFull": "photos/P1090713.jpg",
+    "locTag": "Brooklyn - NY"
+  },
+  {
+    "num": "007",
+    "category": "New York",
+    "title": "Freight Liner",
+    "gear": "Panasonic DMC-FX33 · 100mm, f/5,6",
+    "location": "New York - USA",
+    "year": "2024",
+    "src": "photos/thumb/P1090428.jpg",
+    "srcFull": "photos/P1090428.jpg",
+    "locTag": "Times Square - USA"
+  },
+  {
+    "num": "006",
+    "category": "New York",
+    "title": "Wall Street",
+    "gear": "Panasonic DMC-FX33 · 51mm, f/3,8",
+    "location": "Wall Street - New York",
+    "year": "2024",
+    "src": "photos/thumb/P1090184.jpg",
+    "srcFull": "photos/P1090184.jpg",
+    "locTag": "Wall Street - NY"
+  },
+  {
+    "num": "005",
+    "category": "New York",
+    "title": "BUS",
+    "gear": "Panasonic DMC-FX33 · 48mm, f/3,7",
+    "location": "New York - USA",
+    "year": "2024",
+    "src": "photos/thumb/P1090080.jpg",
+    "srcFull": "photos/P1090080.jpg",
+    "locTag": "New York - USA"
+  },
+  {
+    "num": "004",
+    "category": "New York",
+    "title": "Vendeurs de rue",
+    "gear": "Panasonic DMC-FX33 · 48mm, f/3,7",
+    "location": "New York - USA",
+    "year": "2024",
+    "src": "photos/thumb/P1090364.jpg",
+    "srcFull": "photos/P1090364.jpg",
+    "locTag": "New York - USA"
+  },
+  {
+    "num": "003",
+    "category": "New York",
+    "title": "Brume urbaine",
+    "gear": "Panasonic DMC-FX33 · 51mm, f/3,8",
+    "location": "New York - USA",
+    "year": "2024",
+    "src": "photos/thumb/P1090267.jpg",
+    "srcFull": "photos/P1090267.jpg",
+    "locTag": "New York - USA"
+  },
+  {
+    "num": "002",
+    "category": "New York",
+    "title": "Patrouille en ville",
+    "gear": "Panasonic DMC-FX33 · 92mm, f/5,4",
+    "location": "New York - USA",
+    "year": "2024",
+    "src": "photos/thumb/P1090096.jpg",
+    "srcFull": "photos/P1090096.jpg",
+    "locTag": "New York - USA"
+  },
+  {
+    "num": "001",
+    "category": "New York",
+    "title": "F.D.N.Y",
+    "gear": "Panasonic DMC-FX33 · 28mm, f/2,8",
+    "location": "New York - USA",
+    "year": "2024",
+    "src": "photos/thumb/P1090101.jpg",
+    "srcFull": "photos/P1090101.jpg",
+    "locTag": "New York - USA"
+  }
+];
+
+    // ── GÉNÉRATION DES CARTES ──
+    (function() {
+      var g = document.getElementById('gallery');
+      var svg = '<svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';
+      photos.forEach(function(p) {
+        var c = document.createElement('div');
+        c.className = 'photo-card';
+        c.dataset.category = p.category;
+        c.dataset.title = p.title;
+        c.dataset.gear = p.gear;
+        c.dataset.location = p.location;
+        c.dataset.year = p.year;
+        c.dataset.srcFull = p.srcFull;
+        var n = document.createElement('span');
+        n.className = 'photo-num';
+        n.textContent = p.num;
+        var img = document.createElement('img');
+        img.src = p.src;
+        img.alt = p.title;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        var ov = document.createElement('div');
+        ov.className = 'photo-overlay';
+        ov.innerHTML =
+          '<div class="photo-overlay-top">' +
+            '<span class="photo-location-tag">' + p.locTag + '</span>' +
+            '<span class="photo-year-tag">' + p.year + '</span>' +
+          '</div>' +
+          '<div class="photo-overlay-bottom">' +
+            '<div class="photo-overlay-line"></div>' +
+            '<div class="photo-title">' + p.title + ' <button class="photo-fav" onclick="toggleFav(this, event)">&#9733;</button></div>' +
+            '<div class="photo-meta-row">' +
+              '<span class="photo-gear">' + p.gear + '</span>' +
+              '<div class="photo-expand-icon">' + svg + '</div>' +
+            '</div>' +
+          '</div>';
+        c.appendChild(n);
+        c.appendChild(img);
+        c.appendChild(ov);
+        g.appendChild(c);
+      });
+    })();
+
     const allCards = [...document.querySelectorAll('.photo-card')];
     const gallery = document.getElementById('gallery');
 
@@ -1855,7 +1315,7 @@
       lbImgWrap.innerHTML = '';
       if (img) {
         const clone = document.createElement('img');
-        clone.src = img.src;
+        clone.src = card.dataset.srcFull || img.src;
         clone.alt = card.dataset.title;
         lbImgWrap.appendChild(clone);
       }
